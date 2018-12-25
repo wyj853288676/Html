@@ -1,0 +1,74 @@
+<html>
+    <head></head>
+    <body>
+    <div class='row' style="padding:1em">
+        <input type="radio" hidden name='country' value='' id='country1'>
+        <label for='country1' class='myLink'>link</label>
+        <input type="radio" hidden name='country' value='' id='country2'>
+        <label for='country2' class='myLink'>link</label>
+        <input type="radio" hidden name='country' value='' id='country3'>
+        <label for='country3'  class='myLink'>link</label>
+        <input type="radio" hidden name='country' value='' id='country4'>
+        <label for='country4' class='myLink'>link</label>
+        <input type="radio" hidden name='country' value='' id='country5'>
+        <label for='country5' class='myLink'>link</label>
+        <input type="radio" hidden name='country' value='' id='country6'>
+        <label for='country6' class='myLink'>link</label>
+
+    </div>
+      
+
+    </body>
+
+</html>
+<style>
+    .myLink{
+        margin-left:1.5em;
+        margin-right:1.5em;
+        text-decoration: none;
+        color:inherit;
+        font-size:auto;
+        position: relative;
+        display: inline-block;
+    }
+    .myLink::before{
+        content:"[";
+        transform:translateX(20px);
+    }
+    .myLink::after{
+        content:"]";
+        transform:translateX(-20px);
+    }
+    .myLink::after,.myLink::before{
+        position: absolute;
+        opacity: 0;
+        height: 0;
+        transition:all 0.3s ease;   
+    }
+    .myLink:hover{
+        font-weight: bold;
+    }
+    .myLink:hover::before{
+        height: 100%;
+        opacity: 1;
+        transform: translateX(-1em);
+    }
+    .myLink:hover::after{
+        height: 100%;
+        opacity: 1;
+        transform: translateX(0.6em);
+    }
+    input[type='radio']:checked+label.myLink{
+        font-weight: bold;
+    }
+    input[type='radio']:checked+label.myLink::before{
+        height: 100%;
+        opacity: 1;
+        transform: translateX(-1em);
+    }
+    input[type='radio']:checked+label.myLink::after{
+        height: 100%;
+        opacity: 1;
+        transform: translateX(0.6em);
+    }
+</style>
