@@ -77,9 +77,8 @@ input[type="checkbox"]:checked+label.myCheckbox:after{
     position: absolute;
     z-index: 9999;
     border-radius: 50%;
-    width: 0.9em;
-    height: 0.9em;
-    margin:0.2em;
+    margin: 23%;
+    padding: 27%;
     -moz-transition: -moz-transform 0.3s cubic-bezier(0.25, 0.1, 0.54, 1.39);
     -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.25, 0.1, 0.54, 1.39);
     transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.54, 1.39);
