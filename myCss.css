@@ -47,10 +47,10 @@
     -webkit-transition: left 0.5s cubic-bezier(0.27, 0.34, 0.34, 1.57),background-color 0.5s;
     -moz-transition: left 0.5s cubic-bezier(0.27, 0.34, 0.34, 1.57),background-color 0.5s;
 }
-input[type='checkbox']:checked+label:before{
+input[type='checkbox']:checked+label.myCheckbox:before{
     left:2em;
 }
-input[type="checkbox"]:checked+label:after{
+input[type="checkbox"]:checked+label.myCheckbox:after{
     background-color:#4cda60;
 }
 /* 自定义复选框 */
