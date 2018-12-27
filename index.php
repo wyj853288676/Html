@@ -1,6 +1,6 @@
 <?php
     $path="C:\Users\wyj\Desktop\git\Html";
-    $list=glob("$path\\*.html");
+    $list1=glob("$path\\*.html");
 ?>
 <html>
 <head>
@@ -13,12 +13,12 @@
 <body style='font-size:20px'>
     <div class='row'>
     <ul class="nav nav-tabs">
-        <?php foreach($list as $value):?>
+        <?php foreach($list1 as $value):?>
             <li class=""><a href="#<?=str_replace(["$path\\",'.html'],"",$value);?>" data-toggle="tab" ><?=str_replace(["$path\\",'.html'],"",$value);?></a></li>
         <?php endforeach;?>
     </ul>
     <div class='tab-content'>
-        <?php foreach($list as $value):?>
+        <?php foreach($list1 as $value):?>
             <div class='tab-pane fade in ' id='<?=str_replace(["$path\\",'.html'],"",$value);?>'>
                 <?php include(str_replace("$path\\","",$value));?>
             </div>
