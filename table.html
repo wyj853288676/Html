@@ -195,7 +195,7 @@ function init(){
     $(selectorx).on("mouseout",function(e){
         onX=false;
     });
-    $(document).bind("mousedown",function(e){
+    $(document).on("mousedown",function(e){
         div_x = e.pageX - $(selectorx).offset().left;
         mousedown=true;
         $(document).on("mousemove",function(e){
@@ -209,7 +209,7 @@ function init(){
             return false;
         });
     });
-    $(document).bind("mouseup",function(e){
+    $(document).on("mouseup",function(e){
         onX=false;
         mousedown=false;
     });
