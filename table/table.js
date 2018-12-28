@@ -10,8 +10,8 @@ $(document).ready(function(){
 });
 
 var selector;
-//右边有两列不移动
-var offset=2;
+//右边有offset列不移动
+var offset=0;
 function showTable(){
     selector="#table_01";
     $("#table_01").removeClass('hide');
@@ -25,6 +25,7 @@ var marginLeft=0;
 function align(){
     selector="#table_01";
     marginLeft=0;
+    offset=0;
     //right-table右移量
     $(selector+" .table-left tr:first td").each(function(index,element){
         var width=$(this).outerWidth();
@@ -37,7 +38,7 @@ function align(){
             marginLeft+=width;
         }
         $(selector+" .table-right ").css("margin-left",marginLeft+'px');
-        
+        offset++;
     });
     $(selector+" .table-right tr:first td").each(function(index,element){
         var width=$(this).outerWidth();
@@ -121,6 +122,12 @@ function horizonMove(x){
     var tx=x*($(selector+" .table-right").outerWidth()-length)/(length-lx);
     $(selector+" .table-right").css('left',(-tx)+'px');
     $(selector+" .table-header").css('left',(-tx)+'px');
+    indexx=$(selector+" .scrollx .progress-scroll ").offset().left;
+    if(indexx-limitx['left']>=10){
+        $("#table_01 .table-left").addClass('shadow');
+    }else{
+        $("#table_01 .table-left").removeClass('shadow');
+    }
 }
 
 
@@ -240,4 +247,13 @@ function verticalMove(y){
     var ty=y*($(selector+" .table-right").outerHeight()-height+35)/(height-ly);
     $(selector+" .table-right").css('top',(-ty)+'px');
     $(selector+" .table-left").css('top',(-ty)+'px');
+    //添加阴影
+    indexy=$(selector+" .scrolly .progress-scroll ").offset().top;
+    if((indexy-limity['top'])>=10){
+        $("#table_01 .table-header").addClass('shadow');
+        $("#table_01 .table-header-left").addClass('shadow');
+    }else{
+        $("#table_01 .table-header").removeClass('shadow');
+        $("#table_01 .table-header-left").removeClass('shadow');
+    }
 }

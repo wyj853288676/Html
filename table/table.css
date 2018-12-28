@@ -212,15 +212,24 @@ button.myBtn:active{
     background-color: white;
     z-index: 2;
 }
+.stat-table .table-header.shadow{
+    box-shadow: -10px 0px 10px #00000075;
+}
 .stat-table .table-header-left{
     z-index:3;
     background-color:white;
+}
+.stat-table .table-header-left.shadow{
+    box-shadow: -10px 0px 10px #00000075;
 }
 /* left */
 .stat-table .table-left{
     margin-top:34px;
     z-index: 1;
     background-color: white;
+}
+.stat-table .table-left.shadow{
+    box-shadow: #00000075 1px -4px 5px;
 }
 .stat-table .table-left td{
 }
