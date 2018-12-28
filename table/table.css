@@ -1,0 +1,283 @@
+
+/* myContainer */
+.myContainer{
+    margin-top:15px;
+    border-bottom: 1px #DEEAF6 solid;
+}
+
+/* myContainer */
+
+/* tooltip */
+label.tip{
+    border:white 1px solid;
+    /* padding:0.5em 1.5em 0.5em 1.5em; */
+    background-color:#263275;
+    border-radius: 5px;
+    color:white;
+    font-weight: bold;
+    position: relative;
+    margin-top:5px; 
+    z-index: 9999;
+}
+label.tip::before{
+    content: " ";
+    width: 0px;
+    height: 0px;
+    border-width: 18px 5px 10px 5px;
+    border-style: solid;
+    border-color: transparent transparent #263275;
+    position: absolute;
+    bottom: 100%;
+}
+label.tip{
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 0.3s ease,opacity 0.3s ease;
+}
+input.tip+label.tip{
+    opacity: 1;
+    transform: scale(1);
+}
+.crm-input{
+    padding-left:10px;
+}
+.crm-input:read-only{
+    cursor: pointer;
+    user-select: none;
+}
+/* tooltip */
+
+/* form */
+form{
+    width:100%;
+}
+.control-label{
+    width:30%;
+    padding-right: 15px;
+    padding-left: 15px; 
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.bordertop-cut{
+    border-top:0px;
+}
+/* form */
+
+/* radio */
+.myRadio{
+    margin-top: 0.5em;
+    margin-left: 2em;
+    position: relative;
+    cursor: pointer;
+}
+.myRadio i::before{
+    content:" ";
+    position: absolute;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border: 1px black solid;
+    border-radius: 50%;
+    margin-top:0.25em;
+    margin-left: -2em;
+}
+.myRadio i::after{
+    content:" ";
+    position: absolute;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background-color:black;
+    border-radius: 50%;
+    margin-top:0.25em;
+    margin-left: -2em;
+    /* transform: scale(0); */
+    opacity: 0;
+    transition: opacity 0.5s ;
+}
+.control-input input[type='radio']:checked+label.myRadio i::after{
+    opacity: 1;
+    /* transform: scale(1); */
+}
+/* radio */
+
+/* btn */
+button.myBtn{
+    padding:0.5em;
+    background-color:white;
+    border: 1px solid #263275;
+    cursor: pointer;
+    position: relative;
+    height: 2.5em;
+    opacity: 0.8;
+    margin-bottom: 2em;
+    border-radius: 10px;
+    outline: none;
+    font-weight: bold;
+}
+button.myBtn:hover{
+    box-shadow: 0 0 10px rgb(35, 35, 157);;
+   
+}
+button.myBtn:focus,button.myBtn:visited{
+    border: 1px solid #263275 !important;
+}
+button.myBtn:active{
+    box-shadow: 0 0 10px rgb(160, 160, 245) inset;
+}
+/* btn */
+
+/* img */
+.img-container{
+    margin-left: 30%;
+    margin-top: 10%;
+    transition: opacity 0.5s;
+    opacity: 1;
+    position: relative;
+}
+.progress-bar{
+    position: absolute;
+    width: 460px;
+    height: 120px;
+    background-color:white;
+    opacity: 0.5;
+    margin-top:-120px;
+    transform: translateX(0px);
+    transition: transform 1s, width 1.4s;
+}
+.img-container.move .progress-bar{
+    transform: translateX(460px);
+    width: 0px;
+}
+.img-container.hide{
+    opacity: 0.2;
+}
+.img-container.hide .progress-bar{
+    opacity: 0;
+}
+/* img */
+
+/* table */
+.stat-table{
+    overflow: hidden;
+    position: absolute;
+    width: 90%;
+    margin-left: 1%;
+    margin-top:-240px;
+    border: 1px #DEEAF6 solid;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    height: 60%;
+    transition: opacity 0.5s;
+    opacity: 1;
+}
+.stat-table h3{
+    position: absolute;
+    z-index: 3;
+    background-color: white;
+    opacity: 1;
+    width:100%;
+}
+.stat-table  th{
+    white-space: nowrap;
+    padding-left :2em;
+    padding-right:2em;
+    font-weight: inherit;
+    text-align: center;
+}
+.stat-table td{
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    text-align: left;
+}
+.stat-table.hide{
+    opacity: 0;
+    display: none;
+}
+.stat-table table{
+    position:absolute;
+    width: auto;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+.stat-table .table-container{
+    margin-top:33px;
+    overflow: hidden;
+}
+/* header */
+.stat-table .table-header{
+    background-color: white;
+    z-index: 2;
+}
+.stat-table .table-header-left{
+    z-index:3;
+    background-color:white;
+}
+/* left */
+.stat-table .table-left{
+    margin-top:47px;
+    z-index: 1;
+    background-color: white;
+}
+.stat-table .table-left td{
+}
+/* right */
+.stat-table .table-right{
+    /* display: none; */
+    margin-top:47px;
+    z-index: 0;
+}
+.stat-table .table-right .td{
+}
+/* table */
+
+
+/* scrollx */
+.scrollx{
+    /* width: 100%; */
+    height: 12px;
+    background-color:#eaeaeb;
+    position: absolute;
+    transition: width 0.3s;
+    bottom: 0;
+    z-index: 2;
+}
+.scrollx .progress-scroll{ 
+    height: 100%;
+    position: absolute;
+    background-color: #454545;
+    border-radius: 100px;
+    cursor: -webkit-grab;
+    opacity: 0.5;
+
+}
+.scrollx .progress-scroll:hover{
+    box-shadow: 0 0 10px #0b1b75;
+}
+
+/* scrolly */
+.scrolly{
+    width: 12px;
+    height: 100%;
+    background-color:#eaeaeb;
+    position: absolute;
+    transition: height 0.3s;
+    top: 0;
+    z-index: 3;
+    right: 0;
+}
+.scrolly .progress-scroll{ 
+    width: 100%;
+    position: absolute;
+    background-color: #454545;
+    border-radius: 100px;
+    cursor: -webkit-grab;
+    opacity: 0.5;
+}
+.scrolly .progress-scroll:hover{
+    box-shadow: 0 0 10px #0b1b75;
+}

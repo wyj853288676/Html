@@ -1,0 +1,226 @@
+<?php
+    $this->registerJsFile('@web/js/stat/index.js');
+?>
+<link rel="stylesheet" href="/css/stat/index.css">
+<div class='myContainer' draggable='false'>
+    <h4>会計管理データを出力する</h4>
+    <div class='input-group'>
+        <!-- form -->
+        <form action="#" id='form1'>
+            <!-- <input type="text" class='form-control' >
+            <label class='tip'>Error!</label>
+            <input type="text" class='form-control'> -->
+            <div class="row control-row">
+                <div class="control-label borderbottom-cut">
+                    <label autocomplete='off' >取引先コード</label>
+                </div>
+                <div class="col-sm-4 control-input">
+                    <input autocomplete='off' placeholder='取引先コード' type="text"  class="crm-input borderbottom-cut" name="client_code" autofocus="" aria-required="true">
+                </div>
+            </div>
+            <div class="row control-row">
+                <div class=" control-label borderbottom-cut">
+                    <label >取引先名</label>
+                </div>
+                <div class="col-sm-4 control-input">
+                    <input autocomplete='off' placeholder='取引先名' type="text"  class="crm-input borderbottom-cut" name="client_name" autofocus="" aria-required="true">
+                </div>
+            </div>
+            <div class="row control-row">
+                <div class=" control-label borderbottom-cut ">
+                    <label >帳票出力期間を選択</label>
+                </div>
+                <div class="col-sm-2 control-input">
+                    <input autocomplete='off' type="text" readOnly='readOnly' class="crm-input borderbottom-cut " name="start_date"  autofocus="" value='<?=$form['start_date']?>' aria-required="true">
+                </div>
+                <div class="col-sm-2 control-input">
+                    <input autocomplete='off' type="text"  readOnly='readOnly'  class="crm-input borderbottom-cut " name="end_date" autofocus=""value='<?=$form['end_date']?>'  aria-required="true">
+                </div>
+            </div>
+            <!-- radio-group -->
+            <div class="row control-row">
+                <div class=" control-label borderbottom-cut ">
+                </div>
+                <div class="col-sm-4 control-input">
+                    <div class='crm-input  borderbottom-cut'>
+                        <input type="radio" id='type1' name='type' hidden value='1' checked>
+                        <label for="type1"  class='myRadio'><i></i>サービス提供取引【売上-月割】</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row control-row">
+                <div class=" control-label borderbottom-cut bordertop-cut">
+                        <label >出力フォーマットを選択(一つずつ)</label>
+                </div>
+                <div class="col-sm-4 control-input">
+                    <div class='crm-input  borderbottom-cut bordertop-cut'>
+                        <input type="radio" id='type2'  name='type' hidden value='2'>
+                        <label for="type2"  class='myRadio'><i></i>サービス提供取引【受注】</label>
+                    </div>
+                </div>
+            </div>            
+            <div class="row control-row">
+                <div class=" control-label  bordertop-cut">
+                </div>
+                <div class="col-sm-4 control-input">
+                    <div class='crm-input bordertop-cut'>
+                        <input type="radio" id='type3'  name='type' hidden value='3'>
+                        <label for="type3" class='myRadio'><i></i>売買取引</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- form -->
+    </div>
+    <br>
+    <button class='myBtn' style='width:8em' >出 力</button>
+</div>
+<!-- 结果 -->
+<div class='result-container' draggable='false'>
+    <div class='img-container '>
+        <img height="120px" src="/images/logo/nint_black.png" draggable='false' >
+        <div class='progress-bar'></div>
+    </div>
+    <!-- tables -->
+    <div class='stat-table hide' id='table_01' >
+        <h3>サービス提供取引【売上-月割】</h3>
+        <div class='table-container'>
+            <table class='table   table-condensed aj_table table-bordered table-header-left'>
+                <thead>
+                    <tr>
+                        <th>契約主体22222222222222222</th>
+                        <th>契約区分</th>
+                    </tr>
+                </thead>
+            </table>
+            <table class='table   table-condensed aj_table table-bordered table-header' draggable='false'>
+                <thead>
+                    <tr>    
+                    <th>契約主体22222222222222222</th>
+                    <th>契約区分</th>
+                    <th>サービス区分</th>
+                    <th>取引先Code</th>
+                    <th>取引先名</th>
+                    <th>受注Code</th>
+                    <th>契約額(税込)</th>
+                    <th>契約額(税抜)</th>
+                    <th>契約開始日</th>
+                    <th>契約終了日</th>
+                    <th>契約開始月</th>
+                    <th>契約終了月</th>
+                    <th>2018-09-01</th>
+                    <th>2018-10-01</th>
+                    <th>2018-11-01</th>
+                    <th>2018-12-01</th>
+                    <th>2019-01-01</th>
+                    <th>2019-02-01</th>
+                    </tr>
+                </thead>
+            </table>
+            <table class='table   table-condensed aj_table table-bordered table-left' draggable='false'> 
+                <tbody>
+                    <tr><td>NINT</td><td>Service</tr>
+                    <tr><td>NINT</td><td>Service</tr>
+                    <tr><td>NINT</td><td>Service</tr>
+                    <tr><td>NINT</td><td>Service</tr>
+                    <tr><td>NINT</td><td>Service</tr>
+                    <tr><td>NINT</td><td>Service</tr>
+                    <tr><td>NINT</td><td>Service</tr>
+                    <tr><td>NINT</td><td>Service</tr>
+                    <tr><td>NINT</td><td>Service</tr>
+                    <tr><td>NINT</td><td>Service</tr>
+                    <tr><td>NINT</td><td>Service</tr>
+                    <tr><td>NINT</td><td>Service</tr>
+                    <tr><td>NINT</td><td>Service</tr>
+                    <tr><td>NINT</td><td>Service</tr>
+                    <tr><td>NINT</td><td>Service</tr>
+                    <tr><td>NINT</td><td>Service</tr>
+                </tbody>
+            </table>
+            <table class='table   table-condensed aj_table table-bordered table-right' draggable='false'>
+                    <tbody>
+                        <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>13664657498798798<td>11</td></td></tr>
+                        <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10<td>11</td></td></tr>
+                        <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10<td>11</td></td></tr>
+                        <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10<td>11</td></td></tr>
+                        <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10<td>11</td></td></tr>
+                        <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10<td>11</td></td></tr>
+                        <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10<td>11</td></td></tr>
+                        <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10<td>11</td></td></tr>
+                        <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10<td>11</td></td></tr>
+                        <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10<td>11</td></td></tr>
+                        <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10<td>11</td></td></tr>
+                        <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10<td>11</td></td></tr>
+                        <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10<td>11</td></td></tr>
+                        <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10<td>11</td></td></tr>
+                        <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10<td>11</td></td></tr>
+                        <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10<td>11</td></td></tr>
+                    </tbody>
+            </table>
+        </div>
+        <div class='scroll-container'>
+            <div class='scrollx'><div class='progress-scroll' draggable='false'></div></div>
+            <div class='scrolly'><div class='progress-scroll' draggable='false'></div></div>
+        </div>
+    </div>
+    <div class='stat-table hide' id='table_02' >
+        <h3>サービス提供取引【受注】</h3>
+        <table class='table    table-condensed aj_table table-bordered'>
+            <thead>
+                <tr>
+                <th>契約主体</th>
+                <th>契約区分</th>
+                <th>サービス区分</th>
+                <th>取引先Code</th>
+                <th>取引先名</th>
+                <th>受注Code</th>
+                <th>契約額(税込)</th>
+                <th>契約額(税抜)</th>
+                <th>契約開始日</th>
+                <th>契約終了日</th>
+                <th>契約開始月</th>
+                <th>契約終了月</th>
+                <th>2018-09-01</th>
+                <th>2018-10-01</th>
+                <th>2018-11-01</th>
+                <th>2018-12-01</th>
+                <th>2019-01-01</th>
+                <th>2019-02-01</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <div class='stat-table hide' id='table_03' >
+        <h3>売買取引</h3>
+        <table class='table    table-condensed aj_table table-bordered'>
+            <thead>
+                <tr>
+                <th>契約主体</th>
+                <th>契約区分</th>
+                <th>サービス区分</th>
+                <th>取引先Code</th>
+                <th>取引先名</th>
+                <th>受注Code</th>
+                <th>契約額(税込)</th>
+                <th>契約額(税抜)</th>
+                <th>納品日</th>
+                <th>2018-09-01</th>
+                <th>2018-10-01</th>
+                <th>2018-11-01</th>
+                <th>2018-12-01</th>
+                <th>2019-01-01</th>
+                <th>2019-02-01</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <!-- tables -->
+</div>
+
+
+
