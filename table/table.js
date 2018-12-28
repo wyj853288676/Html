@@ -35,8 +35,10 @@ function align(){
             marginLeft+=thWidth;
         }else if(width>=thWidth){
             $(selector+" .table-header th:eq("+index+")").css('min-width',width+'px');
+            $(selector+" .table-header-left th:eq("+index+")").css('min-width',width+'px');
             marginLeft+=width;
         }
+        console.log({width,thWidth});
         $(selector+" .table-right ").css("margin-left",marginLeft+'px');
         offset++;
     });
@@ -115,15 +117,14 @@ function initScrollx(){
         mouseDownX=false;
     });
 }
-
-//移动滚动条和table-right、header
+//移动横向滚动条和table-right、header
 function horizonMove(x){
     $(selector+" .scrollx  .progress-scroll").css('left',x+'px');
     var tx=x*($(selector+" .table-right").outerWidth()-length)/(length-lx);
     $(selector+" .table-right").css('left',(-tx)+'px');
     $(selector+" .table-header").css('left',(-tx)+'px');
-    indexx=$(selector+" .scrollx .progress-scroll ").offset().left;
-    if(indexx-limitx['left']>=10){
+    //不能赋值给indexx,因为mousemove还要用到indexx记录鼠标按下时progress-scroll的初始位置
+    if($(selector+" .scrollx .progress-scroll ").offset().left-limitx['left']>=10){
         $("#table_01 .table-left").addClass('shadow');
     }else{
         $("#table_01 .table-left").removeClass('shadow');
@@ -159,7 +160,7 @@ function initScrolly(){
     //limity 存的是offset
     limity['top']=$(selector+" .scrolly .progress-scroll").offset().top;
     limity['bottom']=height-ly+limity['top'];
-    //添加监听
+    //添加鼠标监听
     $(selector+" .scrolly").on("mouseover",function(e){
         onY=true;
     });
@@ -186,42 +187,42 @@ function initScrolly(){
     $(document).on("mouseup",function(e){
         mouseDownY=false;
     });
-    //左右键移动scroll keycode:37 39 上下键：38 40
+    //绑定键盘事件 左右键移动scroll keycode:37 39 上下键：38 40
     $(document).on("keydown",function(e){
-    e.stopProgation;
-    e.preventDefault;
-    //判断是否焦点在表格上
-    if($(selector+":hover").html()==undefined){
-        return false;
-    }
-    if(e.keyCode==39){
-        indexx=$(selector+" .scrollx .progress-scroll ").offset().left;
-        movex=10;
-        if((movex+indexx+0)>=limitx['left']&&(movex+indexx-30)<=limitx['right']){
-            horizonMove(movex+indexx-limitx['left']);
+        e.stopProgation;
+        e.preventDefault;
+        //判断是否焦点在表格上
+        if($(selector+":hover").html()==undefined){
+            return false;
         }
-    }
-    else if(e.keyCode==37){
-        indexx=$(selector+" .scrollx .progress-scroll ").offset().left;
-        movex=-10;
-        if((movex+indexx+0)>=limitx['left']&&(movex+indexx-30)<=limitx['right']){
-            horizonMove(movex+indexx-limitx['left']);
+        if(e.keyCode==39){
+            indexx=$(selector+" .scrollx .progress-scroll ").offset().left;
+            movex=10;
+            if((movex+indexx+0)>=limitx['left']&&(movex+indexx-30)<=limitx['right']){
+                horizonMove(movex+indexx-limitx['left']);
+            }
         }
-    }
-    if(e.keyCode==40){
-        indexy=$(selector+" .scrolly .progress-scroll ").offset().top;
-        movey=10;
-        if((movey+indexy+0)>=limity['top']&&(movey+indexy-50)<=limity['bottom']){
-            verticalMove(movey+indexy-limity['top']);
+        else if(e.keyCode==37){
+            indexx=$(selector+" .scrollx .progress-scroll ").offset().left;
+            movex=-10;
+            if((movex+indexx+0)>=limitx['left']&&(movex+indexx-30)<=limitx['right']){
+                horizonMove(movex+indexx-limitx['left']);
+            }
         }
-    }
-    else if(e.keyCode==38){
-        indexy=$(selector+" .scrolly .progress-scroll ").offset().top;
-        movey=-10;
-        if((movey+indexy+0)>=limity['top']&&(movey+indexy-50)<=limity['bottom']){
-            verticalMove(movey+indexy-limity['top']);
+        if(e.keyCode==40){
+            indexy=$(selector+" .scrolly .progress-scroll ").offset().top;
+            movey=10;
+            if((movey+indexy+0)>=limity['top']&&(movey+indexy-50)<=limity['bottom']){
+                verticalMove(movey+indexy-limity['top']);
+            }
         }
-    }
+        else if(e.keyCode==38){
+            indexy=$(selector+" .scrolly .progress-scroll ").offset().top;
+            movey=-10;
+            if((movey+indexy+0)>=limity['top']&&(movey+indexy-50)<=limity['bottom']){
+                verticalMove(movey+indexy-limity['top']);
+            }
+        }
     });
     //绑定滚轮事件
     $("#table_01").on("mousewheel DOMMouseScroll",function (e) {
@@ -247,9 +248,8 @@ function verticalMove(y){
     var ty=y*($(selector+" .table-right").outerHeight()-height+35)/(height-ly);
     $(selector+" .table-right").css('top',(-ty)+'px');
     $(selector+" .table-left").css('top',(-ty)+'px');
-    //添加阴影
-    indexy=$(selector+" .scrolly .progress-scroll ").offset().top;
-    if((indexy-limity['top'])>=10){
+    //添加阴影 不能赋值给indexx,因为mousemove还要用到indexx记录progress-scroll初始位置
+    if(($(selector+" .scrolly .progress-scroll ").offset().top-limity['top'])>=10){
         $("#table_01 .table-header").addClass('shadow');
         $("#table_01 .table-header-left").addClass('shadow');
     }else{
