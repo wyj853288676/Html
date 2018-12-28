@@ -1,67 +1,31 @@
 
 
-//datetimepicker
-$("input[name='start_date'],input[name='end_date']").datetimepicker({
-    startView:3,
-    minView:'year',
-    format: 'yyyy-mm',
-});
 
 //提交表单
-$("button.myBtn").on('click',function(e){
-    $(".img-container").addClass('move');
-    $(".stat-table").addClass('hide');
-    $(".img-container ").removeClass('hide');
-    setTimeout(function(){
-        $(".img-container ").removeClass('move');
-        $('.img-container ').addClass('hide'); 
+$(document).ready(function(){
+    showTable();
+    $(window).resize(function(){
         showTable();
-    },1500);
-    var form={};
-    //get form
-    $("#form1 input").each(function(){
-        if($(this).attr("type")=='text'){
-            form[$(this).attr("name")]=$(this).val();
-        }else if($(this).attr("type")=='radio'||$(this).attr("type")=='checkbox'){
-            name=$(this).attr('name');
-            form[name]=$("#form1 input[name='"+name+"']:checked").val();
-        }
-    });
-    //ajax
-    // $.ajax({
-    //     url:'/stat/get-stat',
-    //     type: "POST",
-    //     data: {
-    //         'form':form
-    //     },
-    //     dataType:'json',
-    //     async:'true',
-    //     success: function(data) {
-    //         console.log(data);
-    //     },
-    //     error: function() {
-    //         alert('Failed!');
-    //     },
-    // });
+    })
 });
 
 var selector;
 //右边有两列不移动
 var offset=2;
 function showTable(){
-    var type=$("input[name='type']:checked").val();
-    selector="#table_0"+type+"  ";
-    $(selector).removeClass('hide');
+    selector="#table_01";
+    $("#table_01").removeClass('hide');
     align();
     initScrollx();
     initScrolly();
 }
 
-
+var marginLeft=0;
 // 表格对齐
 function align(){
+    selector="#table_01";
+    marginLeft=0;
     //right-table右移量
-    var marginLeft=0;
     $(selector+" .table-left tr:first td").each(function(index,element){
         var width=$(this).outerWidth();
         var thWidth=$(selector+" .table-header th:eq("+(index)+")").outerWidth();
@@ -73,6 +37,7 @@ function align(){
             marginLeft+=width;
         }
         $(selector+" .table-right ").css("margin-left",marginLeft+'px');
+        
     });
     $(selector+" .table-right tr:first td").each(function(index,element){
         var width=$(this).outerWidth();
@@ -82,7 +47,6 @@ function align(){
         }else if(width>thWidth){
             $(selector+" .table-header th:eq("+(index+offset)+")").css('min-width',width+'px');
         }
-
     });
 }
 
@@ -149,29 +113,6 @@ function initScrollx(){
     $(document).on("mouseup",function(e){
         mouseDownX=false;
     });
-    // //左右键移动scroll keycode:37 39 (在最后绑定这个事件)
-    // $(document).on("keydown",function(e){
-    //     e.stopProgation;
-    //     e.preventDefault;
-    //     //判断是否焦点在表格上
-    //     if($(selector+":hover").html()==undefined){
-    //         return false;
-    //     }
-    //     if(e.keyCode==39){
-    //         indexx=$(selector+" .scrollx .progress-scroll ").offset().left;
-    //         movex=10;
-    //         if((movex+indexx+0)>=limitx['left']&&(movex+indexx-30)<=limitx['right']){
-    //             horizonMove(movex+indexx-limitx['left']);
-    //         }
-    //     }
-    //     else if(e.keyCode==37){
-    //         indexx=$(selector+" .scrollx .progress-scroll ").offset().left;
-    //         movex=-10;
-    //         if((movex+indexx+0)>=limitx['left']&&(movex+indexx-30)<=limitx['right']){
-    //             horizonMove(movex+indexx-limitx['left']);
-    //         }
-    //     }
-    // });
 }
 
 //移动滚动条和table-right、header
@@ -274,7 +215,23 @@ function initScrolly(){
             verticalMove(movey+indexy-limity['top']);
         }
     }
-});
+    });
+    //绑定滚轮事件
+    $("#table_01").on("mousewheel DOMMouseScroll",function (e) {
+        if($(selector+":hover").html()==undefined){
+            return false;
+        }else{
+            e.stopPropagation();
+            e.preventDefault();
+            var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) ||  // chrome & ie
+                (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1));              // firefox
+            movey=delta>0?-5:5;
+            indexy=$(selector+" .scrolly .progress-scroll ").offset().top;
+            if((movey+indexy+0)>=limity['top']&&(movey+indexy-50)<=limity['bottom']){
+                verticalMove(movey+indexy-limity['top']);
+            }
+        }
+    });
 }
 
 

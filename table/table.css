@@ -165,7 +165,7 @@ button.myBtn:active{
     position: absolute;
     width: 90%;
     margin-left: 1%;
-    margin-top:-240px;
+    /* margin-top:-240px; */
     border: 1px #DEEAF6 solid;
     user-select: none;
     -webkit-user-select: none;
@@ -205,7 +205,6 @@ button.myBtn:active{
     -ms-user-select: none;
 }
 .stat-table .table-container{
-    margin-top:33px;
     overflow: hidden;
 }
 /* header */
@@ -219,7 +218,7 @@ button.myBtn:active{
 }
 /* left */
 .stat-table .table-left{
-    margin-top:47px;
+    margin-top:34px;
     z-index: 1;
     background-color: white;
 }
@@ -228,7 +227,7 @@ button.myBtn:active{
 /* right */
 .stat-table .table-right{
     /* display: none; */
-    margin-top:47px;
+    margin-top:34px;
     z-index: 0;
 }
 .stat-table .table-right .td{
@@ -249,14 +248,16 @@ button.myBtn:active{
 .scrollx .progress-scroll{ 
     height: 100%;
     position: absolute;
-    background-color: #454545;
+    /* background-color: #454545; */
+    background:linear-gradient(#bdc3c7, #2c3e50);
+    /* background: -webkit-gradient(linear,100% 0%, 0% 0%, from(#999999), to(#212121), color-stop(0.0,#999999)); */
     border-radius: 100px;
     cursor: -webkit-grab;
     opacity: 0.5;
 
 }
 .scrollx .progress-scroll:hover{
-    box-shadow: 0 0 10px #0b1b75;
+    box-shadow: 0 0 10px  rgb(44, 62, 80);
 }
 
 /* scrolly */
@@ -273,7 +274,9 @@ button.myBtn:active{
 .scrolly .progress-scroll{ 
     width: 100%;
     position: absolute;
-    background-color: #454545;
+    /* background-color: #454545; */
+    background:linear-gradient(90deg,#bdc3c7, #2c3e50);
+    /* background: -webkit-gradient(linear,0% 100%, 0% 49%, from(#999999), to(#212121), color-stop(0.0,#999999)); */
     border-radius: 100px;
     cursor: -webkit-grab;
     opacity: 0.5;
