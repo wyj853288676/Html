@@ -38,7 +38,6 @@ function align(){
             $(selector+" .table-header-left th:eq("+index+")").css('min-width',width+'px');
             marginLeft+=width;
         }
-        console.log({width,thWidth});
         $(selector+" .table-right ").css("margin-left",marginLeft+'px');
         offset++;
     });
@@ -187,13 +186,16 @@ function initScrolly(){
     $(document).on("mouseup",function(e){
         mouseDownY=false;
     });
-    //绑定键盘事件 左右键移动scroll keycode:37 39 上下键：38 40
+    //绑定键盘事件 左右键移动scroll keycode:37 39 上下键：38 40,unbind防止resize时候重复触发
+    $(document).unbind("keydown");
     $(document).on("keydown",function(e){
-        e.stopProgation;
-        e.preventDefault;
         //判断是否焦点在表格上
         if($(selector+":hover").html()==undefined){
             return false;
+        }
+        if(e.keyCode==39||e.keyCode==37||e.keyCode==40||e.keyCode==38){
+            e.stopProgation;
+            e.preventDefault;
         }
         if(e.keyCode==39){
             indexx=$(selector+" .scrollx .progress-scroll ").offset().left;
@@ -224,7 +226,8 @@ function initScrolly(){
             }
         }
     });
-    //绑定滚轮事件
+    //绑定滚轮事件 unbind防止重复触发
+    $("#table_01").unbind(" mousewheel DOMMouseScroll ");
     $("#table_01").on("mousewheel DOMMouseScroll",function (e) {
         if($(selector+":hover").html()==undefined){
             return false;
@@ -257,3 +260,5 @@ function verticalMove(y){
         $("#table_01 .table-header-left").removeClass('shadow');
     }
 }
+
+//bug 屏幕高度变化时，键盘和滚轮控制每次移动的距离会变大
