@@ -1,7 +1,3 @@
-
-
-
-//提交表单
 $(document).ready(function(){
     showTable();
     $(window).resize(function(){
@@ -10,7 +6,7 @@ $(document).ready(function(){
 });
 
 var selector;
-//右边有offset列不移动
+//左边有offset列不移动
 var offset=0;
 function showTable(){
     selector="#table_01";
