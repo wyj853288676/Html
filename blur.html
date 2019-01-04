@@ -1,0 +1,51 @@
+<div class='blur-box'>
+    <div class='blur-container'>
+        <div class='blur-pills'></div>
+        <div class='blur-pills'></div>
+        <div class='blur-pills'></div>
+        <div class='blur-pills progress-pills'></div>
+        
+    </div>
+</div>
+
+
+<style>
+    .blur-box{
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    .blur-container{
+        display: flex;
+        width: 200%;
+        height: 200%;
+        background-color:black;
+        filter: blur(30px) contrast(30);
+        margin-top: -10%;
+        margin-left: -10%;
+        align-items: center;
+    }
+    .blur-container .blur-pills{
+        width: 200px;
+        height: 200px;
+        background-color:white;
+        border-radius:50%;
+        margin-left:250px;
+    }
+    .blur-container .blur-pills:first-child{
+        margin-left:450px;
+    }
+    .blur-pills.progress-pills{
+        position: absolute;
+        animation: movePills infinite ease-in-out alternate 2s;
+    }
+    @keyframes movePills {
+        0%{
+            left: -100px;
+        }
+        100%{
+            left:1235px;
+        }
+
+    }
+</style>
