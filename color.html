@@ -1,0 +1,150 @@
+<div class='color-container'>
+    <div class="red-star">
+    </div>
+    <div class="yellow-star">
+    </div>
+
+<div class='square-box'>
+    <div class='loading-container'>
+        <div class='loading-dot'></div>
+    </div>
+    <div class='loading-center'>
+            LOADING
+    </div>
+</div>
+
+</div>
+<style>
+    .color-container{
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        background-color: black;
+    }
+    .red-star::before{
+        content:" ";
+        width: 1em;
+        height: 1em;
+        background: radial-gradient(red,red 10%,rgba(255, 0, 0, 0) 56%);
+        border-radius: 50%;
+        display: inline-block;
+        animation:moveStar 10s linear alternate infinite;
+    }
+    .yellow-star::before{
+        content:" ";
+        width: 1em;
+        height: 1em;
+        border-radius: 50%;
+        display: inline-block;
+        background: radial-gradient(gold,gold 10%,rgba(255, 0, 0, 0) 56%);
+        box-shadow:   0 0 2em, 0 0 4em, 0 0 6em, 0 0 8em, 0 0 10em, 0 0 0 0.5em rgba(255, 255, 0, 0.1);
+        animation:moveStar 10s linear reverse infinite;
+    }
+    .square-box{
+        width: 200px;
+        height: 200px;
+        position: absolute;
+    }
+    .loading-container{
+        width: 100%;
+        height: 100%; 
+        position: absolute;;
+        border-radius: 50%;
+        color: gold;
+        border-width: 0.1em 0.1em 0em 0em;
+        border-color: gold transparent transparent transparent;
+        border-style:solid;
+        animation: loadingRotate 4s infinite linear;
+    }
+    .loading-dot{
+        width: 50%;
+        height: 1px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform-origin: 0% 0%;
+        transform: rotate(-45deg);
+    }
+    .loading-dot::after{
+        content:" ";
+        width: 1em;
+        height: 1em;
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(gold,gold 10%,rgba(255, 0, 0, 0) 56%);
+        box-shadow:   0 0 2em, 0 0 4em, 0 0 6em, 0 0 8em, 0 0 10em, 0 0 0 0.5em rgba(255, 255, 0, 0.1);
+        top: -.5em;
+        right: -.6em;
+    }
+    .loading-center{
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        /* border-radius: 100% 100% 100% 0; */
+        background-color: #1c1d21;
+        transform: scale(0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        animation: text-color 2s infinite linear alternate;
+        user-select: none;
+        -webkit-user-select: none;
+        /* linear-gradient(266deg, #00fcbd, #7400f9) */
+    }
+@keyframes moveStar {
+    0%{
+        transform: translate3d(0,0,0) ;
+        opacity: 1;
+    }
+    25%{
+        transform: translate3d(100px,100px,0);
+        opacity: 0.3;
+    } 
+
+    50%{
+        transform: translate3d(200px,0,0);
+        opacity: 1;
+    } 
+
+    75%{
+        transform: translate3d(300px,-100px,0);
+        opacity: 0.3;
+
+    } 
+    100%{
+        transform: translate3d(400px,100px,0);
+        opacity: 1;
+    } 
+}
+@keyframes loadingRotate {
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+    
+}
+@keyframes text-color {
+    0%{
+        color:rgb(220, 216, 191);
+        text-shadow: 0px 0px 0px gold;
+        box-shadow: 0px 0px 30px rgba(255, 217, 0, 0);
+    }
+    50%{
+        color: gold ;
+        text-shadow: 0px 0px 10px gold;
+        box-shadow: 0px 0px 30px rgba(255, 217, 0, 0.541);
+        
+    }
+    100%{
+        color:rgb(220, 216, 191);
+        text-shadow: 0px 0px 0px gold;
+        box-shadow: 0px 0px 30px gold
+    }
+
+}
+</style>

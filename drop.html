@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+      <filter id="liquid">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="liquid"></feColorMatrix>
+      </filter>
+    </defs>
+  </svg>
+<div class='drops-container'>
+        <div class='drops-background'></div>
+        <div class="drops">
+                <div class="drop1"></div>
+                <div class="drop2"></div>  
+        </div>
+</div>
+
+<style>
+    svg{
+        position: absolute;
+    }
+    .drops-container{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content:center;
+    }
+    .drops-background{
+        background-color: #10a7c1;
+        position: absolute;
+        width: 100px;
+        height: 100px;;
+    }
+    .drops {
+        -webkit-filter: url(#liquid);
+        filter: url(#liquid);
+        position: absolute;
+        z-index: 1;
+        opacity: 1;
+        /* background-color: #10a7c1; */
+        width: 100px;
+        height: 100px;;
+        }
+    .drop1, .drop2 {
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        background-color: #10a7c1;
+    }
+    .drop1 {
+        width: 90px;
+        height: 16px;
+        bottom: 2px;
+        border-radius: 0;
+    }
+    .drop2 {
+        width: 21px;
+        height: 24px;
+        animation: drop 3s linear   infinite;
+    }
+
+    @keyframes drop {
+        0% {
+            bottom: 0px;
+        }
+        70% {
+            bottom: -24px;
+        }
+        100% {
+            bottom: -100px;
+        }
+    }
+</style>
