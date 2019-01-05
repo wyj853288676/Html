@@ -1,0 +1,83 @@
+<style>
+        .dot-container{
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            overflow: hidden;
+        }
+        .light-dot{
+            width: 10px;
+            height: 10px;
+            /* width: 100px;
+            height: 100px; */
+            animation-name: move-frames-1;
+            animation-duration: 10s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            position: relative;
+            transition: top 10s;
+        }
+        .light-dot i{
+            background:radial-gradient(#99ffff, #99ffff 10%, rgba(153, 255, 255, 0) 56%);
+            display: block;
+            width: 100%;
+            height: 100%;
+            animation: fadeIn  2s infinite;
+        }
+      
+      @keyframes fadeIn {
+          0%{
+              opacity: 1;
+          }
+          50%{
+              opacity: 0.5;
+          }
+          100%{
+              opacity: 1;
+          }
+      }
+    
+      @keyframes move-frames-1 {
+        0% {
+            -webkit-transform: translateX(0px) translateY(0px) ;
+                    transform:  translateX(0px) translateY(0px)  ;
+        }
+        50%{
+            -webkit-transform: translateX(800px) translateY(0px) ;
+                    transform:  translateX(800px) translateY(0px)  ;
+        }
+        100%{
+            -webkit-transform:  translateX(1600px) translateY(0px)  ;
+                    transform:  translateX(1600px) translateY(0px) ;
+        }
+    }
+    </style>
+    
+<div class='dot-container'>
+    <div class='light-dot'><i></i></div>
+</div>
+
+<script>
+    var html=$(".dot-container").html();
+    var maxX=1600;
+    var maxY=600;
+    var delay=10;
+    var count=1000;
+    for(var i=0;i<count;i++){
+        $('.dot-container').append(html);
+    }
+    $(".light-dot").each(function(index){
+        var ranX=Math.random()*maxX;
+        var ranY=Math.random()*maxY*(0.5-Math.random())*2;
+        var ranD=Math.random()*delay;
+        $(this).css("transform","translateX("+ranX+"px) "+" translateY("+ranY+"px) ");
+        $(this).css("animation-delay",ranD+"s");
+        $(this).children(" i ").css("animation-delay",ranD+"s");
+        $(this).attr("id","dot"+index);
+    });
+  
+</script>
+
+
+
+
