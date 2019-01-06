@@ -37,6 +37,7 @@
         height: 100%;
         width:100%; 
         background-color:white;
+        margin:0px !important;
     }
     .row:hover{
         box-shadow: 0px 0px 10px #11111179;
