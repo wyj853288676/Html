@@ -5,6 +5,7 @@
 <html>
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    <link rel="icon" href="images/favicon.ico">
     <title>无聊写写</title>
     <link rel="stylesheet" href="myCss.css">
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -33,10 +34,8 @@
         background-color:#f9f0e3;
     }
     .row{
-        margin-left:10%;
-        margin-top:5%;
-        height: 80%;
-        width:80%;
+        height: 100%;
+        width:100%; 
         background-color:white;
     }
     .row:hover{
