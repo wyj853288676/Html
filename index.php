@@ -7,6 +7,7 @@
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
     <link rel="icon" href="images/favicon.ico">
     <title>无聊写写</title>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="myCss.css">
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
@@ -26,7 +27,7 @@
         <div class="navbar-collapse collapse" role="navigation">
             <ul class="nav nav-tabs ">
                 <?php foreach($list1 as $value):?>
-                    <li class=""><a href="#<?=str_replace(["$path\\",'.html'],"",$value);?>"  data-toggle='tab'><?=str_replace(["$path\\",'.html'],"",$value);?></a></li>
+                    <li class=""><a href="#<?=str_replace(["$path\\",'.html'],"",$value);?>"  data-toggle='tab''''''''''''''''''''''''''''''''''''''''''''''''''><?=str_replace(["$path\\",'.html'],"",$value);?></a></li>
                 <?php endforeach;?>
                 <li><a href="/table/index.html" target="_blank" >table</a></li>
             </ul>
