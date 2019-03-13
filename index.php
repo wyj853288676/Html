@@ -1,6 +1,6 @@
 <?php
-    $path="C:\Users\wyj\Desktop\git\Html";
-    $list1=glob("$path\\*.html");
+    $path="";
+    $list1=glob("*.html");
 ?>
 <html>
 <head>
@@ -27,7 +27,7 @@
         <div class="navbar-collapse collapse" role="navigation">
             <ul class="nav nav-tabs ">
                 <?php foreach($list1 as $value):?>
-                    <li class=""><a href="#<?=str_replace(["$path\\",'.html'],"",$value);?>"  data-toggle='tab''''''''''''''''''''''''''''''''''''''''''''''''''><?=str_replace(["$path\\",'.html'],"",$value);?></a></li>
+                    <li class=""><a href="#<?=str_replace(["$path\\",'.html'],"",$value);?>"  data-toggle='tab'><?=str_replace(["$path\\",'.html'],"",$value);?></a></li>
                 <?php endforeach;?>
                 <li><a href="/table/index.html" target="_blank" >table</a></li>
             </ul>

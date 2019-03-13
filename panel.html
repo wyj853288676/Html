@@ -1,0 +1,204 @@
+<br>
+<br>
+<br>    
+<div class="myNumber-container"  number='2'>
+    <div class="num-1"></div>
+    <div class="num-2"></div>
+    <div class="num-3"></div>
+
+    <div class="num-4"></div>
+    <div class="num-5"></div>
+
+    <div class="num-6"></div>
+    <div class="num-7"></div>
+    <div class="num-8"></div>
+
+</div>
+
+<style>
+.myNumber-container{
+    height: 4em;
+    width: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-left: 100px;
+}
+.myNumber-container div[class^='num-']{
+    background-color:rgba(0,0,0,0);
+    position: absolute;
+    border-style: solid;
+    border-width: calc(.5em - 2px);
+
+}
+
+
+.num-1{
+    width:calc( 2em - 2px);
+    top: 0;
+    height: 0px;
+    border-top-color: rgba(23, 162, 184, 0.1);
+    border-left-color: rgba(0,0,0,0);
+    border-right-color: rgba(0,0,0,0);
+    border-bottom-color: rgba(0,0,0,0);
+}
+.myNumber-container[number='2'] .num-1,
+.myNumber-container[number='3'] .num-1,
+.myNumber-container[number='5'] .num-1,
+.myNumber-container[number='6'] .num-1,
+.myNumber-container[number='7'] .num-1,
+.myNumber-container[number='8'] .num-1,
+.myNumber-container[number='9'] .num-1
+{
+    border-top-color: rgba(23, 162, 184, 1) !important;
+}
+
+.num-8{
+    width:calc( 2em - 2px);
+    bottom: 0;
+    height: 0px;
+    border-bottom-color: rgba(23, 162, 184, 0.1);
+    border-left-color: rgba(0,0,0,0);
+    border-right-color: rgba(0,0,0,0);
+    border-top-color: rgba(0,0,0,0);
+}
+
+.myNumber-container[number='2'] .num-8,
+.myNumber-container[number='3'] .num-8,
+.myNumber-container[number='5'] .num-8,
+.myNumber-container[number='6'] .num-8,
+.myNumber-container[number='8'] .num-8
+{
+    border-bottom-color: rgba(23, 162, 184, 1) !important;
+}
+
+.num-2{
+    height: calc(2em - 4px );
+    left: 0;
+    top: 2px;
+    width: 0px;
+    border-left-color: rgba(23, 162, 184, 0.1);
+    border-bottom-color: rgba(0,0,0,0);
+    border-right-color: rgba(0,0,0,0);
+    border-top-color: rgba(0,0,0,0);
+}
+
+.myNumber-container[number='4'] .num-2,
+.myNumber-container[number='5'] .num-2,
+.myNumber-container[number='6'] .num-2,
+.myNumber-container[number='8'] .num-2,
+.myNumber-container[number='9'] .num-2
+{
+    border-left-color: rgba(23, 162, 184, 1) !important;
+}
+
+.num-3{
+    height: calc(2em - 4px );
+    right: 0;
+    top: 2px;
+    width: 0px;
+    border-right-color: rgba(23, 162, 184, 0.1);
+    border-bottom-color: rgba(0,0,0,0);
+    border-left-color: rgba(0,0,0,0);
+    border-top-color: rgba(0,0,0,0);
+}
+
+.myNumber-container[number='1'] .num-3,
+.myNumber-container[number='2'] .num-3,
+.myNumber-container[number='3'] .num-3,
+.myNumber-container[number='4'] .num-3,
+.myNumber-container[number='7'] .num-3,
+.myNumber-container[number='8'] .num-3,
+.myNumber-container[number='9'] .num-3
+{
+    border-right-color: rgba(23, 162, 184, 1) !important;
+}
+
+.num-6{
+    height: calc(2em - 4px );
+    left: 0;
+    top: calc( 2em );
+    width: 0px;
+    border-left-color: rgba(23, 162, 184, 0.1);
+    border-bottom-color: rgba(0,0,0,0);
+    border-right-color: rgba(0,0,0,0);
+    border-top-color: rgba(0,0,0,0);
+}
+
+.myNumber-container[number='2'] .num-6,
+.myNumber-container[number='6'] .num-6,
+.myNumber-container[number='7'] .num-6
+{
+    border-left-color: rgba(23, 162, 184, 1) !important;
+}
+
+.num-7{
+    height: calc(2em - 4px );
+    right: 0;
+    top: calc( 2em );
+    width: 0px;
+    border-right-color: rgba(23, 162, 184, 0.1);
+    border-bottom-color: rgba(0,0,0,0);
+    border-left-color: rgba(0,0,0,0);
+    border-top-color: rgba(0,0,0,0);
+}
+
+.myNumber-container[number='3'] .num-7,
+.myNumber-container[number='4'] .num-7,
+.myNumber-container[number='5'] .num-7,
+.myNumber-container[number='6'] .num-7,
+.myNumber-container[number='7'] .num-7,
+.myNumber-container[number='8'] .num-7,
+.myNumber-container[number='9'] .num-7
+{
+    border-right-color: rgba(23, 162, 184, 1) !important;
+}
+
+
+.num-4,.num-5{
+    border-width: calc(.25em - 1px) !important;
+    /* width: 1em; */
+    width: calc(2em - 8px);
+
+}
+.num-4{
+    height: 0px;
+    border-bottom-color: rgba(23, 162, 184, 0.1);
+    border-left-color: rgba(0,0,0,0);
+    border-right-color: rgba(0,0,0,0);
+    border-top-color: rgba(0,0,0,0);
+    top: calc(1.5em );
+}
+
+.num-5{
+    height: 0px;
+    border-top-color: rgba(23, 162, 184, 0.1);
+    border-left-color: rgba(0,0,0,0);
+    border-right-color: rgba(0,0,0,0);
+    border-bottom-color: rgba(0,0,0,0);
+    top: calc(2em - 2px );
+}
+
+.myNumber-container[number='2'] .num-4,
+.myNumber-container[number='3'] .num-4,
+.myNumber-container[number='4'] .num-4,
+.myNumber-container[number='6'] .num-4,
+.myNumber-container[number='8'] .num-4,
+.myNumber-container[number='9'] .num-4
+{
+    border-bottom-color: rgba(23, 162, 184, 1) !important;
+}
+
+.myNumber-container[number='2'] .num-5,
+.myNumber-container[number='3'] .num-5,
+.myNumber-container[number='4'] .num-5,
+.myNumber-container[number='6'] .num-5,
+.myNumber-container[number='8'] .num-5,
+.myNumber-container[number='9'] .num-5
+{
+    border-top-color: rgba(23, 162, 184, 1) !important;
+}
+
+
+</style>
