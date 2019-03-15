@@ -42,6 +42,16 @@
     </div>
 </body>
 <style>
+    @font-face {
+	font-family: 'MyFont'; /* 给你的自定义WebFont命名 */
+	src:url('font-awesome/fonts/fontawesome-webfont.eot?v=4.7.0');
+	src:url('font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'),
+        url('font-awesome/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'),
+        url('font-awesome/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'),
+        url('font-awesome/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'),  
+        url('font-awesome/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
+    font-weight:normal;font-style:normal
+}
     body{
         background-color:#f9f0e3;
     }
@@ -62,6 +72,12 @@
    .navbar-header a{
         color:white;
     }
+    /* .navbar-header a::before{
+        font-family:"MyFont";
+        content:" \f121";
+        display:block;
+        transform:translateY(100px);
+    } */
     .nav.nav-tabs a{
         color:#7b7474;
         font-weight:500;

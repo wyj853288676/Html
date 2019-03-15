@@ -10,6 +10,10 @@
     <button class="btn btn-default" onclick='clearCanvas()'>重置</button>
 </div>
 
+<!-- <h2 style="font-family:MyFont;opacity: 0 ;" id="h2" >
+    &#xf067;
+</h2> -->
+
 <style>
     #container{
         background-color:gray;
@@ -21,10 +25,14 @@
     #pointer{
         position: absolute;
     }
+    body{
+        font-family: "MyFont";
+    }
 </style>
 
 
 <script>
+
 function initCanvas(){
     var canvas=document.getElementById('clock');
     var ctx=canvas.getContext('2d');
@@ -84,11 +92,17 @@ function initCanvas(){
     ctx.fillStyle='#8dc9f8';
     ctx.font='20px normal';
     ctx.fillText('BETA',0,-60);
-    ctx.font='14px normal';
+    // ctx.font='14px normal';
+    ctx.font='14px MyFont';
     // 获取当前日期
     var date=new Date();
     var ymd=date.getFullYear()+'.'+(date.getMonth()+1)+'.'+date.getDate();
-    ctx.fillText('评估时间 : '+ymd,0,95);
+    // ctx.fillText(" 评估时间 : "+ymd,0,95);
+    // let content = document.getElementById('h2').textContent;
+    ctx.font='14px MyFont';
+    ctx.fillText("\uf121",0,95);
+
+    
     ctx.font='45px bold';
 
     // 绘制动画需要重置幕布，所以重建一个canvas对象
@@ -126,7 +140,7 @@ function initCanvas(){
         }else{
             evluate='极好';
         }
-        ctxPoint.font='95px bold';
+        ctxPoint.font='95px bold MyFont';
         ctxPoint.textAlign='center';
         ctxPoint.shadowColor='#fff';
         // 所有的动画事件
@@ -166,11 +180,11 @@ function initCanvas(){
 
 
             ctx.beginPath();
-            var angle=240*text/1000*Math.PI;
-            ctx.arc(0,0,180,(text*240/1000-210)/180*Math.PI,150/180*Math.PI,true);
-            var linearGradient= ctx.createLinearGradient(-180*Math.cos(1/6*Math.PI),90,-180*Math.cos(angle),-180*Math.sin(angle));
-            linearGradient.addColorStop(0,"white")
-            linearGradient.addColorStop(1,"blue");
+            var angle=(i+60)/180*Math.PI;
+            ctx.arc(0,0,180,0.5*Math.PI+angle,150/180*Math.PI,true);
+            var linearGradient= ctx.createLinearGradient(-180*Math.cos(1/6*Math.PI),90,-180*Math.sin(angle),180*Math.cos(angle));
+            linearGradient.addColorStop(0,"#5db3f5")
+            linearGradient.addColorStop(1,"#5db3f5");
             ctx.strokeStyle=linearGradient;
             ctx.lineWidth='3';
             ctx.stroke();
@@ -188,7 +202,7 @@ function initCanvas(){
         slideValue();
     }
     // 打开页面时默认的跳动数字
-    run(850);
+    run(600);
     // 重新绘制的函数
     // var runBtn=document.getElementById('run');
     // var valueInput=document.getElementById('value');
