@@ -6,7 +6,7 @@ function myTrim(x) {
 /**
  * 判断是否为移动设备
  */
-var isPC = function ()
+var checkPC = function ()
 {
     var userAgentInfo = navigator.userAgent.toLowerCase();
     var Agents = new Array("android", "iphone", "symbianOS", "windows phone", "ipad", "ipod");
@@ -469,17 +469,19 @@ function jBulletin(inOptions){
         before:null,//公告栏在哪一个dom前面
         after:null,//公告栏在哪一个dom后面
         parent:$("body"),//公告栏的parent； parent，before，after只有一个会生效，优先级为：before,after,parent
-        time:7000,//time ms 轮播一次 注意单位是毫秒
-        defaultTitle:"<i class='fa fa-bullhorn text-muted' >【お知らせ】</i>",
-        mobileDefaultTitle:"<i class='fa fa-bullhorn text-muted' ></i>",
+        time:10000,//time ms 轮播一次 注意单位是毫秒
+        defaultTitle:"<i class='fa fa-volume-up text-muted' >【お知らせ】</i>",
+        mobileDefaultTitle:"<i class='fa fa-volume-up text-muted' ></i>",
+        msPerPx:15,//每px移动所需要的ms数
     };
     $.extend(options,inOptions);
     let _container=$(document.createElement("div")).addClass('bulletin-container');
     let _header=$(document.createElement("div")).addClass('bulletin-header text-muted');
-    let _viceTitle=$(document.createElement("div")).addClass('vice-title').css('margin-left',5);//副标题可以用来放日期在header中，随着li的变换而变换
     let _body=$(document.createElement("div")).addClass('bulletin-body');
     let _footer=$(document.createElement("div")).addClass('bulletin-footer');
     let _ul=$(document.createElement("ul")).addClass('bulletin-ul');
+    let _viceTitleUl=$(document.createElement("ul")).addClass('bulletin-ul vice-title-ul');
+    let _viceTitleContainer=$(document.createElement("div")).addClass('vice-title-container');
     let _lis=[];
     let _removeBtn=$(document.createElement("button")).addClass('no-border bulletin-button no-bg text-muted').html("×").css('font-size','20px').attr('title','閉じる');
     let activeIndex=0;//active li是第几个
@@ -490,12 +492,20 @@ function jBulletin(inOptions){
         let _li=$(document.createElement("li")).addClass('bulletin-li').append(_child).addClass(index==0?'active':'').data('vice-title',_content.data('vice-title')==undefined?'':_content.data('vice-title'));
         _lis.push(_li);
         _ul.append(_li);
+        // 副标题 list
+        let _viceTitle=$(document.createElement("div")).addClass('vice-title').html(_li.data('vice-title'));//副标题可以用来放日期在header中，随着li的变换而变换
+        let _viceTitleLi=$(document.createElement("li")).addClass('bulletin-li').append(_viceTitle);
+        _viceTitleUl.append(_viceTitleLi);
         count++;
     });
+    if(count==0){
+        return true;
+    }
+    _viceTitleContainer.append(_viceTitleUl);
     _container.append(_header).append(_body).append(_footer);
     _body.append(_ul);
     _footer.append(_removeBtn);
-    _header.html(isPC()?options['defaultTitle']:options['mobileDefaultTitle']).append(_viceTitle);
+    _header.html(checkPC()?options['defaultTitle']:options['mobileDefaultTitle']).append(_viceTitleContainer);
     //在li长度过长或者有多个li的时候，设置定时器来控制公告的轮播
     if(options['before']!=null){
         options['before'].before(_container);
@@ -511,9 +521,9 @@ function jBulletin(inOptions){
     //公告的上下轮播
     function bindListenY(){
         let _activeLi=_ul.children('li.active');
+        //更新viceTitleUl 位置
+        _viceTitleUl.css('margin-top',_ul.offset()['top']-_activeLi.offset()['top']);
         _ul.css('margin-top',_ul.offset()['top']-_activeLi.offset()['top']);//ul的transition在css中设置为500ms
-        //更新vice-title
-        _viceTitle.html(_activeLi.data('vice-title'));
         //限制body最大宽度
         _body.css('max-width',_container.outerWidth()-_footer.outerWidth()-_header.outerWidth());
         setTimeout(function(){
@@ -536,34 +546,32 @@ function jBulletin(inOptions){
         let _child=dom.children('div.li-child');
         let realWidth=_child.outerWidth();
         let marginLeft=80;//clone-child margin-left
+        let stayTime=1000;//轮播完后停留的时间
         if((realWidth-width)>=10){
             let _cloneChild=dom.children('div.li-child').clone().css('margin-left',marginLeft);;
             dom.append(_cloneChild);
-            transition=(realWidth+marginLeft)*20;
+            transition=(realWidth+marginLeft)*options['msPerPx'];
             //transition最少为3000ms
             transition=transition<3000?3000:transition;
-            _child.css('transition','all '+transition+"ms linear");
             let duration=0;
             moveLi();
             function moveLi(){
-                _child.css('margin-left',-realWidth-marginLeft);
+                _child.css('transition','all '+transition+"ms linear").css('margin-left',-realWidth-marginLeft);
                 setTimeout(function(){
-                    _child.css('transition','all 0s').css('margin-left','0');
-                    duration+=transition;
+                    _child.css('transition','all 0s').css('margin-left',0);
+                    duration=duration+transition+stayTime;
                     if(duration>=options['time']){
                         _cloneChild.remove();
                     }else{
-                        moveLi();
+                        setTimeout(function(){
+                            moveLi();
+                        },stayTime);
                     }
                 },transition);
             }
 
         }
-        if(transition>=options['time']){
-            return transition;
-        }else{
-            return Math.ceil(options['time']/transition)*transition;
-        }
+        return Math.max( Math.ceil(options['time']/(transition+stayTime))*(transition+stayTime),options['time']);
     }
     //其他监听 一般为button
     function bindListen(){

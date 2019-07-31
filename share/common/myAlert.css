@@ -422,7 +422,8 @@ div.alert-container span.title-span-pc::after{
 }
 div.alert-container div.alert-panel{
     width: 30%;
-    min-width: 300px;
+    min-width: 400px;
+    max-width: 95%;
     height: auto;
     background: white;
     border-radius: 1rem;
@@ -921,6 +922,12 @@ div.bulletin-header div.vice-title{
     font-size: 12px;
 
 }
+div.bulletin-container div.vice-title-container{
+    height: 100%;
+}
 @media screen and (max-width:767px){
+    div.bulletin-container div.vice-title-container{
+        margin-left: 5px;
+    }
 }
 /* 公告栏 bulletin-container */
