@@ -32,7 +32,7 @@
                 <li><a href="/table/index.html" target="_blank" >table</a></li>
             </ul>
         </div>
-        <div class='tab-content'>
+        <div class='tab-content' style='margin-top: 50px;'>
             <?php foreach($list1 as $value):?>
                 <div class='tab-pane fade in ' id='<?=str_replace(["$path\\",'.html'],"",$value);?>'>
                     <?php include(str_replace("$path\\","",$value));?>
@@ -84,6 +84,12 @@
     }
     .nav.nav-tabs li{
         border-radius:0;
+    }
+    div.tab-pane.active{
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        height:100%;
     }
     .nav.nav-tabs li.active a{
         color:white;
