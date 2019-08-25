@@ -1,6 +1,7 @@
 <?php
     $path="";
     $list1=glob("*.html");
+    $activeIndex='mi.html';
 ?>
 <html>
 <head>
@@ -25,22 +26,23 @@
         <a class="navbar-brand hidden-sm" href="#" disabled>列表</a>
         </div>
         <div class="navbar-collapse collapse" role="navigation">
-            <ul class="nav nav-tabs ">
+            <ul class="nav nav-tabs " id='tab-list'>
                 <?php foreach($list1 as $value):?>
-                    <li class=""><a href="#<?=str_replace(["$path\\",'.html'],"",$value);?>"  data-toggle='tab'><?=str_replace(["$path\\",'.html'],"",$value);?></a></li>
+                    <li class="<?=$value==$activeIndex?'active':''?>"><a href="#<?=str_replace(["$path\\",'.html'],"",$value);?>"  data-toggle='tab'><?=str_replace(["$path\\",'.html'],"",$value);?></a></li>
                 <?php endforeach;?>
-                <li><a href="/table/index.html" target="_blank" >table</a></li>
             </ul>
         </div>
-        <div class='tab-content' style='margin-top: 50px;'>
+        <div class='tab-content' style='margin-top: 50px;height:calc(100vh - 50px)'>
             <?php foreach($list1 as $value):?>
-                <div class='tab-pane fade in ' id='<?=str_replace(["$path\\",'.html'],"",$value);?>'>
+                <div class='tab-pane fade in <?=$value==$activeIndex?'active':''?>' id='<?=str_replace(["$path\\",'.html'],"",$value);?>'>
                     <?php include(str_replace("$path\\","",$value));?>
                 </div>
             <?php endforeach;?>
         </div>
     </div>
 </body>
+<script>
+</script>
 <style>
     @font-face {
 	font-family: 'MyFont'; /* 给你的自定义WebFont命名 */

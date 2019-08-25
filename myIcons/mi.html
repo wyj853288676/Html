@@ -1,0 +1,769 @@
+
+<html>
+    <head>
+        <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div style="display:flex;align-items:center;justify-content:center;flex-wrap: wrap;">
+            <label class='mi-label'>
+                <i class="mi mi-chart mi-bar-chart "></i>
+            </label>
+            <label class='mi-label'>
+                <i class="mi mi-chart mi-bar-chart-horizon "></i>
+            </label>
+            <label class='mi-label'>
+                <i class="mi mi-menu"></i>
+            </label>
+            <label class='mi-label'>
+                <i class="mi mi-top animationed-hover"></i>
+            </label>
+            <label class='mi-label'>
+                <i class="mi mi-down animationed-hover"></i>
+            </label>
+            <label class='mi-label'>
+                <i class="mi mi-right-angle-left"></i>
+            </label>
+            <label class='mi-label'>
+                <i class="mi mi-right-angle-right"></i>
+            </label>
+            <label class='mi-label'>
+                <i class="mi mi-angle-bar-left"></i>
+            </label>
+            <label class='mi-label'>
+                <i class="mi mi-angle-bar-right"></i>
+            </label>
+            <label class='mi-label'>
+                <i class="mi mi-angle-bar-up"></i>
+            </label>
+            <label class='mi-label'>
+                <i class="mi mi-angle-bar-down"></i>
+            </label>
+            <label class='mi-label'>
+                <i class="mi mi-plus"></i>
+            </label>
+            <label class='mi-label'>
+                <i class="mi mi-close animationed"></i>
+            </label>
+            <label class='mi-label'>
+                <i class="mi mi-check animationed"></i>
+            </label>
+            <label class='mi-label'>
+                <i class="mi mi-alert"></i>
+            </label>
+            <label class='mi-label'>
+                <i class="mi mi-upload"></i>
+            </label>
+            <label class='mi-label'>
+                <i class="mi mi-download"></i>
+            </label>
+            <label class='mi-label'>
+                <i class="mi mi-multi-arrow-left"></i>
+            </label>
+        </div>
+    </body>
+</html>
+<style>
+body{
+    background:white;
+}
+label.mi-label{
+    width: 3em;
+    height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dotted #ccc;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+label.mi-label:hover{
+    background:#eee;
+}
+i.mi{
+    display: inline-block;
+    position: relative;
+    width: 1em;
+    height: 1em;
+}
+i.mi::before,i.mi::after{
+    content: "";
+    pointer-events: none;
+}
+/* bar-chart */
+i.mi-chart {
+    width: 1.5em;
+    height: 1em;
+    box-shadow: -1px 1px 0px 1px #555;
+    overflow: hidden;
+    border: 1px solid transparent;
+}
+i.mi-bar-chart::before {
+    width: .2em;
+    position: absolute;
+    left: calc(-.2em - 1px);
+    bottom: -.5em;
+    background: transparent;
+    height: 100%;
+    box-shadow: 0.3em -0.1em 0em 0em #555, 0.6em -0.5em 0em 0em #555, 0.9em -0.2em 0em 0em #555, 1.2em -0.4em 0em 0em #555;
+}
+i.mi-bar-chart.animationed::before{
+    animation: myIconBarChartAnimation 5s linear infinite;
+    animation-delay: 1s;
+}
+/* -.5em最长 .5em最短 */
+@keyframes myIconBarChartAnimation{
+    0%{
+        box-shadow: 0.3em -0.1em 0em 0em #555,
+        0.6em -0.5em 0em 0em #555, 
+        0.9em -0.2em 0em 0em #555,
+        1.2em -0.4em 0em 0em #555;
+    }
+    16.666666%{
+        box-shadow: 0.3em -0.1em 0em 0em #555,
+        0.6em -0.5em 0em 0em #555, 
+        0.9em -0.2em 0em 0em #555,
+        1.2em -0.4em 0em 0em #555;
+    }
+    33.333333%{
+        box-shadow: 0.3em -0.5em 0em 0em #555,
+        0.6em 0.2em 0em 0em #555, 
+        0.9em -0.4em 0em 0em #555,
+        1.2em -0.2em 0em 0em #555;
+    }
+    50%{
+        box-shadow: 0.3em -0.5em 0em 0em #555,
+        0.6em 0.2em 0em 0em #555, 
+        0.9em -0.4em 0em 0em #555,
+        1.2em -0.2em 0em 0em #555;
+    }
+    66.666666%{
+        box-shadow: 0.3em -0.1em 0em 0em #555,
+        0.6em -0.25em 0em 0em #555, 
+        0.9em -0.35em 0em 0em #555,
+        1.2em -0.5em 0em 0em #555;
+    }
+    83.333333%{
+        box-shadow: 0.3em -0.1em 0em 0em #555,
+        0.6em -0.25em 0em 0em #555, 
+        0.9em -0.35em 0em 0em #555,
+        1.2em -0.5em 0em 0em #555;
+    }
+    100%{
+        box-shadow: 0.3em -0.1em 0em 0em #555,
+        0.6em -0.5em 0em 0em #555, 
+        0.9em -0.2em 0em 0em #555,
+        1.2em -0.4em 0em 0em #555;
+    }
+}
+i.mi-bar-chart.animationed-2::before{
+    animation: myIconBarChartAnimation2 1s linear infinite;
+}
+/* -.5em最长 .5em最短 */
+@keyframes myIconBarChartAnimation2{
+    0%{
+        box-shadow: 0.3em -0.1em 0em 0em #555,
+        0.6em -0.5em 0em 0em #555, 
+        0.9em -0.2em 0em 0em #555,
+        1.2em -0.4em 0em 0em #555;
+    }
+    33.33333%{
+        box-shadow: 0.3em -0.5em 0em 0em #555,
+        0.6em 1px 0em 0em #555, 
+        0.9em -0.4em 0em 0em #555,
+        1.2em -0.2em 0em 0em #555;
+    }
+    66.6666%{
+        box-shadow: 0.3em -0.2em 0em 0em #555,
+        0.6em -0.4em 0em 0em #555, 
+        0.9em -0.5em 0em 0em #555,
+        1.2em -0.5em 0em 0em #555;
+    }
+    99.99999%{
+        box-shadow: 0.3em -0.1em 0em 0em #555,
+        0.6em -0.5em 0em 0em #555, 
+        0.9em -0.2em 0em 0em #555,
+        1.2em -0.4em 0em 0em #555;
+    }
+}
+/* bar-chart */
+
+/* bar-chart-horizon */
+i.mi-bar-chart-horizon{
+    height: 1.2em;
+}
+i.mi-bar-chart-horizon::before{
+    height: .2em;
+    width: 100%;
+    top: calc(-0.2em - 0px);
+    position: absolute;
+    box-shadow: -0em 0.2em 0em 0em #555,
+    -0.4em 0.5em 0em 0em #555,
+    -0.8em 0.8em 0em 0em #555,
+    -1.2em 1.1em 0em 0em #555;
+}
+i.mi-bar-chart-horizon.animationed::before{
+    animation: myIconBarChartHorizonAnimation 5s 1s linear infinite;
+}
+@keyframes myIconBarChartHorizonAnimation{
+    0%{
+        box-shadow: -0em 0.2em 0em 0em #555,
+    -0.4em 0.5em 0em 0em #555,
+    -0.8em 0.8em 0em 0em #555,
+    -1.2em 1.1em 0em 0em #555;
+    }
+    16.666666%{
+        box-shadow:-0em 0.2em 0em 0em #555,
+    -0.4em 0.5em 0em 0em #555,
+    -0.8em 0.8em 0em 0em #555,
+    -1.2em 1.1em 0em 0em #555;
+    }
+    33.333333%{
+        box-shadow: -1.2em 0.2em 0em 0em #555,
+    -0.8em 0.5em 0em 0em #555,
+    -0.4em 0.8em 0em 0em #555,
+    -0em 1.1em 0em 0em #555;
+    }
+    50%{
+        box-shadow: -1.2em 0.2em 0em 0em #555,
+    -0.8em 0.5em 0em 0em #555,
+    -0.4em 0.8em 0em 0em #555,
+    -0em 1.1em 0em 0em #555;
+    }
+    66.666666%{
+        box-shadow: -0.8em 0.2em 0em 0em #555,
+    -0.4em 0.5em 0em 0em #555,
+    -0em 0.8em 0em 0em #555,
+    -1.2em 1.1em 0em 0em #555;
+    }
+    83.333333%{
+        box-shadow: -0.8em 0.2em 0em 0em #555,
+    -0.4em 0.5em 0em 0em #555,
+    -0em 0.8em 0em 0em #555,
+    -1.2em 1.1em 0em 0em #555;
+    }
+    100%{
+        box-shadow: -0em 0.2em 0em 0em #555,
+    -0.4em 0.5em 0em 0em #555,
+    -0.8em 0.8em 0em 0em #555,
+    -1.2em 1.1em 0em 0em #555;
+    }
+}
+
+/* bar-chart-horzion */
+
+/* menu */
+i.mi-menu{
+    display: inline-flex;
+    align-items: center;
+    height: 1.5em;
+}
+i.mi-menu::before{
+    width: 1.25em;
+    height: 0px;
+    /* background: #555; */
+    display: block;
+    box-shadow: 0px calc(-0.7em + 2px) 0px 1px #555,
+     0px 0px 0px 1px #555,
+     0px calc(0.7em - 1.5px) 0px 1px #555;
+    transition: box-shadow 0.3s;
+}
+i.mi-menu.mi-active::before{
+    box-shadow: 0px 0 0px 1px rgba(85, 85, 85, 0.4),
+     0px 0px 0px 1px rgba(85, 85, 85, 1),
+     0px 0 0px 1px rgba(85, 85, 85, 0.4);
+}
+/* menu */
+
+/* to top */
+i.mi-top{
+    width: 1em;
+    height: 1em;
+}
+i.mi-top::before{
+    border-width: 2px 0px 0px 2px;
+    border-style: solid;
+    border-color: transparent;
+    border-top-color: #555;
+    border-left-color: #555;
+    width: .5em;
+    height: .5em;
+    display: block;
+    transform: rotate(45deg);
+    position: absolute;
+    top: .5em;
+    left: 20%;
+}
+i.mi-top::after{
+    height: 2px;
+    background: #555;
+    width: 1.2em;
+    display: block;
+    position: absolute;
+    top: 10%;
+    left: -.1em;
+}
+i.mi-top.animationed::before,
+i.mi-top.animationed-hover:hover::before{
+    animation: myIoncTopAnimation 1s ease-in-out infinite;
+}
+@keyframes myIoncTopAnimation{
+    0%{
+        transform: translateY(10px) rotate(45deg);
+        opacity: 0.5;
+    }
+    70%{
+        transform: translateY(0px) rotate(45deg);
+        opacity: 1;;
+    }
+    100%{
+        transform: translateY(0px) rotate(45deg);
+        opacity: 1;;
+    }
+}
+/* to top */
+
+/* down */
+
+i.mi-down{
+    width: 1em;
+    height: 1em;
+}
+i.mi-down::before{
+    border-width:0px 0px 2px 2px;
+    border-style: solid;
+    border-color: transparent;
+    border-bottom-color: #555;
+    border-left-color: #555;
+    width: .5em;
+    height: .5em;
+    display: block;
+    transform: rotate(-45deg);
+    position: absolute;
+    top: -2px;
+    left: 20%;
+}
+i.mi-down::after{
+    height: 2px;
+    background: #555;
+    width: 1.2em;
+    display: block;
+    position: absolute;
+    bottom: 10%;
+    left: -.1em;
+}
+i.mi-down.animationed::before,
+i.mi-down.animationed-hover:hover::before{
+    animation: myIoncDownAnimation 1s ease-in-out infinite;
+}
+@keyframes myIoncDownAnimation{
+    0%{
+        transform: translateY(-10px) rotate(-45deg);
+        opacity: 0.5;
+    }
+    70%{
+        transform: translateY(0px) rotate(-45deg);
+        opacity: 1;;
+    }
+    100%{
+        transform: translateY(0px) rotate(-45deg);
+        opacity: 1;;
+    }
+}
+
+/* down */
+
+/* 左直角 right-angle-left */
+.mi-right-angle-left{
+    width: .5em;
+    height: 1em;
+}
+.mi-right-angle-left::before,
+.mi-right-angle-left::after{
+    display: block;
+    height: 100%;
+    width: .5em;
+    border-width: 5px 0px 0px 5px;
+    border-style: solid;
+    border-color: transparent;
+    border-top-color: #555;
+    border-left-color: #555;
+    position: absolute;
+}
+.mi-right-angle-left::after{
+    border-top-color: white;
+    border-left-color: white;
+    /* transform: scale(.5); */
+    border-width: 3px 0px 0px 3px;
+    top: 1px;
+    left: 1px;
+}
+/* 左直角 right-angle-left */
+
+
+/* 右直角 right-angle-right */
+.mi-right-angle-right{
+    width: .5em;
+    height: 1em;
+}
+.mi-right-angle-right::before,
+.mi-right-angle-right::after{
+    display: block;
+    height: 100%;
+    width: .5em;
+    border-width: 0px 5px 5px 0px;
+    border-style: solid;
+    border-color: transparent;
+    border-bottom-color: #555;
+    border-right-color: #555;
+    position: absolute;
+}
+.mi-right-angle-right::after{
+    border-bottom-color: white;
+    border-right-color: white;
+    /* transform: scale(.5); */
+    border-width: 0px 3px 3px 0px;
+    bottom: -4px;
+    right: 4px;
+}
+/* 右直角 right-angle-left */
+
+/* 箭头 */
+.mi-angle-bar-left::before,
+.mi-angle-bar-right::before,
+.mi-angle-bar-up::before,
+.mi-angle-bar-down::before{
+    height: 0;
+    width: 0;
+    border-style: solid;
+    border-style: solid;
+    display: block;
+    border-color: transparent;
+}
+.mi-angle-bar-left::after,
+.mi-angle-bar-right::after,
+.mi-angle-bar-up::after,
+.mi-angle-bar-down::after{
+    background: #555;
+    display: inline-block;
+    position: absolute;
+}
+.mi-angle-bar-left::before{
+    border-right-color: #555;
+    border-width: .5em .4em 0.5em 0.0em;
+}
+.mi-angle-bar-left::after{
+    height: .6em;
+    width: .5em;
+    top: .2em;
+    left: .4em;
+}
+.mi-angle-bar-right::before{
+    border-left-color: #555;
+    border-width: .5em 0.0em 0.5em 0.4em;
+    float: right;
+}
+.mi-angle-bar-right::after{
+    height: .6em;
+    width: .5em;
+    top: .2em;
+    right: .4em;
+}
+.mi-angle-bar-up::before{
+    border-bottom-color: #555;
+    border-width: .0em 0.5em 0.4em 0.5em;
+}
+.mi-angle-bar-up::after{
+    width: .6em;
+    height: .5em;
+    top: .4em;
+    left: .2em;
+}
+.mi-angle-bar-down::before{
+    border-top-color: #555;
+    border-width: .4em 0.5em 0.0em 0.5em;
+    position: absolute;
+    top: .5em;
+}
+.mi-angle-bar-down::after{
+    width: .6em;
+    height: .5em;
+    top: 0em;
+    left: .2em;
+}
+/* 箭头 */
+
+/* 加号 */
+.mi-plus{
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+}
+.mi-plus::before{
+    display:block;
+    width: 100%;
+    height: 2px;;
+    background: #555;
+}
+.mi-plus::after{
+    display:block;
+    height: 100%;;
+    width: 2px;
+    background: #555;
+    position: absolute;
+    left: calc(50% - 1px);
+    top: 0; 
+}
+/* 加号 */
+
+/* 乘号 */
+.mi-close::before,.mi-close::after{
+    width: 1em;
+    height: 2px;;
+    background: #555;
+    display:block;
+    position: absolute;
+    left: 0;
+    top: calc(.5em - 1px);
+}
+.mi-close::before{
+    transform: rotate(45deg);
+}
+.mi-close::after{
+    transform: rotate(-45deg);
+}
+.mi-close.animationed::before{
+    animation: myIconCheckBefore 0.15s ease-in-out;
+}
+
+.mi-close.animationed::after{
+    animation: myIconCheckAfter 0.3s ease-in-out ;
+}
+@keyframes myIconCheckBefore{
+    0%{
+        opacity: 0;
+        transform: rotate(45deg) scaleX(0);
+    }
+    100%{
+        opacity: 1;
+        transform: rotate(45deg) scaleX(1);
+    }
+}
+
+@keyframes myIconCheckAfter{
+    0%{
+        opacity: 0;
+        transform: rotate(-45deg) scaleX(0);
+    }
+    50%{
+        opacity: 0;
+        transform: rotate(-45deg) scaleX(0);
+
+    }
+    100%{
+        opacity: 1;
+        transform: rotate(-45deg) scaleX(1);
+    }
+}
+/* 乘号 */
+
+/* 对号 */
+.mi-check::before{
+    display: block;
+    border-width: 0px 0px 2px 2px;
+    width: 1em;
+    height: .5em;
+    border-style: solid ;
+    border-color: #555;
+    transform: rotate(-45deg);
+}
+.mi-check.animationed::before{
+    animation: myIconCheckAnimation 0.5s ease;
+}
+@keyframes myIconCheckAnimation{
+    0%{
+        opacity: 0;
+        transform: rotate(0);
+    }
+    100%{
+        opacity: 1;
+        transform: rotate(-45deg);
+    }
+}
+
+/* 对号 */
+
+/* 叹号 */
+.mi-alert{
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    width: 1em;
+}
+.mi-alert::before{
+    display: block;
+    width: 4px;
+    background: #555;
+    height: .8em;
+    border-radius: 2px;
+    position: absolute;
+    top: -2px;
+}
+.mi-alert::after{
+    display: block;
+    width: 4px;
+    background: #555;
+    height: 4px;
+    bottom: -3px;
+    border-radius: 100%;
+    position: absolute;
+}
+
+/* 叹号 */
+
+/* 上传 */
+.mi-upload::before,
+.mi-download::before
+{
+    width: 100%;
+    height: 50%;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    border: 1px solid #555;
+    border-top-color: transparent;
+    border-top-width: 0px;
+    left: -1px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.mi-upload::after{
+    border-width: .4em .3em .4em .3em;
+    border-style: solid;
+    border-color: transparent;
+    border-bottom-color: #555;
+    box-shadow: 0px 0.55em 0px -0.2em #555;
+    position: absolute;
+    left: .2em;
+    bottom: 0.7em;
+}
+.mi-upload.animationed::after{
+    animation: myIconUpload 1.5s infinite;
+}
+@keyframes myIconUpload {
+    0%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100%{
+        transform: translateY(-.5em);
+        opacity: 0.1;
+    }
+}
+
+/* 上传 */
+
+/* 下载 */
+.mi-download::after{
+    bottom: 0em;
+    border-width: .4em .3em .4em .3em;
+    border-style: solid;
+    border-color: transparent;
+    border-top-color: #555;
+    box-shadow: 0px -0.55em 0px -0.2em #555;
+    position: absolute;
+    left: .2em;
+    bottom: -.1em;
+}
+
+.mi-download.animationed::after{
+    animation: myIconDownload 1.5s infinite;
+}
+@keyframes myIconDownload {
+    0%{
+        transform: translateY(-0.5em);
+        opacity: 1;
+    }
+    100%{
+        transform: translateY(0em);
+        opacity: 0.1;
+    }
+}
+
+/* 下载 */
+
+/* 多个箭头 */
+.mi-multi-arrow-left::before{
+    width: 2px;
+    height: .5em;
+    display: block;
+    transform: skew(-35deg);
+}
+.mi-multi-arrow-left::after{
+    width: 2px;
+    height: .5em;
+    display: block;
+    transform: skew(35deg);
+    top: .5em;
+  
+}
+.mi-multi-arrow-left::before,
+.mi-multi-arrow-left::after{
+    box-shadow: 0.4em 0px 0px #555,.8em 0px 0px #555,1.2em 0px 0px #555;
+    position: absolute;
+    left: -.3em;
+    background: transparent;
+}
+.mi-multi-arrow-left.animationed::before,
+.mi-multi-arrow-left.animationed::after{
+    animation: myIconMultiArrow 2s linear infinite;
+}
+@keyframes myIconMultiArrow {
+    0%{
+        box-shadow: 0.4em 0px 0px rgba(85, 85, 85, 0.2),.8em 0px 0px rgb(84, 84, 84, 0.2),1.2em 0px 0px rgb(85, 85, 85, 0.2);
+    }
+    33.333%{
+        box-shadow: 0.4em 0px 0px rgba(85, 85, 85, 0.2),.8em 0px 0px rgb(84, 84, 84, 0.2),1.2em 0px 0px rgb(85, 85, 85, 1);
+    }
+    66.666%{
+        box-shadow: 0.4em 0px 0px rgba(85, 85, 85, 0.2),.8em 0px 0px rgb(84, 84, 84, 1),1.2em 0px 0px rgb(85, 85, 85, 0.2);
+    }
+    100%{
+        box-shadow: 0.4em 0px 0px rgba(85, 85, 85, 1),.8em 0px 0px rgb(84, 84, 84, 0.2),1.2em 0px 0px rgb(85, 85, 85, 0.2);
+    }
+}
+.mi-multi-arrow-left.animationed-2::before,
+.mi-multi-arrow-left.animationed-2::after{
+    animation: myIconMultiArrow2 2s linear infinite;
+}
+@keyframes myIconMultiArrow2 {
+    0%{
+        box-shadow: 0.4em 0px 0px rgba(85, 85, 85, 0.1),.8em 0px 0px rgb(84, 84, 84, 0.1),1.2em 0px 0px rgb(85, 85, 85, 0.1);
+    }
+    33.333%{
+        box-shadow: 0.4em 0px 0px rgba(85, 85, 85, 0.1),.8em 0px 0px rgb(84, 84, 84, 0.1),1.2em 0px 0px rgb(85, 85, 85, 1);
+    }
+    66.666%{
+        box-shadow: 0.4em 0px 0px rgba(85, 85, 85, 0.1),.8em 0px 0px rgb(84, 84, 84, 1),1.2em 0px 0px rgb(85, 85, 85, 1);
+    }
+    100%{
+        box-shadow: 0.4em 0px 0px rgba(85, 85, 85, 1),.8em 0px 0px rgb(84, 84, 84, 1),1.2em 0px 0px rgb(85, 85, 85, 1);
+    }
+}
+/* 多个箭头 */
+
+
+</style>
+
+<script>
+    $(document).ready(function(){
+        $("label.mi-label").on('click',function(){
+            $(this).children('i.mi').toggleClass('mi-active ').removeClass('animationed');
+            setTimeout(function(dom){
+                $(dom).addClass('animationed');
+            },50,$(this).children('i.mi'));
+        });
+    });
+
+</script>
