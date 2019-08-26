@@ -85,6 +85,8 @@ i.mi{
     position: relative;
     width: 1em;
     height: 1em;
+    font-style: normal;
+    color: #555;
 }
 i.mi::before,i.mi::after{
     content: "";
@@ -94,7 +96,7 @@ i.mi::before,i.mi::after{
 i.mi-chart {
     width: 1.5em;
     height: 1em;
-    box-shadow: -1px 1px 0px 1px #555;
+    box-shadow: -1px 1px 0px 1px currentColor;
     overflow: hidden;
     border: 1px solid transparent;
 }
@@ -105,7 +107,7 @@ i.mi-bar-chart::before {
     bottom: -.5em;
     background: transparent;
     height: 100%;
-    box-shadow: 0.3em -0.1em 0em 0em #555, 0.6em -0.5em 0em 0em #555, 0.9em -0.2em 0em 0em #555, 1.2em -0.4em 0em 0em #555;
+    box-shadow: 0.3em -0.1em 0em 0em currentColor, 0.6em -0.5em 0em 0em currentColor, 0.9em -0.2em 0em 0em currentColor, 1.2em -0.4em 0em 0em currentColor;
 }
 i.mi-bar-chart.animationed::before{
     animation: myIconBarChartAnimation 5s linear infinite;
@@ -114,46 +116,46 @@ i.mi-bar-chart.animationed::before{
 /* -.5em最长 .5em最短 */
 @keyframes myIconBarChartAnimation{
     0%{
-        box-shadow: 0.3em -0.1em 0em 0em #555,
-        0.6em -0.5em 0em 0em #555, 
-        0.9em -0.2em 0em 0em #555,
-        1.2em -0.4em 0em 0em #555;
+        box-shadow: 0.3em -0.1em 0em 0em currentColor,
+        0.6em -0.5em 0em 0em currentColor, 
+        0.9em -0.2em 0em 0em currentColor,
+        1.2em -0.4em 0em 0em currentColor;
     }
     16.666666%{
-        box-shadow: 0.3em -0.1em 0em 0em #555,
-        0.6em -0.5em 0em 0em #555, 
-        0.9em -0.2em 0em 0em #555,
-        1.2em -0.4em 0em 0em #555;
+        box-shadow: 0.3em -0.1em 0em 0em currentColor,
+        0.6em -0.5em 0em 0em currentColor, 
+        0.9em -0.2em 0em 0em currentColor,
+        1.2em -0.4em 0em 0em currentColor;
     }
     33.333333%{
-        box-shadow: 0.3em -0.5em 0em 0em #555,
-        0.6em 0.2em 0em 0em #555, 
-        0.9em -0.4em 0em 0em #555,
-        1.2em -0.2em 0em 0em #555;
+        box-shadow: 0.3em -0.5em 0em 0em currentColor,
+        0.6em 0.2em 0em 0em currentColor, 
+        0.9em -0.4em 0em 0em currentColor,
+        1.2em -0.2em 0em 0em currentColor;
     }
     50%{
-        box-shadow: 0.3em -0.5em 0em 0em #555,
-        0.6em 0.2em 0em 0em #555, 
-        0.9em -0.4em 0em 0em #555,
-        1.2em -0.2em 0em 0em #555;
+        box-shadow: 0.3em -0.5em 0em 0em currentColor,
+        0.6em 0.2em 0em 0em currentColor, 
+        0.9em -0.4em 0em 0em currentColor,
+        1.2em -0.2em 0em 0em currentColor;
     }
     66.666666%{
-        box-shadow: 0.3em -0.1em 0em 0em #555,
-        0.6em -0.25em 0em 0em #555, 
-        0.9em -0.35em 0em 0em #555,
-        1.2em -0.5em 0em 0em #555;
+        box-shadow: 0.3em -0.1em 0em 0em currentColor,
+        0.6em -0.25em 0em 0em currentColor, 
+        0.9em -0.35em 0em 0em currentColor,
+        1.2em -0.5em 0em 0em currentColor;
     }
     83.333333%{
-        box-shadow: 0.3em -0.1em 0em 0em #555,
-        0.6em -0.25em 0em 0em #555, 
-        0.9em -0.35em 0em 0em #555,
-        1.2em -0.5em 0em 0em #555;
+        box-shadow: 0.3em -0.1em 0em 0em currentColor,
+        0.6em -0.25em 0em 0em currentColor, 
+        0.9em -0.35em 0em 0em currentColor,
+        1.2em -0.5em 0em 0em currentColor;
     }
     100%{
-        box-shadow: 0.3em -0.1em 0em 0em #555,
-        0.6em -0.5em 0em 0em #555, 
-        0.9em -0.2em 0em 0em #555,
-        1.2em -0.4em 0em 0em #555;
+        box-shadow: 0.3em -0.1em 0em 0em currentColor,
+        0.6em -0.5em 0em 0em currentColor, 
+        0.9em -0.2em 0em 0em currentColor,
+        1.2em -0.4em 0em 0em currentColor;
     }
 }
 i.mi-bar-chart.animationed-2::before{
@@ -162,28 +164,28 @@ i.mi-bar-chart.animationed-2::before{
 /* -.5em最长 .5em最短 */
 @keyframes myIconBarChartAnimation2{
     0%{
-        box-shadow: 0.3em -0.1em 0em 0em #555,
-        0.6em -0.5em 0em 0em #555, 
-        0.9em -0.2em 0em 0em #555,
-        1.2em -0.4em 0em 0em #555;
+        box-shadow: 0.3em -0.1em 0em 0em currentColor,
+        0.6em -0.5em 0em 0em currentColor, 
+        0.9em -0.2em 0em 0em currentColor,
+        1.2em -0.4em 0em 0em currentColor;
     }
     33.33333%{
-        box-shadow: 0.3em -0.5em 0em 0em #555,
-        0.6em 1px 0em 0em #555, 
-        0.9em -0.4em 0em 0em #555,
-        1.2em -0.2em 0em 0em #555;
+        box-shadow: 0.3em -0.5em 0em 0em currentColor,
+        0.6em 1px 0em 0em currentColor, 
+        0.9em -0.4em 0em 0em currentColor,
+        1.2em -0.2em 0em 0em currentColor;
     }
     66.6666%{
-        box-shadow: 0.3em -0.2em 0em 0em #555,
-        0.6em -0.4em 0em 0em #555, 
-        0.9em -0.5em 0em 0em #555,
-        1.2em -0.5em 0em 0em #555;
+        box-shadow: 0.3em -0.2em 0em 0em currentColor,
+        0.6em -0.4em 0em 0em currentColor, 
+        0.9em -0.5em 0em 0em currentColor,
+        1.2em -0.5em 0em 0em currentColor;
     }
     99.99999%{
-        box-shadow: 0.3em -0.1em 0em 0em #555,
-        0.6em -0.5em 0em 0em #555, 
-        0.9em -0.2em 0em 0em #555,
-        1.2em -0.4em 0em 0em #555;
+        box-shadow: 0.3em -0.1em 0em 0em currentColor,
+        0.6em -0.5em 0em 0em currentColor, 
+        0.9em -0.2em 0em 0em currentColor,
+        1.2em -0.4em 0em 0em currentColor;
     }
 }
 /* bar-chart */
@@ -197,56 +199,56 @@ i.mi-bar-chart-horizon::before{
     width: 100%;
     top: calc(-0.2em - 0px);
     position: absolute;
-    box-shadow: -0em 0.2em 0em 0em #555,
-    -0.4em 0.5em 0em 0em #555,
-    -0.8em 0.8em 0em 0em #555,
-    -1.2em 1.1em 0em 0em #555;
+    box-shadow: -0em 0.2em 0em 0em currentColor,
+    -0.4em 0.5em 0em 0em currentColor,
+    -0.8em 0.8em 0em 0em currentColor,
+    -1.2em 1.1em 0em 0em currentColor;
 }
 i.mi-bar-chart-horizon.animationed::before{
     animation: myIconBarChartHorizonAnimation 5s 1s linear infinite;
 }
 @keyframes myIconBarChartHorizonAnimation{
     0%{
-        box-shadow: -0em 0.2em 0em 0em #555,
-    -0.4em 0.5em 0em 0em #555,
-    -0.8em 0.8em 0em 0em #555,
-    -1.2em 1.1em 0em 0em #555;
+        box-shadow: -0em 0.2em 0em 0em currentColor,
+    -0.4em 0.5em 0em 0em currentColor,
+    -0.8em 0.8em 0em 0em currentColor,
+    -1.2em 1.1em 0em 0em currentColor;
     }
     16.666666%{
-        box-shadow:-0em 0.2em 0em 0em #555,
-    -0.4em 0.5em 0em 0em #555,
-    -0.8em 0.8em 0em 0em #555,
-    -1.2em 1.1em 0em 0em #555;
+        box-shadow:-0em 0.2em 0em 0em currentColor,
+    -0.4em 0.5em 0em 0em currentColor,
+    -0.8em 0.8em 0em 0em currentColor,
+    -1.2em 1.1em 0em 0em currentColor;
     }
     33.333333%{
-        box-shadow: -1.2em 0.2em 0em 0em #555,
-    -0.8em 0.5em 0em 0em #555,
-    -0.4em 0.8em 0em 0em #555,
-    -0em 1.1em 0em 0em #555;
+        box-shadow: -1.2em 0.2em 0em 0em currentColor,
+    -0.8em 0.5em 0em 0em currentColor,
+    -0.4em 0.8em 0em 0em currentColor,
+    -0em 1.1em 0em 0em currentColor;
     }
     50%{
-        box-shadow: -1.2em 0.2em 0em 0em #555,
-    -0.8em 0.5em 0em 0em #555,
-    -0.4em 0.8em 0em 0em #555,
-    -0em 1.1em 0em 0em #555;
+        box-shadow: -1.2em 0.2em 0em 0em currentColor,
+    -0.8em 0.5em 0em 0em currentColor,
+    -0.4em 0.8em 0em 0em currentColor,
+    -0em 1.1em 0em 0em currentColor;
     }
     66.666666%{
-        box-shadow: -0.8em 0.2em 0em 0em #555,
-    -0.4em 0.5em 0em 0em #555,
-    -0em 0.8em 0em 0em #555,
-    -1.2em 1.1em 0em 0em #555;
+        box-shadow: -0.8em 0.2em 0em 0em currentColor,
+    -0.4em 0.5em 0em 0em currentColor,
+    -0em 0.8em 0em 0em currentColor,
+    -1.2em 1.1em 0em 0em currentColor;
     }
     83.333333%{
-        box-shadow: -0.8em 0.2em 0em 0em #555,
-    -0.4em 0.5em 0em 0em #555,
-    -0em 0.8em 0em 0em #555,
-    -1.2em 1.1em 0em 0em #555;
+        box-shadow: -0.8em 0.2em 0em 0em currentColor,
+    -0.4em 0.5em 0em 0em currentColor,
+    -0em 0.8em 0em 0em currentColor,
+    -1.2em 1.1em 0em 0em currentColor;
     }
     100%{
-        box-shadow: -0em 0.2em 0em 0em #555,
-    -0.4em 0.5em 0em 0em #555,
-    -0.8em 0.8em 0em 0em #555,
-    -1.2em 1.1em 0em 0em #555;
+        box-shadow: -0em 0.2em 0em 0em currentColor,
+    -0.4em 0.5em 0em 0em currentColor,
+    -0.8em 0.8em 0em 0em currentColor,
+    -1.2em 1.1em 0em 0em currentColor;
     }
 }
 
@@ -261,11 +263,11 @@ i.mi-menu{
 i.mi-menu::before{
     width: 1.25em;
     height: 0px;
-    /* background: #555; */
+    /* background: currentColor; */
     display: block;
-    box-shadow: 0px calc(-0.7em + 2px) 0px 1px #555,
-     0px 0px 0px 1px #555,
-     0px calc(0.7em - 1.5px) 0px 1px #555;
+    box-shadow: 0px calc(-0.7em + 2px) 0px 1px currentColor,
+     0px 0px 0px 1px currentColor,
+     0px calc(0.7em - 1.5px) 0px 1px currentColor;
     transition: box-shadow 0.3s;
 }
 i.mi-menu.mi-active::before{
@@ -284,8 +286,8 @@ i.mi-top::before{
     border-width: 2px 0px 0px 2px;
     border-style: solid;
     border-color: transparent;
-    border-top-color: #555;
-    border-left-color: #555;
+    border-top-color: currentColor;
+    border-left-color: currentColor;
     width: .5em;
     height: .5em;
     display: block;
@@ -296,7 +298,7 @@ i.mi-top::before{
 }
 i.mi-top::after{
     height: 2px;
-    background: #555;
+    background: currentColor;
     width: 1.2em;
     display: block;
     position: absolute;
@@ -333,8 +335,8 @@ i.mi-down::before{
     border-width:0px 0px 2px 2px;
     border-style: solid;
     border-color: transparent;
-    border-bottom-color: #555;
-    border-left-color: #555;
+    border-bottom-color: currentColor;
+    border-left-color: currentColor;
     width: .5em;
     height: .5em;
     display: block;
@@ -345,7 +347,7 @@ i.mi-down::before{
 }
 i.mi-down::after{
     height: 2px;
-    background: #555;
+    background: currentColor;
     width: 1.2em;
     display: block;
     position: absolute;
@@ -386,8 +388,8 @@ i.mi-down.animationed-hover:hover::before{
     border-width: 5px 0px 0px 5px;
     border-style: solid;
     border-color: transparent;
-    border-top-color: #555;
-    border-left-color: #555;
+    border-top-color: currentColor;
+    border-left-color: currentColor;
     position: absolute;
 }
 .mi-right-angle-left::after{
@@ -414,8 +416,8 @@ i.mi-down.animationed-hover:hover::before{
     border-width: 0px 5px 5px 0px;
     border-style: solid;
     border-color: transparent;
-    border-bottom-color: #555;
-    border-right-color: #555;
+    border-bottom-color: currentColor;
+    border-right-color: currentColor;
     position: absolute;
 }
 .mi-right-angle-right::after{
@@ -444,12 +446,12 @@ i.mi-down.animationed-hover:hover::before{
 .mi-angle-bar-right::after,
 .mi-angle-bar-up::after,
 .mi-angle-bar-down::after{
-    background: #555;
+    background: currentColor;
     display: inline-block;
     position: absolute;
 }
 .mi-angle-bar-left::before{
-    border-right-color: #555;
+    border-right-color: currentColor;
     border-width: .5em .4em 0.5em 0.0em;
 }
 .mi-angle-bar-left::after{
@@ -459,7 +461,7 @@ i.mi-down.animationed-hover:hover::before{
     left: .4em;
 }
 .mi-angle-bar-right::before{
-    border-left-color: #555;
+    border-left-color: currentColor;
     border-width: .5em 0.0em 0.5em 0.4em;
     float: right;
 }
@@ -470,7 +472,7 @@ i.mi-down.animationed-hover:hover::before{
     right: .4em;
 }
 .mi-angle-bar-up::before{
-    border-bottom-color: #555;
+    border-bottom-color: currentColor;
     border-width: .0em 0.5em 0.4em 0.5em;
 }
 .mi-angle-bar-up::after{
@@ -480,7 +482,7 @@ i.mi-down.animationed-hover:hover::before{
     left: .2em;
 }
 .mi-angle-bar-down::before{
-    border-top-color: #555;
+    border-top-color: currentColor;
     border-width: .4em 0.5em 0.0em 0.5em;
     position: absolute;
     top: .5em;
@@ -503,13 +505,13 @@ i.mi-down.animationed-hover:hover::before{
     display:block;
     width: 100%;
     height: 2px;;
-    background: #555;
+    background: currentColor;
 }
 .mi-plus::after{
     display:block;
     height: 100%;;
     width: 2px;
-    background: #555;
+    background: currentColor;
     position: absolute;
     left: calc(50% - 1px);
     top: 0; 
@@ -520,7 +522,7 @@ i.mi-down.animationed-hover:hover::before{
 .mi-close::before,.mi-close::after{
     width: 1em;
     height: 2px;;
-    background: #555;
+    background: currentColor;
     display:block;
     position: absolute;
     left: 0;
@@ -574,7 +576,7 @@ i.mi-down.animationed-hover:hover::before{
     width: 1em;
     height: .5em;
     border-style: solid ;
-    border-color: #555;
+    border-color: currentColor;
     transform: rotate(-45deg);
 }
 .mi-check.animationed::before{
@@ -604,7 +606,7 @@ i.mi-down.animationed-hover:hover::before{
 .mi-alert::before{
     display: block;
     width: 4px;
-    background: #555;
+    background: currentColor;
     height: .8em;
     border-radius: 2px;
     position: absolute;
@@ -613,7 +615,7 @@ i.mi-down.animationed-hover:hover::before{
 .mi-alert::after{
     display: block;
     width: 4px;
-    background: #555;
+    background: currentColor;
     height: 4px;
     bottom: -3px;
     border-radius: 100%;
@@ -631,7 +633,7 @@ i.mi-down.animationed-hover:hover::before{
     display: block;
     position: absolute;
     bottom: 0;
-    border: 1px solid #555;
+    border: 1px solid currentColor;
     border-top-color: transparent;
     border-top-width: 0px;
     left: -1px;
@@ -642,8 +644,8 @@ i.mi-down.animationed-hover:hover::before{
     border-width: .4em .3em .4em .3em;
     border-style: solid;
     border-color: transparent;
-    border-bottom-color: #555;
-    box-shadow: 0px 0.55em 0px -0.2em #555;
+    border-bottom-color: currentColor;
+    box-shadow: 0px 0.55em 0px -0.2em currentColor;
     position: absolute;
     left: .2em;
     bottom: 0.7em;
@@ -670,8 +672,8 @@ i.mi-down.animationed-hover:hover::before{
     border-width: .4em .3em .4em .3em;
     border-style: solid;
     border-color: transparent;
-    border-top-color: #555;
-    box-shadow: 0px -0.55em 0px -0.2em #555;
+    border-top-color: currentColor;
+    box-shadow: 0px -0.55em 0px -0.2em currentColor;
     position: absolute;
     left: .2em;
     bottom: -.1em;
@@ -710,14 +712,14 @@ i.mi-down.animationed-hover:hover::before{
 }
 .mi-multi-arrow-left::before,
 .mi-multi-arrow-left::after{
-    box-shadow: 0.4em 0px 0px #555,.8em 0px 0px #555,1.2em 0px 0px #555;
+    box-shadow: 0.4em 0px 0px currentColor,.8em 0px 0px currentColor,1.2em 0px 0px currentColor;
     position: absolute;
     left: -.3em;
     background: transparent;
 }
 .mi-multi-arrow-left.animationed::before,
 .mi-multi-arrow-left.animationed::after{
-    animation: myIconMultiArrow 2s linear infinite;
+    animation: myIconMultiArrow 1s linear infinite;
 }
 @keyframes myIconMultiArrow {
     0%{
@@ -735,7 +737,7 @@ i.mi-down.animationed-hover:hover::before{
 }
 .mi-multi-arrow-left.animationed-2::before,
 .mi-multi-arrow-left.animationed-2::after{
-    animation: myIconMultiArrow2 2s linear infinite;
+    animation: myIconMultiArrow2 1s linear infinite;
 }
 @keyframes myIconMultiArrow2 {
     0%{
@@ -753,6 +755,39 @@ i.mi-down.animationed-hover:hover::before{
 }
 /* 多个箭头 */
 
+/* 省略号 */
+.mi-ellipsis::before{
+    position: absolute;
+    width: .2em;
+    height: .2em;
+    left: -.6em;
+    font-size: -2px;
+    top: .4em;
+    border-radius: 100%;
+    box-shadow: 0.5em 0px 0px currentColor, 1em 0px 0px currentColor, 1.5em 0px 0px currentColor;
+}
+.mi-ellipsis.animationed::before{
+    animation: myIconEllipsis 1s linear infinite;
+}
+@keyframes myIconEllipsis {
+    0%{
+        box-shadow: 0.5em 0px 0px rgba(85, 85, 85, 1), 1em 0px 0px rgba(85, 85, 85, 0.1), 1.5em 0px 0px rgba(85, 85, 85, 0.1);
+    }
+    33.333%{
+        box-shadow: 0.5em 0px 0px rgba(85, 85, 85, 0.1), 1em 0px 0px rgba(85, 85, 85, 1), 1.5em 0px 0px rgba(85, 85, 85, 1);
+    }
+    66.666%{
+        box-shadow: 0.5em 0px 0px rgba(85, 85, 85, 0.1), 1em 0px 0px rgba(85, 85, 85, 0.1), 1.5em 0px 0px rgba(85, 85, 85, 1);
+    }
+    100%{
+        box-shadow: 0.5em 0px 0px rgba(85, 85, 85, 1), 1em 0px 0px rgba(85, 85, 85, 0.1), 1.5em 0px 0px rgba(85, 85, 85, 0.1);
+    }
+}
+/* 省略号 */
+
+/* 搜索 */
+
+/* 搜索 */
 
 </style>
 
