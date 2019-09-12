@@ -36,7 +36,8 @@
             hideScroll:false,
             inlineDom:[],//一同滚动的对象；
             inlineBar:[],//外联滚动条
-            scrollMode:0//默认滚动使用margin-top来实现，mode 1 使用scrollTop()来实现
+            scrollMode:0,//默认滚动使用margin-top来实现，mode 1 使用scrollTop()来实现
+            frame:5,//raf frame
         };
         let DEFAULT_OPTIONS_X={
             maxWidth:"100%",
@@ -52,7 +53,8 @@
             hideScroll:false,
             inlineDom:[],//一同滚动的对象；
             inlineBar:[],//外联滚动条
-            scrollMode:0//默认滚动使用margin-left来实现，mode 1 使用scrollLeft()来实现
+            scrollMode:0,//默认滚动使用margin-left来实现，mode 1 使用scrollLeft()来实现
+            frame:5,//raf frame
         };
         let DEFAULT_OPTIONS_COMMON={
             hideScroll:false,//是否在没有hover时候隐藏scroll-container
@@ -157,7 +159,7 @@
                 if(funOptions==undefined){
                     funOptions={};
                 }
-                let params={useRaf:false, callback:true,moveObject:false,frame:5,isTrusted:true };
+                let params={useRaf:false, callback:true,moveObject:false,frame:optionsY['frame'],isTrusted:true };
                 params=$.extend(params,funOptions);
                 if(params['moveObject']){
                     y=-1*y*(height-scrollHeight)/(sumHeight-height);
@@ -227,7 +229,7 @@
                 if(funOptions==undefined){
                     funOptions={};
                 }
-                let params={useRaf:false, callback:true,moveObject:false,frame:5,isTrusted:true };
+                let params={useRaf:false, callback:true,moveObject:false,frame:optionsX['frame'],isTrusted:true };
                 params=$.extend(params,funOptions);
                 if(params['moveObject']){
                     x=-1*x*(width-scrollWidth)/(sumWidth-width);
@@ -871,7 +873,6 @@
                     verticalMove(resetYTo0?0:getScrollTop(),{useRaf:false,callback:false,moveObject:true});
                 }
                 if(resetX===true){
-                    console.log(resetXTo0);
                     horizonMove(resetXTo0?0:(-1*getScrollLeft()),{useRaf:false,callback:false,moveObject:true});
                 }
                
