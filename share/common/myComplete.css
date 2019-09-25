@@ -1,0 +1,94 @@
+ul.autocomplete-ul{
+    position: absolute;
+    background: white;
+    max-width: 450px;
+    width: auto;
+    min-width: 200px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.2);
+    top: 30px;
+    left: 5px;
+    z-index: 1;
+    max-height: 200px;
+    overflow-y: scroll;
+    display: block;
+    transition: all 0.3s;
+    animation: translateY 0.3s ease-in-out;
+    
+}
+@keyframes translateY{
+    0%{
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    100%{
+        transform:translateY(0);
+        opacity: 1;;
+    }
+}
+ul.autocomplete-ul.show{
+    display:block;
+}
+ul.autocomplete-ul>li{
+    padding : 5px;
+    cursor:default;
+    white-space:normal;
+    /* pointer */
+}
+/* ul.autocomplete-ul>li:hover, */
+ul.autocomplete-ul>li.hover{
+    background:#6c9af7;
+    color:white;
+}
+.ui-autocomplete{
+    z-index:9999;
+}
+
+ul.autocomplete-ul.loading{
+    height: 40px;
+    max-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow:hidden;
+}
+
+ul.autocomplete-ul.loading::before{
+    content: "";
+    width: 30px;
+    height: 30px;
+    border: 1px solid #eee;
+    display: block;
+    position: absolute;
+    border-radius: 100%;
+    top: 5px;
+    left: calc(50% - 15px);
+    border-top-color: #ff8c00;
+    animation: loading 1s linear infinite;
+}
+ul.autocomplete-ul.loading::after{
+    content: "";
+    width: 22px;
+    height: 22px;
+    display: block;
+    position: absolute;
+    /* border: 1px solid #ccc; */
+    top: 9px;
+    left: calc(50% - 11px);
+    background: url(/images/logo/nint_big.png);
+    background-repeat: no-repeat;
+    background-size: 47px;
+    background-position: 2px 5px;
+    opacity: 0.5;
+    filter: grayscale(100);
+}
+
+
+@keyframes loading{
+    0%{
+        transform:rotate(0deg);
+    }
+    100%{
+        transform:rotate(359deg);
+    }
+}
