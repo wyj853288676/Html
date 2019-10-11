@@ -24,6 +24,7 @@ body{
 .content::before{
     counter-increment: count;
     content: counter(count);
+    color: rgba(255, 255, 255, calc(0.5 + counter(count) * 0.5 / 9 ) );
     pointer-events: none;
     display: flex;
     align-items: center;

@@ -550,7 +550,7 @@
                         e.preventDefault();
                     }
                     let _touch = e.originalEvent.changedTouches[0];
-                    if(ADDX&&Math.abs(_touch.pageX-originTouchX)>100){
+                    if(ADDX&&Math.abs(_touch.pageX-originTouchX)>50){
                         //raf计数器
                         if(ADDX){
                             _scrollBarX[0].rafCount=(_scrollBarX[0].rafCount==undefined?0:(_scrollBarX[0].rafCount+1));
@@ -559,8 +559,9 @@
                         x=(indexx-_touch.pageX)*20;
                         horizonMove(x-getScrollLeft(),{moveObject:true,useRaf:true,frame:60});
                     }
-                    if(ADDY&&Math.abs(_touch.pageY-originTouchY)>100){
-                        y=(_touch.pageY-indexy)*20;
+                    if(ADDY&&Math.abs(_touch.pageY-originTouchY)>50){
+                        // y=(_touch.pageY-indexy)*20;
+                        y=(_touch.pageY-originTouchY)>0?600:-600;
                         //raf计数器
                         if(ADDY){
                             _scrollBarY[0].rafCount=(_scrollBarY[0].rafCount==undefined?0:(_scrollBarY[0].rafCount+1));
@@ -1001,10 +1002,10 @@
             afterProcess();
             //将verticalMove暴露给this
             this.verticalMove=function(y,funOptions){
-                return verticalMove(y,$.extend({isTrusted:false},funOptions));
+                return verticalMove(y,$.extend({isTrusted:false,moveObject:true},funOptions));
             }
             this.horizonMove=function(x,funOptions){
-                return horizonMove(x,$.extend({isTrusted:false},funOptions));
+                return horizonMove(x,$.extend({isTrusted:false,moveObject:true},funOptions));
             } ;
             this.getScrollTop=getScrollTop;
             this.getScrollLeft=getScrollLeft;
@@ -1022,31 +1023,14 @@ function rafMove(y,doms,css,f,func){
     f=arguments[3]?arguments[3]:0;
     func=arguments[4]?arguments[4]:function(){};
     let index=parseFloat(doms[0].css(css).replace('px',''));
+    let originIndex=index;
     let frame=f==0?5:f;
     let addNum=(y-index)/frame;
-    let molecule=0;//分子
-    let denominator=0;//分母
-    let addNums=Array();
     if(doms[0][0].rafCount==undefined){
         doms[0][0].rafCount=0;
     }
     let rafSignal=doms[0][0].rafCount;
     let count=0;
-    if(f>15){//在frame>15时，使滑动有ease-out的效果
-        denominator=parseInt(frame/2)*2;
-        molecule=denominator+parseInt(denominator/2);
-        while(molecule>=(denominator/2)){
-            if(molecule>denominator){
-                addNums.push((molecule/denominator)*(y-index)/frame);
-            }else{
-                if(denominator==frame&&denominator==molecule){//偶数帧
-                    molecule--;
-                }
-                addNums.push((molecule/denominator)*(y-index)/frame);
-            }
-            molecule--;
-        }
-    }
     move();
     function move(){
          if(frame<0||(rafSignal-doms[0][0].rafCount)<0){
@@ -1054,7 +1038,7 @@ function rafMove(y,doms,css,f,func){
             return false;
         }
         if(f>15){
-            addNum=addNums[count];
+            addNum=Math.pow(count-f,2)*(originIndex-y)/Math.pow(f,2)+(y-index);
         }
         for(let i in doms){
             doms[i].css(css,(index)+'px');
