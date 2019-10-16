@@ -1,0 +1,140 @@
+div.swiper-axis-container{
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+div.swiper-axis-content{
+    padding: 0em 3em;
+    position: relative;
+    margin: 5px 0px;
+}
+.swiper-axis-title{
+    cursor: default;
+    min-width: 5em;
+    display: block;
+    font-size: 1.2rem;
+    font-weight: normal;
+    padding: 0em 2em;
+    white-space: nowrap;
+    transition: all 0.3s;
+    height: 1em;
+    line-height: 1;
+    text-align:center;
+}
+
+i.swiper-axis-light{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.6em;;
+    margin: 1em 0em;
+    position: relative
+}
+i.swiper-axis-light::before{
+    content: "";
+    width: 1.6em;
+    height: 1.6em;
+    border-radius: 100%;
+    border: none;
+    display: block;
+    opacity: 0.8;
+    background: radial-gradient(rgba(255,255,255,0.5)  20%,rgba(0, 188, 212, 0.7) 10%,rgba(0, 188, 212, 0.7) 40%,rgba(0, 188, 212, 0.3) 50%  ) no-repeat;
+    background: radial-gradient(rgba(255,255,255,0.5) 0% 10%,rgba(0, 188, 212, 0.7) 20% 35%,rgba(0, 188, 212, 0.3) 44% 100% ) no-repeat;
+    transition: all 0.3s;
+    /* box-shadow: 0px 0px 1px rgba(0, 188, 212, 0.1) inset; */
+    z-index: 99;
+}
+
+div.swiper-axis-content::before{
+    content: "";
+    display: block;
+    width: calc(50% + 6em);
+    position: absolute;
+    height: 2px;
+    /* border-radius: 100%; */
+    /* bottom: calc(1.5em + 3px); */
+    top: calc(2.8em + 2px);
+    transform: scaleY(1.2);
+    right: calc(50% - 0px);
+    z-index: 3;
+    background:  linear-gradient(to right,transparent .2em,rgb(150, 223, 233) calc(100% - 0.8em),transparent calc(100% - 0.8em));
+    background: linear-gradient(to right,rgba(255,255,255,0.1) .2em 15%,rgb(150, 223, 233) calc(100% - .8em) calc(100% - .8em),white calc(100% - .8em) );
+    transition: all 0.5s;
+    transform-origin: 50% 50%;
+}
+div.swiper-axis-content:hover::before{
+    transform: scaleY(1.1);
+    background: linear-gradient(to right,rgba(255,255,255,0.2) .2em 15%,rgb(12, 198, 223) calc(100% - .8em) calc(100% - .8em),white calc(100% - .8em) );
+}
+
+/* hover */
+div.swiper-axis-content:hover i.swiper-axis-light::before{
+    opacity: 1;
+    box-shadow: 0px 0px 10px rgba(0, 188, 212, 1),0px 0px 2px rgba(255,255,255,0.8), 0px 0px 1px rgba(0, 188, 212, 0.3) inset;
+}
+div.swiper-axis-content:hover .swiper-axis-title{
+    transform: scale(1.2);
+}
+
+i.swiper-axis-light::after{
+    content: "";
+    height: 2px;
+    width: calc(100% + 6em);
+    position: absolute;
+    background-color: #eee;
+    display: block;
+    left: -3em;
+    z-index: 0;
+    top: calc(50% - 1px);
+}
+
+
+/* 副标题 */
+div.swiper-axis-vice-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 4em;
+    line-height: 1;
+    padding: 5px;
+    min-width: 10em;
+    cursor: default;
+    margin: 0em -1em 0em -1em;
+    position: relative;
+    border: 1px solid transparent
+}
+div.swiper-axis-content:hover div.swiper-axis-vice-title{
+    border: 1px solid #ddd;
+    /* box-shadow: 0px 0px 2px #ccc; */
+}
+div.swiper-axis-content div.swiper-axis-vice-title::before,
+div.swiper-axis-content div.swiper-axis-vice-title::after{
+    content: "";
+    position: absolute;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 10px 7px 10px 7px;
+    border-bottom-color: #ddd;
+    top: calc(-20px);
+    display: none;
+    transform-origin: 50% 100%;
+}
+div.swiper-axis-content div.swiper-axis-vice-title::after{
+    transform: scale(0.9);
+    border-bottom-color: white;
+    top: -19px;
+}
+div.swiper-axis-content:hover div.swiper-axis-vice-title::after,
+div.swiper-axis-content:hover div.swiper-axis-vice-title::before{
+    display: block;
+}
+div.swiper-axis-content:hover div.swiper-axis-vice-title::before{
+    /* transform: scale(1.3); */
+}
+
+/* 副标题 */
+
+
