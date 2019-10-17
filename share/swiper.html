@@ -21,72 +21,61 @@ body{
     counter-reset: count;
     align-items: center;
 }
+#demo{
+    border-width: 0px 1px 0px 1px;
+    border-style:solid;
+    border-color:#eee;
+    width: 800px;
+}
 </style>
 <script>
-$('#demo>div').swiperAxis({
-    parent:$('#container'),
-});
+    $(document).ready(function(){
+        $('#demo').swiperAxis({
 
+        });
+    });
 </script>
 <body>
     <div id="wrap">
-        <div class="demo-container">
-            <div id='demo' hidden> 
-                <div sa-title='2019-01-01' sa-vice-title='这是一个副标题'></div>
-                <div sa-title='2019-01-01' sa-vice-title='这是一个副标题'></div>
-                <div sa-title='2019-01-01' sa-vice-title='这是一个副标题'></div>
-                <div sa-title='2019-01-01' sa-vice-title='这是一个副标题'></div>
-                <div sa-title='2019-01-01' sa-vice-title='这是一个副标题'></div>
+        <div id='demo'>
+            <div class="swiper-axis-content">
+                <div class="swiper-axis-title">2019-01-01</div>
+                <div class="swiper-axis-vice-title">
+                    这是一个副标题
+                </div>
             </div>
-            <div id="container">
-
+            <div class="swiper-axis-content">
+                <div class="swiper-axis-title">2019-04-01</div>
+                <div class="swiper-axis-vice-title">
+                    这是一个副标题
+                </div>
             </div>
-            <!-- <div class="swiper-axis-container" >
-                <div class="swiper-axis-content">
-                    <div class="swiper-axis-title">2019-01-01</div>
-                    <i class="swiper-axis-light"></i>
-                    <div class="swiper-axis-vice-title">
-                        这是一个副标题
-                    </div>
+            <div class="swiper-axis-content">
+                <div class="swiper-axis-title">2019-06-01</div>
+                <div class="swiper-axis-vice-title">
+                    这是一个副标题
                 </div>
-                <div class="swiper-axis-content">
-                    <div class="swiper-axis-title">2019-04-01</div>
-                    <i class="swiper-axis-light"></i>
-                    <div class="swiper-axis-vice-title">
-                        这是一个副标题
-                    </div>
+            </div>
+            <div class="swiper-axis-content">
+                <div class="swiper-axis-title">2019-07-01</div>
+                <div class="swiper-axis-vice-title">
+                    这是一个副标题
                 </div>
-                <div class="swiper-axis-content">
-                    <div class="swiper-axis-title">2019-06-01</div>
-                    <i class="swiper-axis-light"></i>
-                    <div class="swiper-axis-vice-title">
-                        这是一个副标题
-                    </div>
+            </div>
+            <div class="swiper-axis-content">
+                <div class="swiper-axis-title">2019-08-01</div>
+                <div class="swiper-axis-vice-title">
+                    这是一个副标题
                 </div>
-                <div class="swiper-axis-content">
-                    <div class="swiper-axis-title">2019-07-01</div>
-                    <i class="swiper-axis-light"></i>
-                    <div class="swiper-axis-vice-title">
-                        这是一个副标题
-                    </div>
+            </div>
+            <div class="swiper-axis-content">
+                <div class="swiper-axis-title">2019-09-01</div>
+                <div class="swiper-axis-vice-title">
+                    这是一个副标题
                 </div>
-                <div class="swiper-axis-content">
-                    <div class="swiper-axis-title">2019-08-01</div>
-                    <i class="swiper-axis-light"></i>
-                    <div class="swiper-axis-vice-title">
-                        这是一个副标题
-                    </div>
-                </div>
-                <div class="swiper-axis-content">
-                    <div class="swiper-axis-title">2019-09-01</div>
-                    <i class="swiper-axis-light"></i>
-                    <div class="swiper-axis-vice-title">
-                        这是一个副标题
-                    </div>
-                </div>
-            </div> -->
+            </div>
+            
         </div>
-      
     </div>
 </body>
 </html>
