@@ -15,9 +15,11 @@
         initDom();
         align();
         bindListen();
-
+        listenBtn();
         _this[0].swiperMove=move;
         _this[0].getX=getX;
+
+
         function initDom(){
             //light
             _contents.each(function(index){
@@ -63,7 +65,7 @@
                 let x;
                 let distance;
                 let func=function(){};
-                if(Math.abs(e.pageX-recordIndex)>200){
+                if(Math.abs(e.pageX-recordIndex)>150){
                     x=(e.pageX-recordIndex)>0?800:-800;
                     distance=x+getX();
                 }else{
@@ -117,6 +119,34 @@
             });
         }
 
+
+        function listenBtn(){
+            let distance;
+            _rightBtn.on('click',function(){
+                distance=getX()-_firstContent.width();
+                btnClickHandler()
+            })
+            _leftBtn.on('click',function(){
+                distance=getX()+_firstContent.width();
+                btnClickHandler();
+            })
+
+            let btnClickHandler=function(){
+                let func=function(){};
+                console.log(distance,-40+containerWidth-contentWidth);
+                if(distance>40){
+                    func=function(){
+                        move(40,{useRaf:true,frame:30});
+                    }
+                }else if(distance<(-40+containerWidth-contentWidth)){
+                    func=function(){
+                        move(-40+containerWidth-contentWidth,{useRaf:true,frame:30});
+                    }
+                }
+                move(distance,{useRaf:true,func:func});
+            }
+        }
+
         function move(x,funOptions){
             funOptions=arguments[1]?arguments[1]:{};
             let moveOptions={
@@ -125,7 +155,6 @@
                 func:function(){}
             };
             moveOptions=$.extend(moveOptions,funOptions);
-            let distance;
             if(x>maxX){
                 distance=maxX;
                 x=maxX;
