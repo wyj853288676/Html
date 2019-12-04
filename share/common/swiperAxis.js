@@ -2,11 +2,18 @@
     $.fn.swiperAxis=function(inOptions){
         let options={
             alignVice:true,
-            moveSpeed:function(){return _this.find('div.swiper-axis-content').length>0?_this.find('div.swiper-axis-content:eq(0)').width():_this.width();},
+            moveSpeed:function(){
+                if(options['direction']=='horizon'){
+                    return _this.find('div.swiper-axis-content').length>0?_this.find('div.swiper-axis-content:eq(0)').width():_this.width();
+                }else{
+                    return _this.find('div.swiper-axis-content').length>0?_this.find('div.swiper-axis-content:eq(0)').height():_this.height();
+                }
+            },
             fixWidth:false,
+            direction:'horizon',
         };
         options=$.extend(options,inOptions);
-        let _this=$(this).addClass('swiper-axis-container');
+        let _this=$(this).addClass('swiper-axis-container').addClass(options['direction']=='horizon'?'':'vertical-align');
         let _leftBtn=$(document.createElement('button')).addClass('swiper-left-btn swiper-btn').attr('type','button');
         let _rightBtn=$(document.createElement('button')).addClass('swiper-right-btn swiper-btn').attr('type','button');
         let _contents=_this.children();
@@ -15,6 +22,7 @@
         let correctMax,correctMin;
         let containerWidth;
         let contentWidth;
+        let isX=options['direction']=='horizon';//是横向还是纵向
         initDom();
         align();
         bindListen();
@@ -45,10 +53,14 @@
 
         function align(){
             contentWidth=getContentWidth();
-            if(options['fixWidth']&&getContentWidth()<_this.width()){
-                _this.width(getContentWidth());
+            if(options['fixWidth']){
+                if(isX&&getContentWidth()<_this.width()){
+                    _this.width(getContentWidth());
+                }else if(!isX&&getContentWidth()<_this.height()){
+                    _this.height(getContentWidth());
+                }
             }
-            containerWidth=_this.width();
+            containerWidth=isX?_this.width():_this.height();
             if(contentWidth<=containerWidth){
                 correctMax=correctMin=(containerWidth-contentWidth)/2;
             }else{
@@ -71,8 +83,8 @@
                 let x;
                 let distance;
                 let func=function(){};
-                if(Math.abs(e.pageX-recordIndex)>150){
-                    x=(e.pageX-recordIndex)>0?800:-800;
+                if(Math.abs(isX?e.pageX:e.pageY-recordIndex)>150){
+                    x=(isX?e.pageX:e.pageY-recordIndex)>0?800:-800;
                     distance=x+getX();
                 }else{
                     x=getX();
@@ -107,14 +119,14 @@
             })
             _this.on('mousedown',function(e){
                 mousedown=true;
-                recordIndex=index=e.pageX;
+                recordIndex=index=(isX?e.pageX:e.pageY);
                 _object[0].rafCount= _object[0].rafCount!=undefined?( _object[0].rafCount+1):0;
             });
             $(document).on('mousemove',function(e){
                 moveCount++;
                 if(moveCount>limit){
                     moveCount=0;
-                    recordIndex=e.pageX;
+                    recordIndex=(isX?e.pageX:e.pageY);
                 }
             })
             _this.on('mousemove',function(e){
@@ -126,10 +138,10 @@
                 moveCount++;
                 if(moveCount>limit){
                     moveCount=0;
-                    recordIndex=e.pageX;
+                    recordIndex=(isX?e.pageX:e.pageY);
                 }
-                move(e.pageX-index+getX());
-                index=e.pageX;
+                move((isX?e.pageX:e.pageY)-index+getX());
+                index=isX?e.pageX:e.pageY;
             });
 
             $(window).on('resize',function(){
@@ -187,19 +199,18 @@
                 x=minX;
             }
             if(!moveOptions['useRaf']){
-                _object.css('margin-left',x);
+                _object.css(isX?'margin-left':'margin-top',x);
                 moveOptions['func']();
             }else{
-                rafMove(x,[_object],'margin-left',moveOptions['frame'],{func:moveOptions['func']});
+                rafMove(x,[_object],isX?'margin-left':'margin-top',moveOptions['frame'],{func:moveOptions['func']});
             }
         }
         function getX(){
-            return  parseFloat(_object.css('margin-left').replace('px',''))
+            return  parseFloat(_object.css(isX?'margin-left':'margin-top').replace('px',''))
         }
 
         function getContentWidth(){
-    
-            return _object.outerWidth();;
+            return isX?_object.outerWidth():_object.outerHeight();
         }
 
     };
