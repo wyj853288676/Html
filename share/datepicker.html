@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>datepicker-演示</title>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="common/swiperAxis.css">
+    <link rel="stylesheet" href="common/myDatepicker.css">
+    <script src="common/swiperAxis.js"></script>
+    <script src="common/myDatepicker.js"></script>
+</head>
+<style>
+</style>
+<body>
+    <div id="wrap">
+        <div>
+            <input type="text" id='date-input'>
+        </div>
+    </div>
+</body>
+<style>
+#wrap>div{
+    display: flex;
+    align-items: center;
+}
+input{
+    width: 20em;
+}
+</style>
+<script>
+$("#date-input").myDatePicker();
+</script>
+</html>
