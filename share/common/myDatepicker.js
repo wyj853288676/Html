@@ -1,11 +1,19 @@
 
-
+/**
+ * author: wang.yajie
+ * 基于swiperAxis.js开发，请先引入swiperAxis.js swiperAxis.css
+ * options:
+ *      startDate： 开始日期 yyyy-mm-dd
+ *      endDate: 结束日期 默认是当前日期
+ *      view:0 1 2 3 4 表示 "年月日周季"五个视图 
+ *      parent: query selector； 选择器添加到哪一个dom下面，默认是'body';
+ */
 
 ;(function($){
     $.fn.myDatePicker=function(inOptions){
         $(this).each(function(){
             let options={
-                view:3,//0 1 2  year month day week  season
+                view:2,//0 1 2 3 4 年 月 日 周 季  
                 startDate:'2014-01-01 00:00:00',
                 endDate:(new Date()).Format("yyyy-mm-dd hh:ii:ss"),
                 onDateChange:function(value,lastValue){
@@ -16,17 +24,15 @@
             options=$.extend(options,inOptions);
             //这里采用eval是为了方便动态去判断parent
             // options['parent']=eval(options['parent']);
-            let formats=['yyyy','yyyy-mm','yyyy-mm-dd'];
-            let format;
+            let format='yyyy-mm-dd';
             let _this=$(this);
-            let originalValue=value=_this.val()==''?(new Date()).Format("yyyy-mm-dd hh:ii:ss"):_this.val();
+            let value=_this.val()==''?(new Date()).Format("yyyy-mm-dd hh:ii:ss"):_this.val(),originalValue=value;
             let year,month,day,maxYear,maxMonth,maxDay,minYear,minMonth,minDay;
             let _bg=$(document.createElement('div')).addClass('my-date-picker-bg'),
             _container=$("<div class='my-date-picker-container "+('date-view-'+options['view'])+" '></div>").attr('tabindex','-1'),
             _yearPanel=$("<div class='my-date-picker-panel year-panel'></div>"),
             _monthPanel=$("<div class='my-date-picker-panel month-panel'></div>"),
             _dayPanel=$("<div class='my-date-picker-panel day-panel'></div>");
-
             let _yearUl,_monthUl,_dayUl;
             let _operatorContainer;
             // process
@@ -50,11 +56,12 @@
                 if($(options['parent']).css('position')=='static'){
                     $(options['parent']).css('position','relative');
                 }
-                format=formats[options['view']];
                 _container.html('')
                 if(_bg.html()==''){
                     _bg.html(_container);
                 }
+                //计算实际的最大/最小年月日;
+                fixDateLimit();
                 // title
                 _container.append('<div class="operator-container"></div>');
                 _operatorContainer=_container.children('.operator-container');
@@ -73,10 +80,8 @@
 
             function initYear(){
                 _yearPanel.html('<div class="my-date-picker-panel-body"><ul class="date-picker-ul"></ul></div><div class="my-date-picker-panel-header"><span class="date-title">年</span></div><button class="date-picker-btn increase-btn" type="button"></button><button class="date-picker-btn decrease-btn" type="button"></button>');
-                let tempYear=options['startDate'].toDate(format).getFullYear();
+                let tempYear=minYear;
                 year=value.toDate(format).getFullYear();
-                maxYear=options['endDate'].toDate(format).getFullYear();
-                minYear=options['startDate'].toDate(format).getFullYear();
                 _yearUl=_yearPanel.find('ul.date-picker-ul');
                 while(tempYear<=maxYear){
                     _yearUl.append('<li date-value='+tempYear+'>'+tempYear+'</li>');
@@ -88,8 +93,6 @@
                 _monthPanel.html('<div class="my-date-picker-panel-body"><ul class="date-picker-ul"></ul></div><div class="my-date-picker-panel-header"><span class="date-title">月</span></div><button class="date-picker-btn increase-btn" type="button"></button><button class="date-picker-btn decrease-btn" type="button"></button>');
                 let tempMonth=1;
                 month=value.toDate(format).getMonth()+1;
-                maxMonth=options['endDate'].toDate(format).getMonth()+1;
-                minMonth=options['startDate'].toDate(format).getMonth()+1;
                 _monthUl=_monthPanel.find('ul.date-picker-ul');
                 while(tempMonth<=12){
                     let monthText=tempMonth.length==1?('0'+tempMonth):tempMonth;
@@ -101,9 +104,6 @@
             function initDay(){
                 _dayPanel.html('<div class="my-date-picker-panel-body"><ul class="date-picker-ul"></ul></div><div class="my-date-picker-panel-header"><span class="date-title">日</span></div><button class="date-picker-btn increase-btn" type="button"></button><button class="date-picker-btn decrease-btn" type="button"></button>');
                 let tempDay=1;
-                day=value.toDate(format).getDate();
-                minDay=options['startDate'].toDate(format).getDate();
-                maxDay=options['endDate'].toDate(format).getDate();
                 day=value.toDate(format).getDate();
                 _dayUl=_dayPanel.find('ul.date-picker-ul');
                 while(tempDay<=31){
@@ -128,15 +128,17 @@
                             return  _ul.children('li:visible').outerHeight();;
                         },
                         scrollFrame:5,
-                        clickFrame:5,
+                        clickFrame:3,
                         moveSpeed:function(){
                             return _ul.children('li:visible').outerHeight();
                         },
                         fixLimit:function(){
-                            let correctMin=_span.offset()['top']-_ul.offset()['top']-_ul.outerHeight()+_span.outerHeight();
-                            let correctMax=_span.offset()['top']-_ul.offset()['top'];
-                            let maxX=_span.offset()['top']-_ul.offset()['top']+30;
-                            let minX=_span.offset()['top']-_ul.offset()['top']-_ul.outerHeight()+_span.outerHeight()-30;
+                            let liHeight=_span.outerHeight();
+                            //限制
+                            let correctMax=_span.offset()['top']-_ul.offset()['top']+_body[0].getX();
+                            let correctMin=_span.offset()['top']-_ul.offset()['top']-_ul.outerHeight()+liHeight+_body[0].getX();
+                            let minX=correctMin-liHeight;
+                            let maxX=correctMax+liHeight;
                             return {
                                 correctMin:correctMin,
                                 correctMax:correctMax,
@@ -169,7 +171,7 @@
                                 let distance=_body[0].getX()+_span.offset()['top']-_ul.children('li:visible:eq('+index+')').offset()['top'];
                                 _body[0].swiperTo(distance,{frame:10,useRaf:true});
                                 updateDateByDistance();
-                            },100,_body[0].rafCount);
+                            },20,_body[0].rafCount);
                             //记得用let声明
                             let updateDateByDistance=function(){
                                 let diff=_span.offset()['top']-_ul.offset()['top'];
@@ -206,10 +208,10 @@
                 let hover=false;
                 function timeoutFunc(){
                     setTimeout(function(){
-                        // if(!focus&&!hover){
-                        //     _this.removeClass('date-picker-focus');
-                        //     _bg.detach();
-                        // }
+                        if(!focus&&!hover){
+                            _this.removeClass('date-picker-focus');
+                            _bg.detach();
+                        }
                     },100);
                 }
                 _this.on('focus',function(){
@@ -248,7 +250,9 @@
                         _btn.parent().children('div.my-date-picker-panel-body')[0].swiperRightBtn.click();
                     }
                 });
-                
+                _container.delegate('div.my-date-picker-panel-body','mouseover',function(){
+                    this.alignSwiper();
+                });
             }
 
             function resetSwiper(viewIndex){
@@ -279,7 +283,7 @@
                     fixFunctions[options['view']][i]();
                 }
                 function swipeYear(){
-                    year=value.toDate(format).getFullYear();
+                    year=value.toDate().getFullYear();
                     let _body=_yearPanel.children('div.my-date-picker-panel-body');
                     let _span=_yearPanel.find('span.date-title');
                     let _li=_body.find('ul li[date-value='+year+']');
@@ -288,7 +292,7 @@
                 }
 
                 function swipeMonth(){
-                    month=value.toDate(format).getMonth()+1;
+                    month=value.toDate().getMonth()+1;
                     let _body=_monthPanel.children('div.my-date-picker-panel-body');
                     let _span=_monthPanel.find('span.date-title');
                     let _li=_body.find('ul li[date-value='+month+']');
@@ -333,6 +337,33 @@
                     _operatorContainer.html("<span class='date-title'>"+ year + "  " + seasonText +"</span>") ;
                 }
             }
+
+            function fixDateLimit(){
+                let startDate=options['startDate'].toDate(format);
+                let endDate=options['endDate'].toDate(format);
+                switch(options['view']){
+                    case 3:
+                        //周 判断endDate所在月是否有周一没有则endDate前移一个月
+                        if(endDate.getLastMonday()<0){
+                            endDate=new Date(endDate.getFullYear(),endDate.getMonth(),endDate.getLastMonday());
+                        }
+                        //startDate调整为前一个周一
+                        startDate=new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getLastMonday());
+                        break;
+                    case 4:
+                        //季度 将startDate endDate改变成他们所在的季度的开始的那一个月 
+                        endDate=new Date(endDate.getFullYear(),endDate.getMonth()-endDate.getMonth()%3,1);
+                        break;
+                }
+                startDate=new Date(Math.min(startDate,endDate));
+                maxYear=endDate.getFullYear();
+                minYear=startDate.getFullYear();
+                minDay=startDate.getDate();
+                maxDay=endDate.getDate();
+                maxMonth=endDate.getMonth()+1;
+                minMonth=startDate.getMonth()+1;
+            }
+
             function fixYear(){
                 if(_yearPanel.parent().length==0){
                     return true;
@@ -358,15 +389,15 @@
                 _monthUl.children('li').each(function(){
                     let _li=$(this);
                     let tempMonthText=_li.attr('date-value').length==1?('0'+_li.attr('date-value')):_li.attr('date-value');
-                    let dateText=year+'-'+tempMonthText+'-01';
-                    if(checkDate(dateText)||checkDate(year+'-'+tempMonthText+'-'+getLastDay(dateText)) ){
+                    let dateText=year+'-'+tempMonthText;
+                    if(checkMonth(dateText)){
                        _li.css('display',''); 
                     }else{
                         _li.hide();
                     }
                     //季度，只取 1 4 7 10 每个季度开始月
-                    if(options['view']>=4){
-                        _li.css('display',(new Date(dateText).getMonth()%3==0)?'':'none');
+                    if(options['view']>=4&&new Date(dateText).getMonth()%3!=0){
+                        _li.css('display','none');
                     }
                 });
                 return month<10?('0'+month):month;
@@ -385,11 +416,11 @@
                 day=Math.min(day,getLastDay(year+'-' + (month<10?('0'+month):month) + '-01'));
                 switch(options['view']){
                     case 3:
-                        //week
-                        day=day - new Date(year + '-' + month + '-' + day ).getDay() + 1;
+                        //week 取上一个周一
+                        day=new Date(year,month-1,day).getLastMonday();
+                        //获取本月第一个周一
                         if(day<=0){
-                            let lastDayOfMonth=new Date(year,month,0)
-                            day=lastDayOfMonth.getDate()-lastDayOfMonth.getDay()+1;
+                            day=new Date(year,month-1,1).getNextMonday();
                         }
                         break;
                     case 4:
@@ -408,11 +439,11 @@
                      }else{
                          _li.hide();
                      }
-                    //week 和 season week 只显示每周 的周一 季度只显示该月第一天
+                    //week 和 season week 只显示每周 的周一 季度只显示该月第一天 
                     switch(options['view']){
                         case 3:
                             //week
-                            if(new Date(tempDateText).getDay()!=1){
+                            if(new Date(tempDateText).getDay()!=1){  
                                 _li.hide();
                             }
                             break;
@@ -429,13 +460,21 @@
 
             function checkDate(date){
                 let parseDate=date.toDate(format);
-                return checkDay(date)&&Date.parse(parseDate)>=Date.parse(options['startDate'].toDate(format))&&Date.parse(parseDate)<=Date.parse(options['endDate'].toDate(format));
+                let startDate=new Date(minYear,minMonth-1,minDay);
+                let endDate=new Date(maxYear,maxMonth-1,maxDay);
+                return checkDayLegal(date)&&Date.parse(parseDate)>=Date.parse(startDate)&&Date.parse(parseDate)<=Date.parse(endDate);
+            }
+
+            function checkMonth(date){
+                let startDate=new Date(minYear,minMonth-1,1);//取当月第一天
+                let endDate=new Date(maxYear,maxMonth-1,1);//取当月第一天
+                return Date.parse(date.toDate())>=Date.parse(startDate)&&Date.parse(date.toDate())<=Date.parse(endDate);
             }
 
             /**
              * 检查日是否合法
              */
-            function checkDay(date){
+            function checkDayLegal(date){
                 return (date.toDate(format).getDate()==parseInt(date.substring(date.length-2)))
             }
 
@@ -458,6 +497,7 @@
 
 
 Date.prototype.Format = function (fmt) { 
+    fmt=arguments[0]?arguments[0]:"yyyy-mm-dd";
     var o = {
         "m+": this.getMonth() + 1, //月份 
         "d+": this.getDate(), //日 
@@ -477,6 +517,20 @@ Date.prototype.Format = function (fmt) {
     return fmt;
 }
 
+Date.prototype.getLastMonday=function(){
+    let day=this.getDate();
+    let week=this.getDay();
+    let monday=day-((week==0?7:(week%7))-1);
+    //返回值<=0表示在上一个月
+    return monday;
+}
+Date.prototype.getNextMonday=function(){
+    let day=this.getDate();
+    let week=this.getDay();
+    let monday=day + (8-week)%7;
+    return monday;
+}
+
 
 String.prototype.toDate = function (fmt){
     fmt=arguments[0]?arguments[0]:"yyyy-mm-dd";
@@ -485,10 +539,11 @@ String.prototype.toDate = function (fmt){
     let now=new Date();
     for( var i in o){
         reg=new RegExp("("+o[i]+")");
-        let time;
+        let time='';
         if(reg.test(fmt)){
             time=this.substr(fmt.match(reg)['index'],RegExp.$1.length);
-        }else{
+        }
+        if(time==''){
             time=(i==0?now.getFullYear():(i<=2?'01':'00'));
         }
         times.push(time);

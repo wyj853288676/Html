@@ -51,10 +51,10 @@
             maxX=fixed['maxX']?fixed['maxX']:maxX;
         };
         _this[0].reset=function(inOptions){
-            move(0,undefined,false);
             options=$.extend(options,inOptions);
             align();
         };
+        _this[0].alignSwiper=align;
         _this[0].swiperTo=function(x,inOptions){
             move(x,inOptions,false);   
         };
@@ -109,8 +109,6 @@
             correctMax=fixed['correctMax']!=undefined?fixed['correctMax']:correctMax;
             minX=fixed['minX']!=undefined?fixed['minX']:minX;
             maxX=fixed['maxX']!=undefined?fixed['maxX']:maxX;
-            console.log(maxX,minX);
-
         }
 
         function bindListen(){
