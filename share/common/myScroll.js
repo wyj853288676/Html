@@ -171,11 +171,10 @@
                 }
                 ty=-1*y*(sumHeight-height)/(height-scrollHeight);
                 ty=ty<=0?ty:0;
-                onVerticalMove();
                 if(params['useRaf']&&optionsCommon['useRaf']){
                     switch(optionsY['scrollMode']){
                         case 0: 
-                            rafMove(ty,optionsY['inlineDom'],'margin-top',params['frame']);
+                            rafMove(ty,optionsY['inlineDom'],'margin-top',params['frame'],undefined,onVerticalMove);
                             break;
                         case 1:
                             scrollTopAnimation(-ty,optionsY['inlineDom']);
@@ -183,6 +182,7 @@
                     }
                     rafMove(y,optionsY['inlineBar'],'margin-top',params['frame']);
                 }else{
+                    onVerticalMove();
                     for(var i in optionsY['inlineDom']){
                         switch(optionsY['scrollMode']){
                             case 0:
@@ -823,7 +823,6 @@
                 scrollWidth=width*width/sumWidth;
                 scrollWidth=scrollWidth>width?width:scrollWidth;
                 scrollHeight=scrollHeight>height?height:scrollHeight;
-
                 if(!_this.hasClass('myScroll')){
                     //添加滚动条
                     addScrollBar(_this);
@@ -846,11 +845,11 @@
                 }  
                 for(var i in optionsX['inlineBar']){
                     optionsX['inlineBar'][i].parent().css({'width':width+'px','height':optionsX['scrollHeight']});
-                    optionsX['inlineBar'][i].css({'width':scrollWidth+'px','border-radius':optionsX['scrollHeight']+'px'});
+                    optionsX['inlineBar'][i].css({'width':scrollWidth+'px',});
                 } 
                 for(var i in optionsY['inlineBar']){
                     optionsY['inlineBar'][i].parent().css({'height':height+'px','width':optionsY['scrollWidth']});
-                    optionsY['inlineBar'][i].css({'height':scrollHeight+'px','border-radius':optionsY['scrollWidth']+'px'});
+                    optionsY['inlineBar'][i].css({'height':scrollHeight+'px',});
                 }
                 // _scrollContainerY.css('height',height+'px');
                 // _scrollContainerX.css('width',width+'px');
@@ -876,7 +875,6 @@
                 if(resetX===true){
                     horizonMove(resetXTo0?0:(-1*getScrollLeft()),{useRaf:false,callback:false,moveObject:true});
                 }
-               
                 if(isDisplayNone){
                     _this.css({'display':'unset','visibility':'visible','opacity':'1'});
                 }
@@ -959,10 +957,8 @@
                     // _scrollBarY.show();
                     // _scrollBarX.show();
                 }
-                //是否监听DOM变化
-                if( optionsCommon['observe'] && !_object.hasClass('myScroll')){
-                    observe();
-                }
+              
+              
                 //scrollMode 
                 switch(optionsY['scrollMode']){
                     case 0:
@@ -977,6 +973,10 @@
                         break;
                 }
                 _this.addClass(" myScroll " + (ADDX?' myScrollx ':'') + (ADDY?" myScrolly ":'') );
+                //是否监听DOM变化 尽量放在最后监听
+                if( optionsCommon['observe'] && !_object.hasClass('myScroll')){
+                    observe();
+                }
             }
             
             let _this=$(this);
@@ -1019,9 +1019,10 @@
 
 
 //raf使得滚动效果更加平滑 frame可以手动设置
-function rafMove(y,doms,css,f,func){
+function rafMove(y,doms,css,f,func,onFrame){
     f=arguments[3]?arguments[3]:0;
     func=arguments[4]?arguments[4]:function(){};
+    onFrame=arguments[5]?arguments[5]:function(){};
     let index=parseFloat(doms[0].css(css).replace('px',''));
     let originIndex=index;
     let frame=f==0?5:f;
@@ -1043,6 +1044,7 @@ function rafMove(y,doms,css,f,func){
         for(let i in doms){
             doms[i].css(css,(index)+'px');
         }
+        onFrame();
         index+=addNum;
         requestAnimationFrame(move);
         frame--;
@@ -1107,32 +1109,6 @@ function scrollLeftAnimation(distance,doms,limit){
     move(height);
 }
 
-
-
-/**
- * 
- * 判断浏览器类型
- */
-
- /**
- * 是否为IE
- */
-var getExplorer = (function () {
-    var explorer = window.navigator.userAgent,
-        compare = function (s) { return (explorer.indexOf(s) >= 0); },
-        ie11 = (function () { return ("ActiveXObject" in window) })();
-    if (compare("MSIE") || ie11) { return 'ie'; }
-    else if (compare("Firefox") && !ie11) { return 'Firefox'; }
-    else if (compare("Chrome") && !ie11) {
-    if (explorer.indexOf("Edge") > -1) {
-            return 'Edge';
-    } else {
-        return 'Chrome';
-    }
-    }
-    else if (compare("Opera") && !ie11) { return 'Opera'; }
-    else if (compare("Safari") && !ie11) { return 'Safari'; }
-})();
 
 
 

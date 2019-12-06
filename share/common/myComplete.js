@@ -5,16 +5,20 @@
                 return {name:_this.val()};
             },
             url:'',
+            // ajax confs
             success:function(data){
             },
             error:function(){jAlert('Error')},
             onSearch:function(){},
             stopSearch:function(){},
+            // ajax confs end
             onclick:function(_target){},
-            returnDataType:'json',
+            returnDataType:'json',//controller f返回的data 类型
             delay:200,
             height:200,
             body:$('body'),
+            innerHtml:'',
+            minLength:1,//最少输入多少字符
         }
         if($(this).length>1){
             console.log('不支持多个input！！！');
@@ -26,8 +30,9 @@
         let hoverIndex=-1;
         let compositionFlag=false;//是否正在用输入法
         let timeFunc;
-        let _ul=$(document.createElement('ul')).addClass('autocomplete-ul').css({'z-index':9999999,'position':'absolute'});
+        let _ul=$(document.createElement('ul')).addClass('autocomplete-ul').css({'z-index':9999,'position':'absolute'});
         let count=0;//input count
+        let needInnerHtml=(typeof options['innerHtml']=='object'&&options['innerHtml'].length>0) || (typeof options['innerHtml']=='string'&&options['innerHtml']!='');//需要显示innerHtml
         bindListen();
 
         return _ul;
@@ -48,13 +53,13 @@
                             if(j=='value'){
                                 _li.html(data[i][j]);
                             }else{
-                                _li.data(j,data[i][j]);
+                                _li.attr('data-'+j,data[i][j]);
                             }
                         }
                     }
                     _ul.append(_li);
                 }
-                _ul.animate({maxHeight:options['height']},300,'linear')
+                _ul.animate({maxHeight:options['height']},300,'linear');
             }
         }
 
@@ -64,6 +69,11 @@
         function bindListen(){
             _this.on('compositionstart',function(){compositionFlag=true});
             _this.on('compositionend',function(){compositionFlag=false;completeHandler();});
+            if(needInnerHtml){
+                _this.on('focus',function(){
+                    showUl();
+                });
+            }
             _this.on('input',completeHandler);
             _this.on('blur',function(){
                 options['stopSearch']();
@@ -100,12 +110,19 @@
             _ul.delegate('li','mouseover',function(){
                 hoverIndex=$(this).index();
                 _ul.children('li').removeClass('hover');
+                _ul.children('li:eq('+hoverIndex+")").addClass('hover');
             });
             //options['returnDataType']=='json'时候，插件来绑定监听
             _ul.delegate('li','click',function(){
                 let _target=$(this);
                 chooseLiHandler(_target);
             });
+            //resize对齐
+            $(window).on('resize',function(){
+                alignUl();
+            })
+            //阻止滚轮事件冒泡
+            _ul.on('mousewheel DOMMouseScroll',function(e){e.stopPropagation();});
             //选中li的handler
             function chooseLiHandler(_target){
                 // _this.val(_target.html());
@@ -142,7 +159,7 @@
                         if(signal<count){
                             return true;
                         }
-                        if(options['success'](data)===false){
+                        if( (options['success'])(data)===false){
                             return true;
                         };
                         options['stopSearch']();
@@ -154,7 +171,7 @@
             }
             //输入完成后执行的函数
             function completeHandler(){
-                _ul.html('').detach();
+                _ul.html('');
                 options['stopSearch']();
                 hoverIndex=-1;
                 if(compositionFlag){
@@ -163,24 +180,43 @@
                 count++;
                 clearTimeout(timeFunc);
                 //清空时取消匹配
-                if(myTrim(_this.val())==""){
-                    _ul.detach();
+                if(myTrim(_this.val())==""||myTrim(_this.val()).length<options['minLength']){
+                    if(needInnerHtml){
+                        showUl();
+                    }else{
+                        _ul.detach();
+                    }
                     return true;
                 }
                 timeFunc=setTimeout(function(){
                     options['onSearch']();
-                    _ul.addClass('loading').css({
-                        'top':_this.offset()['top']+_this.outerHeight()+2,
-                        'left':_this.offset()['left'],
-                        'max-height':40,
-                        'min-width':_this.outerWidth(),
-                    });
-                    options['body'].append(_ul);
+                    showUl();
+                    _ul.addClass('loading').css({maxHeight:'40px'});
                     ajax(count);
                 },options['delay']);
             };
         }
         // bind listen end
+        function showUl(){
+            _ul.removeClass('loading').html('').css({maxHeight:options['height']});
+            if(typeof options['innerHtml']=='object'){
+                _ul.append(options['innerHtml']);
+            }else if(typeof options['innerHtml']=='string'){
+                _ul.html(options['innerHtml']);
+            }
+            alignUl();
+            if(_ul.parent().length==0){
+                options['body'].append(_ul);
+            }
+        }
+        //对齐ul
+        function alignUl(){
+            _ul.css({
+                'top':_this.offset()['top']+_this.outerHeight()+2-options['body'].offset()['top'],
+                'left':_this.offset()['left']-options['body'].offset()['left'],
+                'width':_this.outerWidth(),
+            });
+        }
 
         
     }

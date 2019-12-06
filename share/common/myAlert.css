@@ -1,10 +1,11 @@
+@charset "utf8";
 /* bottom-bar */
 div.bottom-bar-container{
     position: absolute;
     height: 110vh;
     bottom: 0;
     background-color: rgba(0,0,0,0.3);
-    z-index: 99999999999999;
+    z-index: 9999;
     width: 100vw;
     padding-top: 40vh;
     position: fixed;
@@ -187,14 +188,18 @@ div.bottom-bar-container #form-main{
 div.jside-bar-container{
     position: fixed;
     height: 100%;
-    background-color: rgba(0,0,0,0.6);
-    border: 1px solid #eee;
+    background-color: rgba(0,0,0,0.5);
+    /* border: 1px solid #eee; */
     top: 0;
-    z-index: 99999999999999;
+    z-index: 9999;
     width: 100%;
     opacity:1;
     min-width: 300px;
-    transition: opacity 0.3s;
+    transition: opacity 0.5s;
+    animation: fadeIn 0.5s;
+}
+div.jside-bar-container:not(.no-return-dom).removed{
+    opacity: 0 !important;
 }
 div.jside-bar-container.opacity-change{
     opacity: 0.5;
@@ -211,12 +216,17 @@ div.jside-bar-container.left-sidebar{
 div.jside-bar-container.right-sidebar{
     right: 0;
 }
+div.jside-bar-content{
+    transition: transform 0.3s;
+    transform: translateX(0);
+}
 div.jside-bar-container.left-sidebar div.jside-bar-content{
-    animation: toRight 0.3s ease-in-out 1 ;
+    animation: alertToRight 0.3s ease-in-out 1 ;
 }
 div.jside-bar-container.right-sidebar div.jside-bar-content{
-    animation: toLeft 0.3s ease-in-out 1;
+    animation: alertToLeft 0.3s ease-in-out 1;
 }
+
 div.jside-bar-container.left-sidebar.removed div.jside-bar-content{
     opacity: 0;
     transform: translateX(calc(-100% - 40px));
@@ -227,7 +237,20 @@ div.jside-bar-container.right-sidebar.removed div.jside-bar-content{
     transform: translateX( calc(100% + 40px) );
     transition: all 0.3s;
 }
-@keyframes toLeft{
+div.jside-bar-container.left-sidebar.removed.no-return-dom div.jside-bar-content,
+div.jside-bar-container.right-sidebar.removed.no-return-dom div.jside-bar-content{
+    opacity: 1;
+}
+div.jside-bar-container.left-sidebar.removed.no-return-dom div.jside-bar-content{
+    transform: translateX(calc(-100% - 0px));
+}
+div.jside-bar-container.right-sidebar.removed.no-return-dom div.jside-bar-content{
+    transform: translateX( calc(100% + 0px) );
+}
+div.jside-bar-container.removed button.jside-bar-remove-btn i.fa-angle-right::before{
+    content:"\f104" !important;
+}
+@keyframes alertToLeft{
     0%{
         transform: translateX(calc(100% + 40px) );
     }
@@ -235,7 +258,7 @@ div.jside-bar-container.right-sidebar.removed div.jside-bar-content{
         transform: translateX(0);
     }
 }
-@keyframes toRight{
+@keyframes alertToRight{
     0%{
         transform: translateX( calc(-100% - 40px) );
     }
@@ -263,7 +286,7 @@ div.jside-bar-container.no-background{
     border: none;
 }
 div.jside-bar-container.no-background div.jside-bar-content{
-    border-top: 1px solid #eee;
+    /* border-top: 1px solid #eee; */
     position: relative;
 }
 div.jside-bar-content{
@@ -271,37 +294,43 @@ div.jside-bar-content{
     position: absolute;
     background-color: white;
     bottom: 0;
-    border-left:1px solid #ccc;
+    /* border-left:1px solid #ccc;
     border-bottom: 1px solid #ccc;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #eee; */
 }
 div.jside-bar-header{
     position: relative;
     height: 40px;
     vertical-align: middle;
-    border-bottom: 1px solid #eee;
-    z-index: 9999999;;
+    /* background: #369bac; */
+    /* border-bottom: 1px solid #eee; */
+    background: linear-gradient(to right, rgba(0,120,188,0.8) 1%, rgba(0,190,218,0.8) 100%);
+    z-index: 9999;;
+    color: white;
+    padding-left: 5px;
+    text-align: center;
 }
 div.jside-bar-header span.jside-bar-title{
     font-size: 16px;
-    color: #555 !important;
+    color: inherit !important;
     height: 100%;
     display: inline-flex;
     align-items: center;
     cursor: default;
+    font-weight: bold;;
 }
 div.jside-bar-header span.jside-bar-title i{
     margin-right: 5px;
 }
 div.jside-bar-header span.jside-bar-title::before{
-    content: "";
+    /* content: "";
     width: 4px;
     height: 100%;
     display: inline-block;
     margin-right: 5px;
-    background-color: #08a0e3;
+    background-color: #18a2b8;
     top: 0;
-    left: 0;
+    left: 0; */
 }
 div.jside-bar-content button.jside-bar-remove-btn{
     background-color: rgba(0,0,0,0);
@@ -313,12 +342,12 @@ div.jside-bar-content button.jside-bar-remove-btn{
     border-width: 10px 18px 10px 0px;
     border-style: solid;
     border-color: rgba(0,0,0,0);
-    border-right-color: #08a0e3;
+    border-right-color: #18a2b8;
     display: inline-flex;
     align-items: center;
     z-index: 999;
     position: absolute;
-    left: -19px;
+    left: -18px;
     margin-top: 20px;
     top: calc(50% - 70px);
     cursor: pointer;
@@ -331,34 +360,48 @@ div.jside-bar-content button.jside-bar-remove-btn i{
     left: 6px;
 }
 div.jside-bar-container.left-sidebar div.jside-bar-content  button.jside-bar-remove-btn{
-    right: -17px;
+    right: -18px;
     left: auto;
     border-width: 10px 0px 10px 18px;
     border-right-color: rgba(0,0,0,0);
-    border-left-color: #08a0e3;
+    border-left-color: #18a2b8;
 }
 div.jside-bar-container.left-sidebar div.jside-bar-content  button.jside-bar-remove-btn i{
     left: unset;
     right: 4px;
 }
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    div.jside-bar-content button.jside-bar-remove-btn i{
+        position: relative;
+        transform: translateX(6px);;
+        left: 0;
+    }
+    div.jside-bar-container.left-sidebar div.jside-bar-content  button.jside-bar-remove-btn i{
+        left: auto;
+        right: 20px;
+    }
+}
+
 div.jside-bar-content  button.jside-bar-remove-btn:hover {
     opacity: 1;
 }
 div.jside-bar-header::after{
-    content: "";
-    width: 70px;
+    /* content: "";
+    width: 28px;
     height: 16px;
     position: absolute;
     bottom: -8px;
     padding: 0 4px;
     opacity: 1;
-    right: calc(50% - 50px);
+    right: calc(50% - 24px);
     background-size: 66px 16px;
-    background-position: center;
+    background-position: 0px;
     background-repeat: no-repeat;
     background-image: url(/images/logo/nint_black.png);
     background-color: white;
-
+    opacity: 0.8;
+    filter: grayscale(100); */
 }
 
 /* title */
@@ -375,6 +418,7 @@ div.jside-bar-content-child span.jside-bar-title{
     /* position: absolute; */
     width: 100%;
     font-size: 16px;
+    cursor: default;
 }
 div.jside-bar-content-child span.jside-bar-title>i{
     margin-right: 5px;
@@ -407,11 +451,13 @@ div.jside-bar-content-child span.jside-bar-title::before,div.jside-bar-content-c
     top: 0;
     align-items: center;
     justify-content: center;
-    z-index: 999999999;
+    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: opacity 0.3s;
+    /* filer */
+    /* backdrop-filter:blur(1px); */
 }
 
 div.alert-container span.title-span-pc::before{
@@ -431,6 +477,8 @@ div.alert-container div.alert-panel{
     padding: 10px;
     animation: jAlert 0.4s cubic-bezier(0.5, 1.12, 0.33, 1.77) 1;
     margin-bottom: 50px; 
+    /* filter */
+    filter: drop-shadow(0px 0px 13px rgba(0,0,0,0.5));
 }
 div.alert-container.remove{
     opacity: 0;
@@ -510,6 +558,7 @@ div.alert-container button.alert-remove-button-top{
     justify-content: center;
     border-radius: 100%;
     /* padding: .875rem; */
+    padding: 0;;
     width: 32px;
     height: 32px;
     color: white;
@@ -545,6 +594,7 @@ div.alert-panel-footer{
 @media screen and (max-width:768px){
     div.alert-container div.alert-panel{
         width: 90%;
+        min-width: 0px;
     }
     div.alert-container button.alert-remove-button-top{
         position: absolute;
@@ -566,6 +616,11 @@ div.alert-panel-footer{
     div.jside-bar-header::after{
         display: none;
     }
+    div.alert-container div.alert-panel .alert-panel-heading::before{
+        width: 100px;
+        top: -30px;
+        left: 10px;
+    }
 }
 
 /* jAlert */
@@ -581,7 +636,7 @@ div.alert-loading-container{
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 99999999999999;
+    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -809,7 +864,7 @@ div.alert-bottom-parent-container{
     width: 100%;
     bottom: 50px;
     height: auto;
-    z-index: 99999999;
+    z-index: 9999;
     pointer-events: none;
 }
 body>div.alert-bottom-parent-container{
@@ -931,3 +986,362 @@ div.bulletin-container div.vice-title-container{
     }
 }
 /* 公告栏 bulletin-container */
+
+
+
+
+
+/* 引导 intro */
+.my-intro-bg{
+    position: absolute;
+    z-index: 99999;
+    /* background: rgba(0,0,0,0.4); */
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    animation: fadeIn 0.6s;
+}
+.my-intro-target-active{
+    z-index: 999;
+    pointer-events: none;
+}
+.my-intro-panel{
+    position: absolute;
+    /* background: rgba(255,255,255,0.7); */
+    /* box-shadow: 0 0px 15px rgba(0,0,0,.4), 0px 0px 0px 9999px rgba(0,0,0,0.3); */
+    box-shadow: 0 0px 15px rgba(0,0,0,.4),0px 0px 0px 9999px rgba(0,0,0,0.3);
+
+    border-radius: 5px;
+    transition: width 0.5s,height 0.5s,top 0.5s,left 0.5s;
+}
+.my-intro-panel{
+    animation: scaleDown    0.5s;
+}
+
+@keyframes scaleDown{
+    0%{
+        transform: scale(1.5);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+.my-intro-panel::before{
+    content: attr(data-intro-step);
+    position: absolute;
+    font-size: 12px;
+    width: 2em;
+    height: 2em;
+    border-radius: 100%;
+    display: flex;
+    background: rgb(255, 255, 255);
+    align-items: center;
+    justify-content: center;
+    left: -1em;
+    top: -1em;
+    border: 2px solid white;
+    background: rgba(23, 163, 184, 1);
+    color: white;
+    box-shadow: 0px 0px 5px 2px rgba(23, 163, 184, 1), 0px 0px 0px 1px rgba(23, 163, 184, 0.2) inset;
+    font-weight: bold;
+}
+.my-intro-panel.number-align-top-right::before{
+    left: calc(100% - 1em);
+}
+@media screen and (max-width:768px){
+    .my-intro-panel::before{
+        left: 5px;
+    }
+}
+.my-intro-tip{
+    position: absolute;
+    background: white;
+    box-shadow: 0px 0px 15px rgba(0,0,0,.4);
+    /* filter: drop-shadow(0 0px 15px rgba(0,0,0,.8)); */
+    border-radius: 5px;
+    left:0;
+    top: 0;
+    width: 200px;
+    padding: 5px;
+    transition: all 0.5s;
+}
+
+
+.my-intro-tip::before,.my-intro-tip::after{
+    content: "";
+    position: absolute;
+    border-color: transparent;;
+    border-style: solid;
+}
+.my-intro-tip::after{
+    transform: scale(0.9);
+}
+/* top */
+.my-intro-tip.tip-align-top::before,
+.my-intro-tip.tip-align-top::after{
+    border-width: 10px 7px 10px 7px;
+    left: calc(50% - 10px);
+}
+.my-intro-tip.tip-align-top::before{
+    border-top-color: white;
+    bottom: -20px;
+}
+/* left */
+.my-intro-tip.tip-align-left::before,
+.my-intro-tip.tip-align-left::after{
+    border-width: 7px 10px 7px 10px;
+    top: calc(50% - 10px);
+}
+.my-intro-tip.tip-align-left::before{
+    border-left-color: white;
+    right: -20px;
+}
+/* right */
+.my-intro-tip.tip-align-right::before,
+.my-intro-tip.tip-align-right::after{
+    border-width: 7px 10px 7px 10px;
+    top: calc(50% - 10px);
+}
+.my-intro-tip.tip-align-right::before{
+    border-right-color: white;
+    left: -20px;
+}
+/* bottom */
+.my-intro-tip.tip-align-bottom::before,
+.my-intro-tip.tip-align-bottom::after{
+    border-width: 10px 7px 10px 7px;
+    left: calc(50% - 10px);
+}
+.my-intro-tip.tip-align-bottom::before{
+    border-bottom-color: white;
+    top: -20px;
+}
+
+
+
+.my-intro-tip-body{
+    min-height: 3em;
+    cursor: default;
+    display: flex;
+    align-items: center;
+}
+.my-intro-tip-body::before{
+    content: "";
+    display: block;
+    position: absolute;
+    background: url(/images/logo/nint_white.png) no-repeat center;
+    background-size: contain;
+    width: 60px;
+    top: -15px;
+    height: 19px;
+}
+.intro-tip-span{
+    animation: fadeIn-span 0.8s ;
+    display: inline-block;
+    overflow: hidden;
+}
+@keyframes fadeIn-span{
+    0%,50%{
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+.btn-intro{
+    border: none;
+    background: #ddd;
+    padding:0px 1em;
+    color: #555;
+    margin: 0px 2px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 500;
+    transition: all 0.3s;
+    height: 1.2em;
+    line-height: 0
+}
+.btn-intro:active{
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.5) !important;
+}
+.btn-intro.btn-intro-skip{
+    color: #17a2b8;
+    background: none;
+    transition: all 0.3s;
+}
+.btn-intro.btn-intro-skip:hover{
+    background: #50afbe;
+    color: white;
+}
+.btn-intro:disabled{
+    opacity: 0.5;
+    cursor: default;
+}
+
+.my-intro-pagination{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    counter-reset: intro-page;
+}
+.my-intro-tip:not(.tip-align-top) .my-intro-pagination{
+    bottom: calc(-20px - .5em);
+}
+.my-intro-tip.tip-align-top .my-intro-pagination{
+    top: calc(-20px - .5em);
+}
+.my-intro-page{
+    position: relative;
+}
+.my-intro-page::before{
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 100%;
+    margin: 0px 7px;
+    cursor: pointer;
+    transition: all 0.8s;
+    /* transition-delay: 0.4s; */
+    counter-increment: intro-page;
+}
+.my-intro-page:hover::before{
+    transform: scale(1.5);
+}
+.my-intro-page.active::before{
+    background: #17a2b8;
+    box-shadow: 0px 0px 0px 2px white, 0px 0px 10px 3px rgb(0, 222, 255);
+}
+.my-intro-page::after{
+    content: counter(intro-page);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: calc(100% + 0px);
+    font-style: normal;
+    font-weight: bold;
+    transform: scale(1);
+    font-size: 12px;;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    opacity: 0;
+    transition: all 0.3s;
+}
+.my-intro-pagination:hover .my-intro-page::after{
+    opacity: 1;
+}
+.my-intro-tip.tip-align-top .my-intro-page::after{
+    top: calc(-100% - 0px);
+}
+.my-intro-page.active::after{
+    color: #17a2b8;
+    text-shadow: 0px 0px 6px #17a2b8;
+}
+/* 引导 intro */
+
+
+/* notification */
+div.my-notification-container{
+    position: fixed;
+    width: auto;
+    right: 1em;
+    bottom: 80px;
+}
+div.my-notification-panel{
+    padding:5px;
+    padding-left: 6.5em;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0,0,0,.4);
+    position: relative;
+    min-width: 23em;
+    cursor: default;
+    margin-bottom: 10px;
+    animation: notificationPanel 1s cubic-bezier(0, 0.74, 0.5, 1.76);
+    transition: all 0.3s;
+    opacity: 1;
+}
+div.my-notification-panel.notification-removed{
+    animation: notificationPanelRemoved 1s cubic-bezier(0.61, -0.51, 0.4, 1.03)  forwards;
+}
+@keyframes notificationPanel{
+    0%{
+        opacity: 0;
+        transform: translateX(30%);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes notificationPanelRemoved{
+    0%{
+        opacity: 1;
+        transform: translateX(0%);
+    }
+    100%{
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+div.my-notification-panel::before{
+    content: "";
+    display: block;
+    width: 2.5em;
+    height: 2em;
+    background: url(/images/logo/nint_big.png) no-repeat center;
+    background-size: 6em;
+    background-position: 0em;
+    position: absolute;
+    left: .8em;
+    top: calc(50% - 1em);
+    font-size:1.6em;
+}
+
+div.my-notification-panel-header{
+    font-size: .8em;
+}
+div.my-notification-panel-footer{
+    font-size: .8em;
+    text-align: right;
+}
+div.my-notification-panel-body{
+    min-height: 4em;
+}
+.btn-notification-remove{
+    float: right;
+    border: none;
+    background: none;
+    padding:2px 0px 0px 0px;
+    cursor: pointer;
+}
+.btn-notification-remove:active{
+    box-shadow: none;
+}
+div.my-notification-panel:not(:last-child):not(:hover){
+    opacity: 0.7;
+    box-shadow:  0px 0px 5px rgba(0,0,0,.2);
+}
+
+@media screen and (max-width:768px){
+    div.my-notification-container{
+        width: 100%;
+        right: auto;
+        right: unset;
+        padding-bottom: 80px;
+    }
+    div.my-notification-panel{
+        margin-left: calc(50% - 11.5em);
+        width: 23em;
+    }
+}

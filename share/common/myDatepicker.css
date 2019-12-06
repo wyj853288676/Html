@@ -1,4 +1,7 @@
 @charset "utf-8";
+.my-date-picker-bg *{
+    box-sizing: border-box;
+}
 input.date-time-picker:focus,input.date-time-picker:focus+i.input-icon,
 input.date-time-picker.date-picker-focus,input.date-time-picker.date-picker-focus+i.input-icon{
     z-index: 10000;
@@ -9,11 +12,11 @@ input.date-time-picker.date-picker-focus,input.date-time-picker.date-picker-focu
     left: 0;
     z-index: 9999;
     font-family: Hiragino Sans, "ヒラギノ角ゴシック", Hiragino Kaku Gothic ProN, "ヒラギノ角ゴ ProN W3", Roboto, "Droid Sans", YuGothic, "游ゴシック", Meiryo, "メイリオ", Verdana, "ＭＳ Ｐゴシック", sans-serif;
-
 }
 .my-date-picker-bg *:focus{
     outline: none !important;
 }
+
 .my-date-picker-container{
     /* max-width: 100%; */
     max-width: 100vw;
@@ -39,10 +42,10 @@ input.date-time-picker.date-picker-focus,input.date-time-picker.date-picker-focu
     outline: none;
 }
 .my-date-picker-container.date-view-1,.my-date-picker-container.date-view-4{
-    min-width: calc(8em + 30px);
+    min-width: calc(9em + 30px);
 }
 .my-date-picker-container.date-view-2,.my-date-picker-container.date-view-3{
-    min-width: calc(12em + 45px);
+    min-width: calc(13em + 45px);
 }
 @keyframes date-to-top{
     0%{
@@ -60,10 +63,13 @@ input.date-time-picker.date-picker-focus,input.date-time-picker.date-picker-focu
     width: 100%;
     height: 100%;
     /* overflow: hidden; */
-    padding:0px 5px;
+    padding: 0px 5px;
     display: flex;
     justify-content: center;
     position: relative;
+}
+.my-date-picker-panel:nth-of-type(2){
+    padding:0px 5px 0px calc(1em + 5px);
 }
 .my-date-picker-panel-header{
     height: 100%;
@@ -156,6 +162,9 @@ input.date-time-picker.date-picker-focus,input.date-time-picker.date-picker-focu
     left:calc(50% - 2.5em - 2.5px);
     width: 4em;
     line-height: 0;
+}
+.my-date-picker-panel:nth-of-type(2) .date-picker-btn{
+    left:calc(50% - 2em - 2.5px);
 }
 
 .date-picker-btn.increase-btn{

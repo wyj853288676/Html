@@ -60,12 +60,10 @@
         };
         _this[0].swiperLeftBtn=_leftBtn;
         _this[0].swiperRightBtn=_rightBtn;
-
         initDom();
         align();
         bindListen();
         listenBtn();
-
         function initDom(){
             _object.append(_contents);
             _this.append(_object);
@@ -76,8 +74,6 @@
                     _firstContent=_content;
                 }   
                 _content.children("div.swiper-axis-title").after('<i class="swiper-axis-light"></i>');
-                if(_content.children('div.swiper-axis-vice-title').length>0){
-                }
             });
             if(options['alignVice']){
                 _leftBtn.addClass('align-vice');
@@ -329,7 +325,7 @@
             }
         }
         function getX(){
-            return  parseFloat(_object.css(isX?'margin-left':'margin-top').replace('px',''))
+            return  parseFloat(_object.css(isX?'margin-left':'margin-top').replace('px',''));
         }
 
         function getContentWidth(){
@@ -342,7 +338,7 @@
             let rafOptions={
                 func:function(){},
                 isTrusted:true,
-            }
+            };
             inOptions=arguments[4]?arguments[4]:0;
             rafOptions=$.extend(rafOptions,inOptions);
             let func=rafOptions['func'];
