@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <script src="common/jquery.min.js"></script>
+    <link rel="stylesheet" href="common/myIntro.css">
+    <script src="common/myIntro.js"></script>
+</head>
+<style>
+body{
+    margin: 0;
+}
+#wrap{
+    width: 100%;
+    height: 1000px;
+    display: flex;
+    justify-content:center;
+    flex-wrap: wrap;
+    counter-reset: count;
+}
+</style>
+<body>
+    <div id="wrap">
+        <div id="step-1"></div>
+        <div id="step-2"></div>
+        <div id="step-3"></div>
+        <div id="step-4"class='hide'></div>
+        <div id="step-5" class='hide'></div>
+    </div>
+    <div style='position: absolute;top:0;width: 100%;text-align: center;margin-top: 100px;'>
+        <button class='btn btn-info'>点击按钮显示intro</button>
+        <span class='text-default' style='cursor: default;'>或者点击div块直接从该步骤显示intro</span>
+    </div>
+</body>
+<style>
+body{
+    background: whitesmoke;
+    font-size: 0.875rem;
+    font-family: '微软雅黑';
+}
+button{
+    width: auto;
+    height: 2em;
+    line-height: 1 !important;
+}
+#wrap{
+    counter-reset: counter;
+    height: 2000px;
+}
+#wrap div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    counter-increment: counter;
+}
+#wrap div::before{
+    content: "Step-"counter(counter);
+}
+
+#step-1{
+    width:100px;
+    height:200px;
+    background: #ccc;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+#step-2{
+    width:200px;
+    height:100px;
+    background: #ccc;
+    position: absolute;
+    left: 100px;
+    top: 250px;
+}
+
+#step-3{
+    width:200px;
+    height:100px;
+    background: #ccc;
+    position: absolute;
+    right: 100px;
+    top: 250px;
+}
+
+#step-4{
+    box-shadow: 0px 0px 0px 1px #999;;
+    position: fixed;
+    right: 5px;
+    width: 50px;
+    height: 200px;
+    background: #eee;
+    bottom: calc(50vh - 100px);
+    transition: right 0.5s;
+    opacity: 1;
+}
+#step-4.hide{
+    display: block !important;
+    right: -50px;
+}
+#step-5{
+    width:200px;
+    height:200px;
+    background: #ccc;
+    position: absolute;
+    right: calc(50% - 100px);
+    top: 250px;
+    transition: transform 0.3s;;
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+#step-5.hide{
+    transform: scale(0) translateY(-50px);
+    display: block !important;
+}
+
+
+</style>
+<script>
+
+(function(){
+    let doms=[
+        {
+            dom:$("#step-1"),
+            tip:'这是第一步,大部分时候不需要指定tip显示在左右上下哪一个位置。',
+            align:'right',
+        },
+        {
+            dom:$("#step-2"),
+            align:'top',
+            tip:'你可以指定tip显示在dom的上方',
+        },
+        {
+            dom:$("#step-3"),
+            align:'bottom',
+            tip:'第三步',
+        },
+        {
+            dom:$("#step-4"),
+            align:'left',
+            position:'fixed',
+            sizePlus:5,
+            tip:'对于定位是fixed的dom来说，只需要指定postion:fixed即可让tip和外边框的定位也是fixed',
+        },
+        {
+            dom:$("#step-5"),
+            align:'right',
+            tip:'带有动画效果的dom，它的宽高和定位都是不断变化的，在显示时需要手动设定动画执行完后再显示步骤说明',
+        },
+    ];
+    let options={
+        doms:doms,
+        //0表示从第一步开始,默认为0
+        start:0,
+        //每一步开始前需要进行的操作，step表示进行到哪一步，lastStep表示上一步是哪一步。
+        before:function(step,lastStep){
+            if(step==lastStep){
+                return true;
+            };
+            //有些元素是需要动态显示的，所以它的位置和宽高都不固定，所以需要等待动画效果执行完毕后手动进行到下一步
+            switch(step){
+                case 4:
+                    /*
+                    *进行到第五步，由于#step-5需要动画效果显示，
+                    *所以这里setTimeout设定0.5秒后手动调用align()方法,进行到第五步；同时return false，阻止插件走默认的逻辑自动进行到第五步
+                    */
+                    if($("#step-5").hasClass('hide')){
+                        $('#step-5').removeClass('hide');
+                        setTimeout(function(){
+                            intro.align();
+                        },500);
+                        return false;
+                    }
+                    break;
+                case 3:
+                    if($("#step-4").hasClass('hide')){
+                        $('#step-4').removeClass('hide');
+                        setTimeout(function(){
+                            intro.align();
+                        },500);
+                        return false;
+                    }
+                    break;
+            };
+            switch(lastStep){
+                case 4:
+                    //第五步进行完后隐藏#step-5
+                    $('#step-5').addClass('hide');
+                    break;
+                case 3:
+                    $('#step-4').addClass('hide');
+                    break;
+            }
+        },
+        onClose:function(){
+            $('#step-5,#step-4').addClass('hide');
+            alert('引导完毕!!!');
+        }
+    };
+    //调用myIntro()方法；
+    let intro=myIntro(options);
+    $('button').on('click',function(){
+        //显示intro界面
+        intro.show();
+    });
+    $("#wrap div").on('click',function(){
+        intro.show();
+        intro.jumpTo($(this).index());
+    });
+    /*
+    * myIntro()返回一个对象。
+    * intro.show()表示显示引导界面；
+    * intro.hide()表示关闭引导界面；
+    * intro.align()表示重新对齐引导界面的tip和外边框；
+    * intro.jumpTo()表示跳转至第几步（0表示第一步）
+    */
+})();
+</script>
+</html>
+

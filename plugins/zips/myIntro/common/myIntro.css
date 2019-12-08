@@ -1,0 +1,266 @@
+@charset "utf8";
+/* 引导 intro */
+.my-intro-bg{
+    position: absolute;
+    z-index: 99999;
+    /* background: rgba(0,0,0,0.4); */
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    animation: fadeIn 0.6s;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    font-family: "微软雅黑";
+}
+.my-intro-bg *{
+    outline: none !important;
+}
+.my-intro-target-active{
+    z-index: 999;
+    pointer-events: none;
+}
+.my-intro-panel{
+    position: absolute;
+    /* background: rgba(255,255,255,0.7); */
+    /* box-shadow: 0 0px 15px rgba(0,0,0,.4), 0px 0px 0px 9999px rgba(0,0,0,0.3); */
+    box-shadow: 0 0px 15px rgba(0,0,0,.4),0px 0px 0px 9999px rgba(0,0,0,0.3);
+
+    border-radius: 5px;
+    transition: width 0.5s,height 0.5s,top 0.5s,left 0.5s;
+}
+.my-intro-panel{
+    animation: scaleDown    0.5s;
+}
+
+@keyframes scaleDown{
+    0%{
+        transform: scale(1.5);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+.my-intro-panel::before{
+    content: attr(data-intro-step);
+    position: absolute;
+    font-size: 12px;
+    width: 2em;
+    height: 2em;
+    border-radius: 100%;
+    display: flex;
+    background: rgb(255, 255, 255);
+    align-items: center;
+    justify-content: center;
+    left: -1em;
+    top: -1em;
+    border: 2px solid white;
+    background: rgba(23, 163, 184, 1);
+    color: white;
+    box-shadow: 0px 0px 5px 2px rgba(23, 163, 184, 1), 0px 0px 0px 1px rgba(23, 163, 184, 0.2) inset;
+    font-weight: bold;
+}
+.my-intro-panel.number-align-top-right::before{
+    left: calc(100% - 1em);
+}
+@media screen and (max-width:768px){
+    .my-intro-panel::before{
+        left: 5px;
+    }
+}
+.my-intro-tip{
+    position: absolute;
+    background: white;
+    box-shadow: 0px 0px 15px rgba(0,0,0,.4);
+    /* filter: drop-shadow(0 0px 15px rgba(0,0,0,.8)); */
+    border-radius: 5px;
+    left:0;
+    top: 0;
+    width: 200px;
+    padding: 5px;
+    transition: all 0.5s;
+}
+
+
+.my-intro-tip::before,.my-intro-tip::after{
+    content: "";
+    position: absolute;
+    border-color: transparent;;
+    border-style: solid;
+}
+.my-intro-tip::after{
+    transform: scale(0.9);
+}
+/* top */
+.my-intro-tip.tip-align-top::before,
+.my-intro-tip.tip-align-top::after{
+    border-width: 10px 7px 10px 7px;
+    left: calc(50% - 10px);
+}
+.my-intro-tip.tip-align-top::before{
+    border-top-color: white;
+    bottom: -20px;
+}
+/* left */
+.my-intro-tip.tip-align-left::before,
+.my-intro-tip.tip-align-left::after{
+    border-width: 7px 10px 7px 10px;
+    top: calc(50% - 10px);
+}
+.my-intro-tip.tip-align-left::before{
+    border-left-color: white;
+    right: -20px;
+}
+/* right */
+.my-intro-tip.tip-align-right::before,
+.my-intro-tip.tip-align-right::after{
+    border-width: 7px 10px 7px 10px;
+    top: calc(50% - 10px);
+}
+.my-intro-tip.tip-align-right::before{
+    border-right-color: white;
+    left: -20px;
+}
+/* bottom */
+.my-intro-tip.tip-align-bottom::before,
+.my-intro-tip.tip-align-bottom::after{
+    border-width: 10px 7px 10px 7px;
+    left: calc(50% - 10px);
+}
+.my-intro-tip.tip-align-bottom::before{
+    border-bottom-color: white;
+    top: -20px;
+}
+
+
+
+.my-intro-tip-body{
+    min-height: 3em;
+    cursor: default;
+    display: flex;
+    align-items: center;
+}
+.my-intro-tip-body::before{
+    content: "";
+    display: block;
+    position: absolute;
+    background: url(logo.png) no-repeat center;
+    background-size: contain;
+    width: 60px;
+    top: -15px;
+    height: 19px;
+}
+.intro-tip-span{
+    animation: fadeIn-span 0.8s ;
+    display: inline-block;
+    overflow: hidden;
+}
+@keyframes fadeIn-span{
+    0%,50%{
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+.btn-intro{
+    border: none;
+    background: #ddd;
+    padding:0px 1em;
+    color: #555;
+    margin: 0px 2px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 500;
+    transition: all 0.3s;
+    height: 1.2em;
+    line-height: 0
+}
+.btn-intro:active{
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.5) !important;
+}
+.btn-intro.btn-intro-skip{
+    color: #17a2b8;
+    background: none;
+    transition: all 0.3s;
+    float: right;
+}
+.btn-intro.btn-intro-skip:hover{
+    background: #50afbe;
+    color: white;
+}
+.btn-intro:disabled{
+    opacity: 0.5;
+    cursor: default;
+}
+
+.my-intro-pagination{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    counter-reset: intro-page;
+}
+.my-intro-tip:not(.tip-align-top) .my-intro-pagination{
+    bottom: calc(-20px - .5em);
+}
+.my-intro-tip.tip-align-top .my-intro-pagination{
+    top: calc(-20px - .5em);
+}
+.my-intro-page{
+    position: relative;
+}
+.my-intro-page::before{
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 100%;
+    margin: 0px 7px;
+    cursor: pointer;
+    transition: all 0.8s;
+    /* transition-delay: 0.4s; */
+    counter-increment: intro-page;
+}
+.my-intro-page:hover::before{
+    transform: scale(1.5);
+}
+.my-intro-page.active::before{
+    background: #17a2b8;
+    box-shadow: 0px 0px 0px 2px white, 0px 0px 10px 3px rgb(0, 222, 255);
+}
+.my-intro-page::after{
+    content: counter(intro-page);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: calc(100% + 0px);
+    font-style: normal;
+    font-weight: bold;
+    transform: scale(1);
+    font-size: 12px;;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    opacity: 0;
+    transition: all 0.3s;
+}
+.my-intro-pagination:hover .my-intro-page::after{
+    opacity: 1;
+}
+.my-intro-tip.tip-align-top .my-intro-page::after{
+    top: calc(-100% - 0px);
+}
+.my-intro-page.active::after{
+    color: #17a2b8;
+    text-shadow: 0px 0px 6px #17a2b8;
+}
+/* 引导 intro */

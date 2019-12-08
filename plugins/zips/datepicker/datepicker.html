@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>datepicker-演示</title>
+    <script src="common/jquery.min.js"></script>
+    <link rel="stylesheet" href="common/myDatepicker.css">
+    <script src="common/myDatepicker.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div class='input-group'>
+            <input type="radio" hidden id='dateType_0' value='2' name='dateType'>
+            <label for="dateType_0" class='bar-checkbox waves-effect'>日</label>
+            <input type="radio" hidden id='dateType_1' value='3' name='dateType'>
+            <label for="dateType_1" class='bar-checkbox waves-effect'>週</label>
+            <input type="radio" hidden id='dateType_2' value='1' name='dateType'>
+            <label for="dateType_2" class='bar-checkbox waves-effect'>月</label>
+            <input type="radio" hidden id='dateType_3' value='4' name='dateType'>
+            <label for="dateType_3" class='bar-checkbox waves-effect'>季</label>
+            <input type="radio" hidden id='dateType_4' value='0' name='dateType'>
+            <label for="dateType_4" class='bar-checkbox waves-effect'>年</label>
+        </div>
+        <div>
+            <input type="text" id='date-input'>
+        </div>
+    </div>
+</body>
+<style>
+body{
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+    font-size: 14px;;
+    color: #555;
+    padding: 0px 20px;
+    overflow-y: auto;
+}
+#wrap>div{
+    display: flex;
+    align-items: center;
+}
+input{
+    width: 100%;
+    margin-top: 2em;
+    height: 2.5em;
+    padding: 0px 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: default;
+    outline: none;
+}
+label.bar-checkbox{font-weight:normal;border:1px solid #ddd;height:2em;min-height:28px;min-width:4rem;padding-left:5px;padding-right:5px;position:relative;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}label.bar-checkbox.waves-effect .waves-ripple{background:radial-gradient(rgba(23,163,184,0.3) 0, rgba(23,163,184,0.35) 40%, rgba(23,163,184,0.4) 50%, rgba(23,163,184,0.45) 60%, rgba(255,255,255,0) 70%)}label.bar-checkbox:not(:only-child):not(:last-of-type)::after{content:"";height:1em;width:1px;background:linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2), rgba(0,0,0,0.1));position:absolute;right:0;top:.5em}label.bar-checkbox:hover{background:rgba(23,162,184,0.1);border-color:rgba(23,162,184,0.4)}.input-group label.bar-checkbox{transition:background-color 0.1s}.input-group label.bar-checkbox:not(:first-of-type):not(:last-of-type){border-left:none;border-right:none}.input-group label.bar-checkbox:first-of-type{border-right:none;border-top-left-radius:.5em;border-bottom-left-radius:.5em}.input-group label.bar-checkbox:last-of-type{border-left:none;border-top-right-radius:.5em;border-bottom-right-radius:.5em}input:checked+label.my-checkbox{border-color:#17a2b8;color:#17a2b8;background:rgba(23,162,184,0.05)}input:checked+label.my-checkbox::before,input:checked+label.my-checkbox::after{opacity:1}input:checked+label.bar-checkbox{color:#17a2b8 !important;border-color:#17a2b8;transition:background-color 1s;background-color:rgba(23,163,184,0.2)}
+</style>
+
+<script>
+//调用日期插件
+$("#date-input").myDatePicker({
+    'startDate':'2014-01-01',
+    'endDate':(new Date()).Format("yyyy-mm-dd hh:ii:ss"),
+    //指定父元素，不指定默认为body
+    parent:$("#date-input").parent(),
+});
+
+/**
+ * 监听日期类型变化
+ */
+;(function listenDatePicker(){
+    let _radio=$(" input[name='dateType']");
+    let _input=$(" #date-input");
+    _radio.on('change',function(){
+        let view=parseInt($(this).val());
+        // 0 - 4 年 月 日 周 季
+        _input[0].resetDatePicker({
+            'view':view,
+        });
+        _input.focus();
+    });
+})();
+</script>
+</html>
