@@ -1,0 +1,32 @@
+{
+    "name": "自动加载JOJO",
+    "manifest_version": 2,
+    "version": "0.0.2",
+    "description": "╮(╯▽╰)╭",
+    "icons":{
+      "16":"jojo.png"
+    }
+    ,"background":{
+      "page":"background.html"
+    }
+    ,"browser_action": {
+      "default_icon": "jojo.png",
+      "default_title":"JOJO",
+      "default_popup":"popup.html"
+    }
+    ,"permissions":
+    [
+        "contextMenus", 
+        "tabs", 
+        "notifications", 
+        "webRequest", 
+        "webRequestBlocking",
+        "storage", 
+        "http://*/*", 
+        "https://*/*" 
+    ]
+
+}
+
+
+  

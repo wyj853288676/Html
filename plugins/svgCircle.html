@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>stroke-dasharray演示</title>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="web/autoLayout/autoLayout.css">
+    <script src="web/autoLayout/autoLayout.js"></script>
+</head>
+<style>
+body{
+    margin: 0;
+}
+#wrap{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content:center;
+    flex-wrap: wrap;
+    align-items: center;
+    counter-reset: count;
+}
+
+svg{
+    width: 64px;
+    height: 64px;
+}
+svg circle{
+    fill: #eee;
+    stroke: url(#linear);
+    transition: all 1s;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-dasharray: 194.77;
+    stroke-dashoffset: 194.77;
+    transform: rotate(-90deg);
+    transform-origin: 32px 32px;
+}
+svg circle:hover{
+    stroke-dashoffset: 0;
+}
+.btn-container{
+    width: 100%;
+}
+</style>
+<body>
+    <svg style='position:absolute;z-index:-1;pointer-event:none;'>
+        <defs>
+            <!-- gradientTransform='rotate(90)' -->
+            <linearGradient id="linear" >
+                <stop id="stop1" offset="0%" stop-color="#05a" stop-opacity="0.5" />
+                <stop id="stop2" offset="100%" stop-color="#0a5"/>
+            </linearGradient>
+        </defs>
+    </svg>
+    <div id="wrap">
+        <svg class="circle">
+            <circle cx='32' cy='32' r='31'></circle>
+        </svg>
+        <div class="btn-container">
+
+        </div>
+    </div>
+</body>
+</html>

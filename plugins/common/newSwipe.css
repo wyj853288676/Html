@@ -1,0 +1,117 @@
+.swipe-child-container{
+    overflow: hidden;
+    scroll-behavior: smooth;
+    position: relative;
+}
+.swipe-object{
+    height: 100%;
+    width: auto;
+}
+.swipe-child{
+    display: inline-block;
+    height: 100%;
+}
+.swipe-child-container.is-mobile{
+    /* overflow-x: scroll; */
+}
+.swipe-child-container.is-mobile::-webkit-scrollbar{
+    display: none;
+}
+/* link style */
+.swipe-link-container.default-form{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+.swipe-link.default-form{
+    width: 1em;
+    height: 1em;
+    border-radius: 1em;
+    display: inline-block;
+    background-color: #ddd;
+    transition: width 0.3s;
+    margin:5px;
+}
+.swipe-link.default-form:hover{
+    cursor: pointer;
+    background-color: #ccc;
+}
+.swipe-link.default-form.active{
+    background-color: #bbb;
+    width: 2.5em;
+
+}
+
+/* link style */
+
+
+
+/* button */
+.swipe-nav-btn:focus{
+    outline: none;
+}
+.swipe-nav-btn{
+    width: 3em;
+    height: 3em;
+    background: rgba(0, 0, 0, 1);
+    top: calc(50% - 1.5em);
+    position: absolute;
+    border: none;
+    border-radius: 3em;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.swipe-last-btn{
+    left: -5px;
+}
+.swipe-next-btn{
+    right: -5px;
+}
+
+.swipe-child-container:hover .swipe-nav-btn{
+    opacity: 0.2;
+}
+.swipe-child-container:hover .swipe-last-btn{
+    left: 5px;
+}
+.swipe-child-container:hover .swipe-next-btn{
+    right: 5px;
+}
+.swipe-nav-btn:hover{
+    opacity: 0.3;
+}
+.swipe-nav-btn::before,
+.swipe-nav-btn::after{
+    content: "";
+    display:inline-block;
+    width: 1em;
+    height: 1em;
+    border-style: solid;
+    border-color: transparent;
+    top: 1em;
+    position: absolute;
+
+}
+
+.swipe-last-btn::before{
+    border-width: 0px 0px 2px 2px;
+    border-left-color: white;
+    border-bottom-color: white;
+    transform: rotate(45deg);
+    left: 1.1em;
+}
+
+.swipe-next-btn::before{
+    border-width: 0px 2px 2px 0px;
+    border-style: solid;
+    border-right-color: white;
+    border-bottom-color: white;
+    transform: rotate(-45deg);
+    right: 1.1em;
+}
+/* button */

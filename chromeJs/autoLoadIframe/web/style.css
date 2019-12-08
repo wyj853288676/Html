@@ -1,0 +1,19 @@
+body{
+    background: white;
+    width: 800px;
+    height: 800px;
+    margin: 0;
+}
+
+main{
+    height: 100%;
+    width: 100%;
+}
+iframe{
+    bottom:0;
+    right:0;
+    background:white;
+    z-index:999;
+    width: 100%;
+    height: 100%;
+}
