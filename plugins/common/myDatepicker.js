@@ -17,7 +17,7 @@
         }
         $(this).each(function(){
             let options={
-                view:2,//0 1 2 3 4 表示 年 月 日 周 季  
+                view:2,//0 1 2 3 4 5 6 7 表示 年 月 日 周 季 时 分 秒
                 startDate:'2014-01-01 00:00:00',
                 endDate:(new Date()).Format("yyyy-mm-dd hh:ii:ss"),
                 onDateChange:function(value,lastValue){
@@ -28,17 +28,28 @@
             options=$.extend(options,inOptions);
             //这里采用eval是为了方便动态去判断parent;如果parent要动态的或者传递jquery对象可以把注释打开；
             // options['parent']=eval(options['parent']);
-            let format='yyyy-mm-dd';
+            let format='yyyy-mm-dd hh:ii:ss';
             let _this=$(this).addClass('date-time-picker').attr('readonly',true);
-            let value=_this.val()==''?(new Date()).Format("yyyy-mm-dd hh:ii:ss"):_this.val(),originalValue=value;
-            let year,month,day,maxYear,maxMonth,maxDay,minYear,minMonth,minDay;
+            let value=_this.val()==''?(new Date()).Format("yyyy-mm-dd hh:ii:ss"):_this.val(),valueToDate=value.toDate(format);
+            let year=valueToDate.getFullYear(),month=(valueToDate.getMonth()+1),day=valueToDate.getDate(),hour=valueToDate.getHours(),minute=valueToDate.getMinutes(),second=valueToDate.getSeconds(),maxYear,maxMonth,maxDay,maxHour,maxMinute,maxSecond,minYear,minMonth,minDay,minHour,minMinute,minSecond;
+            //doms
             let _bg=$(document.createElement('div')).addClass('my-date-picker-bg'),
-            _container=$("<div class='my-date-picker-container date-view-"+options['view']+" '></div>").attr('tabindex','-1'),
-            _yearPanel=$("<div class='my-date-picker-panel year-panel'></div>"),
-            _monthPanel=$("<div class='my-date-picker-panel month-panel'></div>"),
-            _dayPanel=$("<div class='my-date-picker-panel day-panel'></div>");
-            let _yearUl,_monthUl,_dayUl;
+                _container=$("<div class='my-date-picker-container date-view-"+options['view']+" '></div>").attr('tabindex','-1'),
+                _content=$("<div class='my-date-picker-content'></div>"),
+                _yearPanel=$("<div class='my-date-picker-panel year-panel'></div>"),
+                _monthPanel=$("<div class='my-date-picker-panel month-panel'></div>"),
+                _dayPanel=$("<div class='my-date-picker-panel day-panel'></div>"),
+                _hourPanel=$("<div class='my-date-picker-panel hour-panel'></div>"),
+                _minutePanel=$("<div class='my-date-picker-panel minute-panel'></div>"),
+                _secondPanel=$("<div class='my-date-picker-panel second-panel'></div>");
+            let _yearUl,_monthUl,_dayUl,_hourUl,_minuteUl,_secondUl;
             let _operatorContainer;
+            //initDom params
+            let basePanelHtml='<div class="my-date-picker-panel-body"><ul class="date-picker-ul"></ul></div><div class="my-date-picker-panel-header"><span class="date-title">{dateTitle}</span></div><button class="date-picker-btn increase-btn" type="button"></button><button class="date-picker-btn decrease-btn" type="button"></button>';
+            let targetPanels=['_yearPanel','_monthPanel','_dayPanel','_hourPanel','_minutePanel','_secondPanel'];
+            let targetUls=['_yearUl','_monthUl','_dayUl','_hourUl','_minuteUl','_secondUl'];
+            let dateTitles=['年','月','日','时','分','秒'];
+ 
             // process
             initDom();
             fixDate();//保留部分日期（格式合法 且 在区间 内）
@@ -60,64 +71,43 @@
                 if($(options['parent']).css('position')=='static'){
                     $(options['parent']).css('position','relative');
                 }
-                _container.html('')
+                _content.html('');
+                _container.html('<div class="operator-container"></div>').append(_content);
                 if(_bg.html()==''){
                     _bg.html(_container);
                 }
-                //计算实际的最大/最小年月日;
+                //计算实际的最大/最小年月日时分秒;
                 fixDateLimit();
                 // title
-                _container.append('<div class="operator-container"></div>');
                 _operatorContainer=_container.children('.operator-container');
                 let functions=[
-                    [initYear],                  //year
-                    [initYear,initMonth],        //month
-                    [initYear,initMonth,initDay],//day
-                    [initYear,initMonth,initDay],//week
-                    [initYear,initMonth],        //season
+                    [0],                  //year
+                    [0,1],        //month
+                    [0,1,2],//day
+                    [0,1,2],//week
+                    [0,1],        //season
+                    [0,1,2,3],//hour
+                    [0,1,2,3,4],//minute
+                    [0,1,2,3,4,5],//second
                 ];
                 for(var i in functions[options['view']]){
-                    functions[options['view']][i]();
-                }
+                   initDate(functions[options['view']][i]);
+                };
             }
-
-
-            function initYear(){
-                _yearPanel.html('<div class="my-date-picker-panel-body"><ul class="date-picker-ul"></ul></div><div class="my-date-picker-panel-header"><span class="date-title">年</span></div><button class="date-picker-btn increase-btn" type="button"></button><button class="date-picker-btn decrease-btn" type="button"></button>');
-                let tempYear=minYear;
-                year=value.toDate(format).getFullYear();
-                _yearUl=_yearPanel.find('ul.date-picker-ul');
-                while(tempYear<=maxYear){
-                    _yearUl.append('<li date-value='+tempYear+'>'+tempYear+'</li>');
-                    tempYear++;
+            //index 0 1 2 3 4 5  年月日时分秒
+            function initDate(index){
+                let startValues=[minYear,1,1,0,0,0];
+                let endValues=[maxYear,12,31,23,59,59];
+                let _targetPanel=eval(targetPanels[index]).html(basePanelHtml.replace('{dateTitle}',dateTitles[index]));
+                let startValue=startValues[index],endValue=endValues[index];
+                eval(targetUls[index]+" =  _targetPanel.find('ul.date-picker-ul') ");
+                let _targetUl=eval(targetUls[index]);
+                while(startValue<=endValue){
+                    _targetUl.append('<li date-value='+startValue+'>'+startValue+'</li>');
+                    startValue++;
                 }
-                _container.append(_yearPanel);   
+                _content.append(_targetPanel);
             }
-            function initMonth(){
-                _monthPanel.html('<div class="my-date-picker-panel-body"><ul class="date-picker-ul"></ul></div><div class="my-date-picker-panel-header"><span class="date-title">月</span></div><button class="date-picker-btn increase-btn" type="button"></button><button class="date-picker-btn decrease-btn" type="button"></button>');
-                let tempMonth=1;
-                month=value.toDate(format).getMonth()+1;
-                _monthUl=_monthPanel.find('ul.date-picker-ul');
-                while(tempMonth<=12){
-                    let monthText=tempMonth.length==1?('0'+tempMonth):tempMonth;
-                    _monthUl.append('<li date-value='+tempMonth+'>'+monthText+'</li>');
-                    tempMonth++;
-                }
-                _container.append(_monthPanel)
-            }
-            function initDay(){
-                _dayPanel.html('<div class="my-date-picker-panel-body"><ul class="date-picker-ul"></ul></div><div class="my-date-picker-panel-header"><span class="date-title">日</span></div><button class="date-picker-btn increase-btn" type="button"></button><button class="date-picker-btn decrease-btn" type="button"></button>');
-                let tempDay=1;
-                day=value.toDate(format).getDate();
-                _dayUl=_dayPanel.find('ul.date-picker-ul');
-                while(tempDay<=31){
-                    let dayText=tempDay.length==1?('0'+tempDay):tempDay;
-                    _dayUl.append('<li date-value='+tempDay+'>'+dayText+'</li>');
-                    tempDay++;
-                }
-                _container.append(_dayPanel);
-            }
-
 
 
             function initSwiperAxis(){
@@ -198,8 +188,16 @@
                                 }else if(_panel.hasClass('day-panel')){
                                     day=dateValue;
                                     viewIndex=2;
-                                }
-                                // newDateText=value=year+'-'+(month<10?('0'+month):month)+'-'+(day<10?('0'+day):day);
+                                }else if(_panel.hasClass('hour-panel')){
+                                    hour=dateValue;
+                                    viewIndex=3;
+                                }else if(_panel.hasClass('minute-panel')){
+                                    minute=dateValue;
+                                    viewIndex=4;
+                                }else if(_panel.hasClass('second-panel')){
+                                    second=dateValue;
+                                    viewIndex=5;
+                                } 
                                 fixDate();
                                 resetSwiper(viewIndex);
                                 swipeDateToValue();
@@ -230,8 +228,8 @@
                     _container.css({
                         top:_this.offset()['top']+_this.outerHeight()+4-$(options['parent']).offset()['top'],
                         left:_this.offset()['left']-$(options['parent']).offset()['left'],
-                        width:_this.outerWidth(),
                     });
+                    _content.css({ width:_this.outerWidth(),});
                     $(options['parent']).append(_bg);
                     resetSwiper();
                     //移动到指定日期
@@ -279,45 +277,24 @@
              */
             function swipeDateToValue(){
                 let fixFunctions=[
-                    [swipeYear],                  //year
-                    [swipeYear,swipeMonth],        //month
-                    [swipeYear,swipeMonth,swipeDay],//day
-                    [swipeYear,swipeMonth,swipeDay],//week
-                    [swipeYear,swipeMonth],        //season
+                    [0],            //year
+                    [0,1],          //month
+                    [0,1,2],        //day
+                    [0,1,2],        //week
+                    [0,1],          //season
+                    [0,1,2,3],      //hour
+                    [0,1,2,3,4],    //minute
+                    [0,1,2,3,4,5]   //second
                 ];
                 value=_this.val();
                 for(var i in fixFunctions[options['view']]){
-                    fixFunctions[options['view']][i]();
+                    swipe(fixFunctions[options['view']][i]);
                 }
-                function swipeYear(){
-                    year=value.toDate().getFullYear();
-                    let _body=_yearPanel.children('div.my-date-picker-panel-body');
-                    let _span=_yearPanel.find('span.date-title');
-                    let _li=_body.find('ul li[date-value='+year+']');
-                    if(_li.length==0){
-                        return true;
-                    }
-                    let distance=_span.offset()['top']-_li.offset()['top']+_body[0].getX();
-                    _body[0].swiperTo(distance);
-                }
-
-                function swipeMonth(){
-                    month=value.toDate().getMonth()+1;
-                    let _body=_monthPanel.children('div.my-date-picker-panel-body');
-                    let _span=_monthPanel.find('span.date-title');
-                    let _li=_body.find('ul li[date-value='+month+']');
-                    if(_li.length==0){
-                        return true;
-                    }
-                    let distance=_span.offset()['top']-_li.offset()['top']+_body[0].getX();
-                    _body[0].swiperTo(distance);
-                }
-
-                function swipeDay(){
-                    day=value.toDate(format).getDate();
-                    let _body=_dayPanel.children('div.my-date-picker-panel-body');
-                    let _span=_dayPanel.find('span.date-title');
-                    let _li=_body.find('ul li[date-value='+day+']');
+                function swipe(index){
+                    let _body=eval(targetPanels[index]+".children('div.my-date-picker-panel-body')");
+                    let _span=eval(targetPanels[index]+".find('span.date-title')");      
+                    let values=[year,month,day,hour,minute,second];
+                    let _li=_body.find('ul li[date-value='+values[index]+']');
                     if(_li.length==0){
                         return true;
                     }
@@ -332,11 +309,14 @@
             */ 
             function fixDate(){
                 let fixFunctions=[
-                    [fixYear],                  //year
-                    [fixYear,fixMonth],        //month
-                    [fixYear,fixMonth,fixDay],//day
-                    [fixYear,fixMonth,fixDay],//week
-                    [fixYear,fixMonth],        //season
+                    [fixYear],                                              //year
+                    [fixYear,fixMonth],                                     //month
+                    [fixYear,fixMonth,fixDay],                              //day
+                    [fixYear,fixMonth,fixDay],                              //week
+                    [fixYear,fixMonth],                                     //season
+                    [fixYear,fixMonth,fixDay,fixHour],                      //hour
+                    [fixYear,fixMonth,fixDay,fixHour,fixMinute],            //minute
+                    [fixYear,fixMonth,fixDay,fixHour,fixMinute,fixSecond]   //second
                 ];
                 let times=[];
                 let weeks=['周日','周一','周二','周三','周四','周五','周六'];
@@ -378,6 +358,12 @@
                 maxDay=endDate.getDate();
                 maxMonth=endDate.getMonth()+1;
                 minMonth=startDate.getMonth()+1;
+                maxHour=endDate.getHours();
+                minHour=startDate.getHours();
+                maxMinute=endDate.getMinutes();
+                minMinute=startDate.getMinutes();
+                maxSecond=endDate.getSeconds();
+                minSecond=startDate.getSeconds();
             }
 
             function fixYear(){
@@ -387,8 +373,6 @@
                 year=Math.min(maxYear,Math.max(minYear,year));
                 return year;
             }
-
-
             function fixMonth(){
                 if(_monthPanel.parent().length==0){
                     return true;
@@ -399,7 +383,7 @@
                 if(year==minYear){
                     month=Math.max(month,minMonth);
                 }
-                if(options['view']>=4){
+                if(options['view']==4){
                     month=month-(month-1)%3;
                 }
                 _monthUl.children('li').each(function(){
@@ -412,13 +396,12 @@
                         _li.hide();
                     }
                     //季度，只取 1 4 7 10 每个季度开始月
-                    if(options['view']>=4&&new Date(dateText).getMonth()%3!=0){
+                    if(options['view']==4&&new Date(dateText).getMonth()%3!=0){
                         _li.css('display','none');
                     }
                 });
                 return month<10?('0'+month):month;
             }
-
             function fixDay(){
                 if(_dayPanel.parent().length==0){
                     return true;
@@ -473,12 +456,56 @@
                 });
                 return day<10?('0'+day):day;
             }
+            function fixHour(){
+                if(_hourPanel.parent().length==0){
+                    return true;
+                }
+                if(Date.parse(new Date(year,month-1,day))==Date.parse(new Date(maxYear,maxMonth-1,maxDay))){
+                    hour=Math.min(hour,maxHour);
+                }else if(Date.parse(new Date(year,month-1,day))==Date.parse(new Date(minYear,minMonth-1,minDay))){
+                    hour=Math.max(hour,minHour);
+                }
+                _hourUl.children('li').each(function(){
+                    $(this).css('display',checkHour(new Date(year,month-1,day,parseInt($(this).attr('date-value'))))?'':'none');
+                });
+                return hour<10?('0'+hour):hour;
+            }
+            function fixMinute(){
+                if(_minutePanel.parent().length==0){
+                    return true;
+                }
+                if(Date.parse(new Date(year,month-1,day,hour))==Date.parse(new Date(maxYear,maxMonth-1,maxDay,hour))){
+                    minute=Math.min(minute,maxMinute);
+                }else if(Date.parse(new Date(year,month-1,day,hour))==Date.parse(new Date(minYear,minMonth-1,minDay,hour))){
+                    minute=Math.max(minute,minMinute);
+                }
+                _minuteUl.children('li').each(function(){
+                    $(this).css('display',checkMinute(new Date(year,month-1,day,hour,parseInt($(this).attr('date-value'))))?'':'none');
+                });
+                return minute<10?('0'+minute):minute;
+            }
+            function fixSecond(){
+                if(_secondPanel.parent().length==0){
+                    return true;
+                }
+                if(Date.parse(new Date(year,month-1,day,hour,minute))==Date.parse(new Date(maxYear,maxMonth-1,maxDay,hour,minute))){
+                    second=Math.min(second,maxSecond);
+                }else if(Date.parse(new Date(year,month-1,day,hour,minute))==Date.parse(new Date(minYear,minMonth-1,minDay,hour,minute))){
+                    second=Math.max(second,minSecond);
+                }
+                _secondUl.children('li').each(function(){
+                    $(this).css('display',checkSecond(new Date(year,month-1,day,hour,minute,parseInt($(this).attr('date-value'))))?'':'none');
+                });
+                return second<10?('0'+second):second;
+            }
+
 
             function checkDate(date){
+                date=typeof date=='string'?date:date.Format(format);
                 let parseDate=date.toDate(format);
                 let startDate=new Date(minYear,minMonth-1,minDay);
                 let endDate=new Date(maxYear,maxMonth-1,maxDay);
-                return checkDayLegal(date)&&Date.parse(parseDate)>=Date.parse(startDate)&&Date.parse(parseDate)<=Date.parse(endDate);
+                return checkDayLegal(date.slice(0,10))&&Date.parse(parseDate)>=Date.parse(startDate)&&Date.parse(parseDate)<=Date.parse(endDate);
             }
 
             function checkMonth(date){
@@ -486,11 +513,34 @@
                 let endDate=new Date(maxYear,maxMonth-1,1);//取当月第一天
                 return Date.parse(date.toDate())>=Date.parse(startDate)&&Date.parse(date.toDate())<=Date.parse(endDate);
             }
+            function checkHour(date){
+                date=typeof date=='string'?date:date.Format(format);
+                let parseDate=date.toDate(format);
+                let startDate=new Date(minYear,minMonth-1,minDay,minHour);
+                let endDate=new Date(maxYear,maxMonth-1,maxDay,maxHour);
+                return Date.parse(parseDate)>=Date.parse(startDate)&&Date.parse(parseDate)<=Date.parse(endDate);
+            }
+            function checkMinute(date){
+                date=typeof date=='string'?date:date.Format(format);
+                let parseDate=date.toDate(format);
+                let startDate=new Date(minYear,minMonth-1,minDay,minHour,minMinute);
+                let endDate=new Date(maxYear,maxMonth-1,maxDay,maxHour,maxMinute);
+                return Date.parse(parseDate)>=Date.parse(startDate)&&Date.parse(parseDate)<=Date.parse(endDate);
+            }
+            function checkSecond(date){
+                date=typeof date=='string'?date:date.Format(format);
+                let parseDate=date.toDate(format);
+                let startDate=new Date(minYear,minMonth-1,minDay,minHour,minMinute,minSecond);
+                let endDate=new Date(maxYear,maxMonth-1,maxDay,maxHour,maxMinute,maxSecond);
+                return Date.parse(parseDate)>=Date.parse(startDate)&&Date.parse(parseDate)<=Date.parse(endDate);
+            }
+                
 
             /**
              * 检查日是否合法
              */
             function checkDayLegal(date){
+
                 return (date.toDate(format).getDate()==parseInt(date.substring(date.length-2)))
             }
 

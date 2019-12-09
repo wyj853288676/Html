@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>datepicker-演示</title>
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="jquery.min.js"></script>
     <link rel="stylesheet" href="common/myDatepicker.css">
     <script src="common/myDatepicker.js"></script>
 </head>
@@ -21,9 +21,15 @@
             <label for="dateType_3" class='bar-checkbox waves-effect'>季</label>
             <input type="radio" hidden id='dateType_4' value='0' name='dateType'>
             <label for="dateType_4" class='bar-checkbox waves-effect'>年</label>
+            <input type="radio" hidden id='dateType_5' value='5' name='dateType'>
+            <label for="dateType_5" class='bar-checkbox waves-effect'>时</label>
+            <input type="radio" hidden id='dateType_6' value='6' name='dateType'>
+            <label for="dateType_6" class='bar-checkbox waves-effect'>分</label>
+            <input type="radio" hidden id='dateType_7' value='7' name='dateType'>
+            <label for="dateType_7" class='bar-checkbox waves-effect'>秒</label>
         </div>
         <div>
-            <input type="text" id='date-input'>
+            <input type="text" id='date-input' style='width:20em'>
         </div>
     </div>
 </body>
@@ -58,7 +64,7 @@ label.bar-checkbox{font-weight:normal;border:1px solid #ddd;height:2em;min-heigh
 <script>
 //调用日期插件
 $("#date-input").myDatePicker({
-    'startDate':'2014-01-01',
+    'startDate':'2014-01-01 18:45:20',
     'endDate':(new Date()).Format("yyyy-mm-dd hh:ii:ss"),
     //指定父元素，不指定默认为body
     parent:$("#date-input").parent(),
