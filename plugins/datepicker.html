@@ -9,7 +9,11 @@
     <script src="common/myDatepicker.js"></script>
 </head>
 <body>
+    <style>
+        body{display:flex;align-items:flex-start;height:100vh;justify-content:center;font-size:14px;color:#555;padding:0 20px;padding-top:100px;overflow-y:auto;font-family:Hiragino Sans,"ヒラギノ角ゴシック",Hiragino Kaku Gothic ProN,"ヒラギノ角ゴ ProN W3",Roboto,"Droid Sans",YuGothic,"游ゴシック",Meiryo,"メイリオ",Verdana,"ＭＳ Ｐゴシック",sans-serif}.input-group{max-width:calc(100vw - 20px);overflow:auto;justify-content:flex-start!important;position:relative}#wrap>div.input-group{display:flex;align-items:center;justify-content:center}input{width:100%;height:2.5em;padding:0 5px;border:1px solid #ddd;border-radius:5px;cursor:default;outline:0}label.bar-checkbox{font-weight:400;border:1px solid #ddd;height:2em;min-height:28px;min-width:4rem;padding-left:5px;padding-right:5px;position:relative;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}label.bar-checkbox.waves-effect .waves-ripple{background:radial-gradient(rgba(23,163,184,.3) 0,rgba(23,163,184,.35) 40%,rgba(23,163,184,.4) 50%,rgba(23,163,184,.45) 60%,rgba(255,255,255,0) 70%)}label.bar-checkbox:not(:only-child):not(:last-of-type)::after{content:"";height:1em;width:1px;background:linear-gradient(to bottom,rgba(0,0,0,.1),rgba(0,0,0,.2),rgba(0,0,0,.1));position:absolute;right:0;top:.5em}label.bar-checkbox:hover{background:rgba(23,162,184,.1);border-color:rgba(23,162,184,.4)}.input-group label.bar-checkbox{transition:background-color .1s}.input-group label.bar-checkbox:not(:first-of-type):not(:last-of-type){border-left:none;border-right:none}.input-group label.bar-checkbox:first-of-type{border-right:none;border-top-left-radius:.5em;border-bottom-left-radius:.5em}.input-group label.bar-checkbox:last-of-type{border-left:none;border-top-right-radius:.5em;border-bottom-right-radius:.5em}input:checked+label.my-checkbox{border-color:#17a2b8;color:#17a2b8;background:rgba(23,162,184,.05)}input:checked+label.my-checkbox::after,input:checked+label.my-checkbox::before{opacity:1}input:checked+label.bar-checkbox{color:#17a2b8!important;border-color:#17a2b8;transition:background-color 1s;background-color:rgba(23,163,184,.2)}label.my-checkbox{border:1px solid #ddd;border-radius:0;display:inline-flex;align-items:center;justify-content:center;padding:7px 10px 7px 5px;margin:0 5px 2px 0;line-height:1.5;position:relative;cursor:pointer;transition:border-color .3s;font-weight:400;background:#fff}label.my-checkbox.block-box{padding:5px 5px 0 5px;flex-wrap:wrap}label.my-checkbox.block-box i{display:flex;align-items:center;justify-content:center;width:100%;margin:5px 0 5px 0}label.my-checkbox.block-box i::before{transform:scale(1.4)}label.my-checkbox:hover{background:rgba(23,162,184,.1);border-color:#1eb3ce;transition:all .5s}label.my-checkbox:hover .hover-shake{animation:shakeIcon .3s linear 2}label.my-checkbox.waves-effect .waves-ripple{background:radial-gradient(rgba(23,163,184,.3) 0,rgba(23,163,184,.35) 40%,rgba(23,163,184,.4) 50%,rgba(23,163,184,.45) 60%,rgba(255,255,255,0) 70%)}label.my-checkbox::after,label.my-checkbox::before{position:absolute;font-size:12px;opacity:0;pointer-events:none;transition:opacity .3s;display:block}label.my-checkbox::after{content:'✔';font-family:ic;color:#fff;top:-4px;right:0;font-weight:700}label.my-checkbox::before{content:"";border-width:.8em;border-color:transparent;border-style:solid;border-top-color:#17a2b8;border-right-color:#17a2b8;width:0;height:0;top:0;right:0}label.my-checkbox i{margin:0 5px}label.bar-checkbox{font-weight:400;border:1px solid #ddd;height:2em;min-height:28px;min-width:4rem;padding-left:5px;padding-right:5px;position:relative;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}label.bar-checkbox.waves-effect .waves-ripple{background:radial-gradient(rgba(23,163,184,.3) 0,rgba(23,163,184,.35) 40%,rgba(23,163,184,.4) 50%,rgba(23,163,184,.45) 60%,rgba(255,255,255,0) 70%)}label.bar-checkbox:not(:only-child):not(:last-of-type)::after{content:"";height:1em;width:1px;background:linear-gradient(to bottom,rgba(0,0,0,.1),rgba(0,0,0,.2),rgba(0,0,0,.1));position:absolute;right:0;top:.5em}label.bar-checkbox:hover{background:rgba(23,162,184,.1);border-color:#1eb3ce;transition:all .5s}.input-group label.bar-checkbox{transition:background-color .1s}.input-group label.bar-checkbox:not(:first-of-type):not(:last-of-type){border-left:none;border-right:none}.input-group label.bar-checkbox:first-of-type{border-right:none;border-top-left-radius:.5em;border-bottom-left-radius:.5em}.input-group label.bar-checkbox:last-of-type{border-left:none;border-top-right-radius:.5em;border-bottom-right-radius:.5em}input:checked+label.my-checkbox{border-color:rgba(23,163,184,.7);color:#17a2b8;background:rgba(23,162,184,.05)}input:checked+label.my-checkbox::after,input:checked+label.my-checkbox::before{opacity:1}label.input-label{font-weight:700;border-left:2px solid #17a2b8;padding-left:.5em;margin:.5em 0;display:inline-block}.info-span{background:#eee;padding:2px;font-weight:500;margin:5px 0;font-size:12px;cursor:default;display:inline-block}
+    </style>
     <div id="wrap">
+        <label class='input-label'>选择视图</label>
         <div class='input-group'>
             <input type="radio" hidden id='dateType_0' value='2' name='dateType'>
             <label for="dateType_0" class='bar-checkbox waves-effect'>日</label>
@@ -28,39 +32,22 @@
             <input type="radio" hidden id='dateType_7' value='7' name='dateType'>
             <label for="dateType_7" class='bar-checkbox waves-effect'>秒</label>
         </div>
-        <div>
-            <input type="text" id='date-input' style='width:20em'>
+        <label class='input-label'>选择定位方式</label>
+        <div class="input-group">
+            <input type="radio" name="position" id="position-1" value='true' hidden >
+            <label for="position-1" class="my-checkbox">position fixed</label>
+            <input type="radio" name="position" id="position-2" value='false' hidden checked>
+            <label for="position-2" class="my-checkbox">position absolute</label>
         </div>
+        <label class='input-label'>输入框</label>
+        <div style='display: flex;'>
+            <input type="text" id='date-input' style='width:20em;display: block;'>
+        </div>
+        <span class="info-span">
+            区间为2014-01-01 18:45:20到当前时间（yyyy-mm-dd hh:ii:ss）
+        </span>
     </div>
 </body>
-<style>
-body{
-    display: flex;
-    align-items: center;
-    height: 100vh;
-    justify-content: center;
-    font-size: 14px;;
-    color: #555;
-    padding: 0px 20px;
-    overflow-y: auto;
-}
-#wrap>div{
-    display: flex;
-    align-items: center;
-}
-input{
-    width: 100%;
-    margin-top: 2em;
-    height: 2.5em;
-    padding: 0px 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    cursor: default;
-    outline: none;
-}
-label.bar-checkbox{font-weight:normal;border:1px solid #ddd;height:2em;min-height:28px;min-width:4rem;padding-left:5px;padding-right:5px;position:relative;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}label.bar-checkbox.waves-effect .waves-ripple{background:radial-gradient(rgba(23,163,184,0.3) 0, rgba(23,163,184,0.35) 40%, rgba(23,163,184,0.4) 50%, rgba(23,163,184,0.45) 60%, rgba(255,255,255,0) 70%)}label.bar-checkbox:not(:only-child):not(:last-of-type)::after{content:"";height:1em;width:1px;background:linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2), rgba(0,0,0,0.1));position:absolute;right:0;top:.5em}label.bar-checkbox:hover{background:rgba(23,162,184,0.1);border-color:rgba(23,162,184,0.4)}.input-group label.bar-checkbox{transition:background-color 0.1s}.input-group label.bar-checkbox:not(:first-of-type):not(:last-of-type){border-left:none;border-right:none}.input-group label.bar-checkbox:first-of-type{border-right:none;border-top-left-radius:.5em;border-bottom-left-radius:.5em}.input-group label.bar-checkbox:last-of-type{border-left:none;border-top-right-radius:.5em;border-bottom-right-radius:.5em}input:checked+label.my-checkbox{border-color:#17a2b8;color:#17a2b8;background:rgba(23,162,184,0.05)}input:checked+label.my-checkbox::before,input:checked+label.my-checkbox::after{opacity:1}input:checked+label.bar-checkbox{color:#17a2b8 !important;border-color:#17a2b8;transition:background-color 1s;background-color:rgba(23,163,184,0.2)}
-</style>
-
 <script>
 //调用日期插件
 $("#date-input").myDatePicker({
@@ -68,13 +55,15 @@ $("#date-input").myDatePicker({
     'endDate':(new Date()).Format("yyyy-mm-dd hh:ii:ss"),
     //指定父元素，不指定默认为body
     parent:$("#date-input").parent(),
+    //定位方式是否用fixed
+    positionFixed:$("#position-1").is(':checked'),
 });
-
 /**
  * 监听日期类型变化
  */
 ;(function listenDatePicker(){
     let _radio=$(" input[name='dateType']");
+    let _radio2=$("input[name='position']");
     let _input=$(" #date-input");
     _radio.on('change',function(){
         let view=parseInt($(this).val());
@@ -83,6 +72,12 @@ $("#date-input").myDatePicker({
             'view':view,
         });
         _input.focus();
+    });
+    //重置定位是fixed还是absolute
+    _radio2.on('change',function(){
+        _input[0].resetDatePicker({
+            positionFixed:$("#position-1").is(':checked'),
+        });
     });
 })();
 </script>

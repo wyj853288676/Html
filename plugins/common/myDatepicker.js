@@ -6,6 +6,7 @@
  *      endDate: 结束日期 默认是当前日期
  *      view:0 1 2 3 4 表示 "年月日周季"五个视图 
  *      parent: query selector； 选择器添加到哪一个dom下面，默认是'body';
+ *      positionFixed：是否使用fixed定位
  */
 
 ;(function($){
@@ -24,6 +25,7 @@
 
                 },
                 parent:'body',
+                positionFixed:false
             };
             options=$.extend(options,inOptions);
             //这里采用eval是为了方便动态去判断parent;如果parent要动态的或者传递jquery对象可以把注释打开；
@@ -75,6 +77,11 @@
                 _container.html('<div class="operator-container"></div>').append(_content);
                 if(_bg.html()==''){
                     _bg.html(_container);
+                };
+                if(options['positionFixed']==true){
+                    _bg.addClass('date-picker-fixed');
+                }else{
+                    _bg.removeClass('date-picker-fixed');
                 }
                 //计算实际的最大/最小年月日时分秒;
                 fixDateLimit();
@@ -169,7 +176,6 @@
                                 _body[0].swiperTo(distance,{frame:10,useRaf:true});
                                 updateDateByDistance();
                             },20,_body[0].rafCount);
-                            //记得用let声明
                             let updateDateByDistance=function(){
                                 let diff=_span.offset()['top']-_ul.offset()['top'];
                                 let index= Math.floor(diff/_ul.children('li:visible').outerHeight());
