@@ -1,0 +1,33 @@
+{
+    "name": "Nint-Report脚本监控插件",
+    "manifest_version": 2,
+    "version": "1.0.0",
+    "description": "Chrome浏览器下自动监控Report系统中正在执行的脚本的运行情况",
+    "icons":{
+      "16": "web/images/nint.png",
+      "48": "web/images/nint.png",
+      "128": "web/images/nint.png"
+    }
+    ,"background":{
+      "page":"background.html"
+    }
+    ,"browser_action": {
+      "default_icon": "web/images/nint.png",
+      "default_title":"nint report",
+      "default_popup":"popup.html"
+    }
+    ,"permissions":
+    [
+        "contextMenus", 
+        "tabs", 
+        "notifications", 
+        "webRequest", 
+        "webRequestBlocking",
+        "storage", 
+        "http://*/*", 
+        "https://*/*" 
+    ]
+}
+
+
+  
