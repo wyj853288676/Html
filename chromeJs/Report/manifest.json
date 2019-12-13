@@ -9,13 +9,20 @@
       "128": "web/images/nint.png"
     }
     ,"background":{
-      "page":"web/background.js"
+      "page":"background.html"
     }
     ,"browser_action": {
       "default_icon": "web/images/nint.png",
       "default_title":"nint report",
       "default_popup":"popup.html"
     }
+    ,"content_scripts":[
+      {
+        "matches":["http://www.report_nint.com/manager/index*","https://www.report.nint.jp/manager/index*"],
+        "js":["web/plugins/jquery.min.js","web/config/config.js","web/content/content-script.js"],
+        "css":["web/content/content-style.css"]
+      }
+    ]
     ,"permissions":
     [
         "contextMenus", 
