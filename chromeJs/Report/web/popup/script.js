@@ -15,6 +15,19 @@ function initFrame(){
     }
     window._main=_main;
     window._reportFrame=_reportFrame;
+    //尝试连接host,不行则提示
+    setTimeout(function(){
+        fetch(window.host).then(function(r){
+            if(r.status==401){
+                jBottomAlert('无法连接到host,请确认通过了服务器basic认证',{
+                    duration:5000,
+                    transition:1000
+                });
+            }
+        })
+    },0);
+  
+
     _reportFrame.setAttribute('src','');
     _reportFrame.setAttribute('src',host+'/monitor/index');
 }
@@ -48,6 +61,7 @@ function bindListen(){
             case host+'/monitor/index':
                 switch(data['errorCode']){
                     case 1: //state ready
+                        checkMonitor();
                         jBottomAlert('load finished');
                         break;
                 }
@@ -62,5 +76,13 @@ function post2Report(data){
 }
 
 
+/**
+ * 检查是否开启了background monitor
+ */
 
-
+function checkMonitor(){
+    var background=chrome.extension.getBackgroundPage();
+    if(!background.monitorRunning){
+        background.runMonitor();
+    }
+}

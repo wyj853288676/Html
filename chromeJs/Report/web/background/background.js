@@ -7,6 +7,12 @@
 function loadScripts(){
     chrome.storage.sync.get({'nint-report-scripts':{}},function(item){
         window.reportScripts=item['nint-report-scripts'];
+        for(var i in window.reportScripts){
+            if(window.reportScripts[i]['status']==0){
+                delete window.reportScripts[i];
+            }
+        }
+        saveScripts();
         runMonitor();
     });
 }
@@ -101,7 +107,6 @@ function monitorScriptInfo(scripts){
         dataType:'json',
         async:'true',
         success: function(data) {
-            console.log( data['sid'] );
             //若不为发布状态则提示
             data['status']=parseInt(data['status']);
             if(data['status']!=scripts['status']){
@@ -110,20 +115,36 @@ function monitorScriptInfo(scripts){
                 updatePopup();
                 //更新这个script的状态
                 window.reportScripts[scripts['sid']]['status']=data['status'];
-                saveScripts();
             };
             if($.inArray( data['status'] , [0,3] ) > -1 ){
                 //中断和执行完的时候，把这个script从队列中删除
                 delete window.reportScripts[scripts['sid']];
             };
+            saveScripts();
         },
-        error: function() {
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
             //未登陆或者遇到其他错误时停止monitor
+            let texts={403:'请通过popup或者网页登陆report系统！',401:'请确认通过了服务器basic认证！'};
             stopMonitor();
-            sendNotification('Report未登陆或者请求遇到错误。请点击popup查看是否登陆');
+            sendNotification('错误代码'+XMLHttpRequest['status']+"！ "+texts[XMLHttpRequest['status']]);
         },
     });
 }
+
+
+
+
+function updatePopup(){
+    var popup=chrome.extension.getViews({type:'popup'});
+    if(popup.length>0){
+        popup[0].initFrame();
+    }
+}
+
+
+
+
+
 
 
 Date.prototype.format = function (fmt) { 
@@ -145,11 +166,4 @@ Date.prototype.format = function (fmt) {
     }
   
     return fmt;
-}
-
-function updatePopup(){
-    var popup=chrome.extension.getViews({type:'popup'});
-    if(popup.length>0){
-        popup[0].initFrame();
-    }
 }

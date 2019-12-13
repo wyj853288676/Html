@@ -18,7 +18,14 @@
     }
     ,"content_scripts":[
       {
-        "matches":["http://www.report_nint.com/manager/index*","https://www.report.nint.jp/manager/index*"],
+        "matches":[
+          "http://www.report_nint.com/manager",
+          "https://report.nint.jp/manager",
+          "http://www.report_nint.com/manager/index*",
+          "https://report.nint.jp/manager/index*",
+          "http://www.report_nint.com/manager?*",
+          "https://report.nint.jp/manager?*"
+        ],
         "js":["web/plugins/jquery.min.js","web/config/config.js","web/content/content-script.js"],
         "css":["web/content/content-style.css"]
       }
