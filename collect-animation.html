@@ -33,6 +33,7 @@ $("body").on('click','.icon-collect',function(){
     $(this).toggleClass('animation collected');
 });
 </script>
+
 <style>
 /* 关注店铺和商品 */
 .relative-container{
@@ -165,9 +166,9 @@ $("body").on('click','.icon-collect',function(){
 @keyframes collection-heart-after{
     0%,70%{
         border-width: 1px;
-        opacity:1;
     }
     0%{
+        opacity:1;
         transform:scale(1);
     }
     100%{
@@ -178,7 +179,7 @@ $("body").on('click','.icon-collect',function(){
 }
 @keyframes collection-bg{
     0%{
-        opacity:1;
+        opacity:0;
         transform:scale(0.7);
         box-shadow:20px -10px 0px 0px #e94c4c, 
         0px -22px 0px 0px #4CAF50, 
@@ -187,9 +188,12 @@ $("body").on('click','.icon-collect',function(){
         20px 12px 0px 0px #FF9800, 
         -20px 13px 0px 0px #795548;
     }
+    20%{
+        opacity: 1;
+    }
     100%{
         opacity:0;
-        transform:scale(4);
+        transform:scale(5);
         box-shadow:20px -10px 0px -10px #e94c4c, 
         0px -22px 0px -10px #4CAF50, 
         -20px -10px 0px -10px #009688, 
