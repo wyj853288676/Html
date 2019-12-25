@@ -13,8 +13,25 @@
     <main>
         <iframe src="" frameborder="0" id='report-frame' style='display:block;'></iframe>
     </main>
+    <div id='auth_comfirm' hidden>
+        <div style='width:100%' >
+            <div class='input-group'>
+                <input id='username' value='' tpype='text'>
+                <i class='input-icon ic ic-user'></i>
+            </div>
+            <div class='input-group'>
+                <input id='password' type='password' value=''>
+                <i class='input-icon ic ic-lock'></i>
+            </div>
+            <div class=''>
+                <input type="checkbox" id='remember_auth' hidden>
+                <label for="remember_auth" class="switch-label">记住凭据</label>
+            </div>
+        </div>
+    </div>
+   
 </body>
-<script src="web/plugins/myAlert.js"></script>
+<script src="web/plugins/myAlert.js?v=20191214"></script>
 <script src="web/config/config.js"></script>
 <script src="web/popup/script.js"></script>
 </html>

@@ -483,6 +483,7 @@ function jBottomAlert(content,inOptions){
         duration:500 ,//显示500ms,
         transition:500,//动画效果需要的时间
         pointerEvent:false,//pointEvent :none
+        parentCss:{}
     };
     $.extend(options,inOptions);
     if(options['parent'].children("div.alert-bottom-parent-container").length==0){
@@ -492,6 +493,7 @@ function jBottomAlert(content,inOptions){
     }else{
         var _parent=options['parent'].children("div.alert-bottom-parent-container");
     }
+    _parent.css(options['parentCss']);
     var _container=$(document.createElement("div"));
     var _span=$(document.createElement("span"));
     _span.addClass("alert-bottom-span").css('animation-duration',options['transition']+'ms').html(content);

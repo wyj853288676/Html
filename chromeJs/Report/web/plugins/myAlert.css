@@ -526,12 +526,12 @@ div.alert-container div.alert-panel .alert-panel-heading::before
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url(/images/logo/nint_white.png);
+    background-image: url(/web/images/nint_white.png);
     top: -32px;
     opacity: 1;
 }
 div.alert-container div.alert-panel .alert-panel-heading::after{
-    background-image: url(/images/logo/nint_white.png);
+    background-image: url(/web/images/nint_white.png);
 }
 div.alert-container.white-img-header div.alert-panel  .alert-panel-heading::before{
     content: "";
@@ -547,7 +547,7 @@ div.alert-container.white-img-header div.alert-panel  .alert-panel-heading::befo
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url(/images/logo/nint_white.png);
+    background-image: url(/web/images/nint_white.png);
 }
 div.alert-container button.alert-remove-button-top{
     background-color: gray;
@@ -582,6 +582,7 @@ div.alert-panel-body{
     justify-content: center;
     padding: 1rem;
     padding-top: 0px;
+    flex-wrap: wrap;
 }
 
 div.alert-panel-footer{
@@ -705,7 +706,7 @@ i.fa.fa-spinner-nint{
 }
 i.fa.fa-spinner-nint::before {
     content: "";
-    background-image: url(/images/logo/nint_white.png);
+    background-image: url(/web/images/nint_white.png);
     background-repeat: no-repeat;
     background-size: 200%;
     background-position: -16% 0px;
@@ -1130,7 +1131,7 @@ div.bulletin-container div.vice-title-container{
     content: "";
     display: block;
     position: absolute;
-    background: url(/images/logo/nint_white.png) no-repeat center;
+    background: url(/web/images/nint_white.png) no-repeat center;
     background-size: contain;
     width: 60px;
     top: -15px;

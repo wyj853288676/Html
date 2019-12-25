@@ -28,10 +28,19 @@ function bindListen(){
     // 监听来自content-script的消息
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
     {
-        //向reportScripts中添加一个script 包括sid和他加入时的状态
-        window.reportScripts[request['sid']]=request;
+        switch(request.type){
+            case "add":
+                //向reportScripts中添加一个script 包括sid和他加入时的状态
+                window.reportScripts[request['sid']]=request;
+                sendNotification('已开始监控'+request['name']+'的执行情况');
+                break;
+            case "delete":
+                if(window.reportScripts[request['sid']]!=undefined){
+                    delete window.reportScripts[request['sid']];
+                }
+                break;
+        }
         saveScripts();
-        sendNotification('已开始监控'+request['name']+'的执行情况');
     });
 }
 
