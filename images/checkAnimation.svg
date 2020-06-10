@@ -1,0 +1,73 @@
+<svg id='svg-check' xmlns="http://www.w3.org/2000/svg" width='400px' height='100px' viewBox='0 0 400 100'>
+    <linearGradient id="linear" >
+        <stop id="stop1" offset="0%" x1="0%" y1="0%" x2="100%" y2="0%" stop-color="#05a" stop-opacity="0.5" />
+        <stop id="stop2" offset="100%" stop-color="#0a5"/>
+    </linearGradient>
+    <path d='M 0 50 L 150 50' class='svg-line line-path'></path>
+    <path d='M 400 50 L 250 50' class='svg-line line-path'></path>
+    <circle cx='200' cy='50' r='48' class='svg-line upper-circle'></circle>
+    <circle cx='200' cy='50' r='48' class='svg-line bottom-circle'></circle>
+    <path d='M 180 50 L  195 65 L 220 35' class='svg-line check-path'></path>
+        <style>
+        #svg-check{
+            --color:#4CAF50;
+        }
+        #svg-check .svg-line{
+            stroke: var(--color);
+            stroke-width:4px;
+            fill:transparent;
+        }
+        #svg-check circle{
+            fill:transparent;
+            stroke-dasharray: 301;;
+            stroke-dashoffset: 150;
+        }
+        #svg-check path.line-path{
+            stroke-dasharray: 150;
+            animation:dashOffsetPath 0.5s ease-in;
+        }
+        #svg-check circle{
+            animation: dashOffsetCircle 1s ease-out forwards;
+        }
+        #svg-check circle.upper-circle{
+            --dashOffsetStart:-301;
+            --dashOffsetEnd:-150;
+        }
+        #svg-check circle.bottom-circle{
+            --dashOffsetStart: 301;
+            --dashOffsetEnd: 150;
+            transform: rotateY(180deg);
+            transform-origin: 200px 50px;
+        }
+        .check-path{
+            animation: showText 1.5s cubic-bezier(0.52, -0.1, 0, 1.63);
+            transform-origin: 50% 50%;
+        }
+        @keyframes showText {
+            0%,50%{
+                transform: scale(0) rotate(40deg);
+                opacity: 0;
+            }
+            100%{
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
+        @keyframes  dashOffsetCircle {
+            0%,50%{
+                stroke-dashoffset: var(--dashOffsetStart);
+            }
+            100%{
+                stroke-dashoffset: var(--dashOffsetEnd);
+            }
+        }
+        @keyframes dashOffsetPath {
+            0%{ 
+                stroke-dashoffset: 150;
+            }
+            100%{
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
+</svg>

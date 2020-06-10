@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Instagram刷新效果</title>
+    <script src="jquery.min.js"></script>
+    <link rel="stylesheet" href="myIcons/iconFontsDemo/style.css">
+</head>
+<style>
+body{
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+    font-size: 14px;;
+    color: #555;
+    padding: 0px 20px;
+    overflow-y: auto;
+    margin: 0;
+}
+</style>
+<body>
+    <div id="wrap">
+        <svg id='svg' width='400px' height='100px' viewBox='0 0 400 100'>
+            <linearGradient id="linear" >
+                <stop id="stop1" offset="0%" x1="0%" y1="0%" x2="100%" y2="0%" stop-color="#05a" stop-opacity="0.5" />
+                <stop id="stop2" offset="100%" stop-color="#0a5"/>
+            </linearGradient>
+            <path d='M 0 50 L 150 50' class='svg-line'></path>
+            <path d='M 400 50 L 250 50' class='svg-line'></path>
+            <circle cx='200' cy='50' r='48' class='svg-line upper-circle'></circle>
+            <circle cx='200' cy='50' r='48' class='svg-line bottom-circle'></circle>
+        </svg>
+        <span class="text ic ic-check"></span>
+    </div>
+    <style>
+        #wrap{
+            position: relative;
+        }
+        #svg,span.text{
+            --color:#4CAF50;
+        }
+        .svg-line,text{
+        }
+        .svg-line{
+            stroke: var(--color);
+            stroke-width:4px;
+        }
+        circle{
+            fill:transparent;
+            stroke-dasharray: 301;;
+            stroke-dashoffset: 150;
+        }
+        #svg path{
+            stroke-dasharray: 150;
+            animation:dashOffsetPath 0.5s ease-in;
+        }
+        #svg circle{
+            animation: dashOffsetCircle 1s ease-out forwards;
+        }
+        #svg circle.upper-circle{
+            --dashOffsetStart:-301;
+            --dashOffsetEnd:-150;
+        }
+        #svg circle.bottom-circle{
+            --dashOffsetStart: 301;
+            --dashOffsetEnd: 150;
+            transform: rotateY(180deg);
+            transform-origin: 200px 50px;
+        }
+        .text{
+            width: 100%;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            font-size: 40px;
+            top: 0;
+            height: 100%;
+            left: 0;
+            color: var(--color);
+            animation: showText 1.5s cubic-bezier(0.52, -0.1, 0, 1.63);
+            font-weight: bold;
+        }
+        @keyframes showText {
+            0%,50%{
+                transform: scale(0) rotate(40deg);
+                opacity: 0;
+            }
+            100%{
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
+        @keyframes  dashOffsetCircle {
+            0%,50%{
+                stroke-dashoffset: var(--dashOffsetStart);
+            }
+            100%{
+                stroke-dashoffset: var(--dashOffsetEnd);
+            }
+        }
+        @keyframes dashOffsetPath {
+            0%{ 
+                stroke-dashoffset: 150;
+            }
+            100%{
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
+</body>
+</html>

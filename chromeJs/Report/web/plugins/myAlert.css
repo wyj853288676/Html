@@ -194,7 +194,7 @@ div.jside-bar-container{
     z-index: 9999;
     width: 100%;
     opacity:1;
-    min-width: 300px;
+    /* min-width: 300px; */
     transition: opacity 0.5s;
     animation: fadeIn 0.5s;
 }
@@ -297,6 +297,7 @@ div.jside-bar-content{
     /* border-left:1px solid #ccc;
     border-bottom: 1px solid #ccc;
     border-top: 1px solid #eee; */
+    /* min-width: 100%; */
 }
 div.jside-bar-header{
     position: relative;

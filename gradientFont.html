@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <title>Title</title>
+     <style>
+         *{margin: 0;padding: 0;}
+         ._borderWrap{
+             width: 180px;
+             height: 150px;
+             position: absolute;
+             left: 23%;
+             top: 25%;
+         }
+         ._border{
+             text-align: center;
+             font-size: 40px;
+             font-weight: bolder;
+             -webkit-text-fill-color: transparent;
+             background-image:  -webkit-linear-gradient(left,#129835,#ece648 25%,#129835 50%,#F9E92B 75%,rgb(40, 150, 38));
+             background-size: 200%,100%;
+             -webkit-background-clip: text;
+             -webkit-animation: word 5s linear infinite ;
+         }
+         @keyframes word {
+             0%{background-position: 0 0}
+             100%{background-position: -100% 0}
+         }
+ 
+     </style>
+ </head>
+ <body>
+         <div class="_borderWrap">
+             <div class="_border">你的名字</div>
+         </div>
+ </body>
+ </html>
