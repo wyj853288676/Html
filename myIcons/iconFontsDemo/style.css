@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'ic';
-  src:  url('fonts/ic.eot?ux6p3l');
-  src:  url('fonts/ic.eot?ux6p3l#iefix') format('embedded-opentype'),
-    url('fonts/ic.ttf?ux6p3l') format('truetype'),
-    url('fonts/ic.woff?ux6p3l') format('woff'),
-    url('fonts/ic.svg?ux6p3l#ic') format('svg');
+  src:  url('fonts/ic.eot?7z96k8');
+  src:  url('fonts/ic.eot?7z96k8#iefix') format('embedded-opentype'),
+    url('fonts/ic.ttf?7z96k8') format('truetype'),
+    url('fonts/ic.woff?7z96k8') format('woff'),
+    url('fonts/ic.svg?7z96k8#ic') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,26 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ic-amazon-sm:before {
+  content: "\eb5b";
+}
+.ic-rakuten-sm:before {
+  content: "\eb5c";
+}
+.ic-yahoo-sm .path1:before {
+  content: "\eb5d";
+  color: rgb(0, 0, 0);
+}
+.ic-yahoo-sm .path2:before {
+  content: "\eb5e";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.ic-yahoo-sm .path3:before {
+  content: "\eb5f";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
 .ic-1:before {
   content: "\e900";
 }
